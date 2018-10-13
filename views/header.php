@@ -9,6 +9,32 @@
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>bootstrap.min.css">
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>estilos.css">
 
-     <title>ISIS 2</title>
+     <title>TP FINAL Terran - Vega</title>
 </head>
 <body>
+
+
+<?php
+
+// $_SESSION['userType'] MANEJA EL TIPO DE USUARIO QUE ES
+
+
+if (!isset($_SESSION['userType']))
+	$_SESSION['userType'] = "public";
+
+
+switch ($_SESSION['userType'])
+{
+	case "public":	echo "<nav class='navbar navbar-light bg-light'>PUBLIC</nav>";
+					break;
+
+	case "user":	echo "<nav class='navbar navbar-light bg-light'>USER</nav>";
+				
+					break;
+
+	case "admin":	echo "<nav class='navbar navbar-light bg-light'>ADMIN</nav>";
+					break;
+}
+
+
+?>
