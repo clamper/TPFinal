@@ -17,7 +17,7 @@
             $urlArray = array_filter($urlArray);
 
             if(empty($urlArray))
-                $this->controller = 'search';            
+                $this->controller = 'home';            
             else
                 $this->controller = ucwords(array_shift($urlArray));
 

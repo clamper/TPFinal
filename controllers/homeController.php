@@ -1,11 +1,11 @@
 <?php
     namespace Controllers;
 
-    class SearchController
+    class HomeController
     {
         public function Index()
         {
-            require_once(VIEWS_PATH."search.php");
+            require_once(VIEWS_PATH."index.php");
         }
 
         public function Logout()
