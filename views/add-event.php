@@ -69,7 +69,6 @@ $artist = ["popeye","xuxa","pato donald"];
             </div>
 
 
-
             <!-- dias -->
 
             <div class="card">
