@@ -9,6 +9,7 @@ ARRAY DE ARTISTAS
 
 */
 
+
 $categorias = ["show","musical","teatro","cine"];
 $plate_types = ["general","palco","platea lateral","campo"];
 $artist = ["popeye","xuxa","pato donald"];
@@ -66,6 +67,7 @@ $artist = ["popeye","xuxa","pato donald"];
                     ?>
                 </div>
             </div>
+
 
 
             <!-- dias -->
