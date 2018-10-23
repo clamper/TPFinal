@@ -5,7 +5,8 @@
     {
         public function Index()
         {
-            require_once(VIEWS_PATH."add-event.php");
+            require_once(VIEWS_PATH."abm.php");
+            //require_once(VIEWS_PATH."add-event.php");
             //require_once(VIEWS_PATH."home.php");
         }
 

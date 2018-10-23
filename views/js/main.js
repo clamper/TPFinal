@@ -1,39 +1,81 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
 
-    var more_days = "<div class='input-group-prepend'><input type='date' class='form-control' name='days'><input type='text' name='artist'><button type='button' class='btn bg-info' id='select_artist' data-toggle='modal' data-target='#myModal'>seleccionar artistas</button></div>";
+    var more_days = "<div class='input-group-prepend'><input type='date' class='form-control' name='days'><input type='text' name='artist'><button type='button' class='btn bg-info' id='select_artist' data-toggle='modal' data-target='#modal_artist'>seleccionar artistas</button></div>";
     var select_day;
 
-    $('input[name=days_radio]').change(function () {
+    $('input[name=days_radio]').change(function() {
         if (this.value == "only") {
             $("#only_day").show(300);
             $("#only_day_cost").show(300);
             $("#more_days").hide(300);
             $("#more_days_cost").hide(300);
-        }
-        else {
+        } else {
             $("#only_day").hide(300);
             $("#only_day_cost").hide(300);
             $("#more_days").show(300);
             $("#more_days_cost").show(300);
         }
 
-
     });
 
-    $("#add_day").on("click", function () {
-        //$("#list_days").append("<input type='date' class='form-control' name='days' > ");
+    $("#add_day").on("click", function() {
         $("#list_days").append(more_days);
     });
 
 
-    //$("#select_artist").on("click", function () {
-    $('div[id=days]').on("click", "#select_artist", function () {
+    $('div[id=days]').on("click", "#select_artist", function() {
         select_day = $(this).prev();
-        select_day.val("jjj");
+
     });
 
 
+    $("#modal_artist").on('show.bs.modal', function() {
+        $('#modal_artist [type=checkbox]').each(function() {
+
+            var artist = select_day.val().split(',');
+
+            // reinicia todos los checks
+            $('#modal_artist [type=checkbox]').each(function() {
+                $(this).prop('checked', false);
+            });
+
+            // marca los artistas elegidos que fueron almacenados en el hidden
+            artist.forEach(function(item) {
+                $("#artist" + item).prop('checked', true);
+            });
+
+        });
+    });
+
+
+    $("#modal_artist").on('hide.bs.modal', function() {
+
+        var artist = [];
+
+        // captura los artistas elegidos y los guarda en el input hidden
+        $('#modal_artist :checked').each(function() {
+            artist.push($(this).attr('id').replace('artist', ''));
+        });
+
+        select_day.val(artist.toString());
+    });
+
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    // ABMs !!!
+
+    $("#modal_edit").on('show.bs.modal', function() {
+        $('#edit_text').val();
+
+    });
+
+    $('div[id=abm_container]').on("click", "#btn_edit", function() {
+        $("#modal_edit").modal('show');
+
+    });
 
 
 });

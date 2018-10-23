@@ -1,4 +1,22 @@
 <!-- views/img/prueba_evento.svg -->
+<?php
+
+//$arrayevento = [ ()]
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
 <div class="container" data-spy="scroll" data-target=".navbar" data-offset="50" style="z-index: 1;">
 
     <div id="section1" class="container" style="padding-top:40px;padding-bottom:30px">
