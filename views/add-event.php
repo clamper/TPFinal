@@ -126,6 +126,7 @@ $artist = ["popeye","xuxa","pato donald"];
                 </div>
             </div>
 
+
             <!-- PLATEAS -->
             <div class="card">
                 <div class="card-body">
