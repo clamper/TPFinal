@@ -6,8 +6,8 @@
         </div>
 
         <div class="btn-group navbar-right">
-            <button type="button" class="btn btn-info"><i class="fa fa-user-plus"></i> Registrarse</button>
-            <button type="button" class="btn btn-info"><i class="fa fa-user"></i> Entrar</button>
+            <a href="user/registerPage"> <button type="button" class="btn btn-info"><i class="fa fa-user-plus"></i> Registrarse</button></a>
+            <button type="button" class="btn btn-info" id="btn_login"><i class="fa fa-user"></i> Entrar</button>
         </div>
     </div>
 
@@ -48,9 +48,9 @@
     </div>
 
     <form method="post" action="">
-        <form class="form-inline">
+        <form class="form-inline" method="POST" action="event/search">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="buscador" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+                <input type="text" class="form-control" placeholder="buscador" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" name="search">
                 <div class="input-group-append" id="button-addon4">
                     <button class="btn btn-info" type="button">Buscar</button>
                 </div>

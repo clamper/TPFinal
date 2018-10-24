@@ -153,14 +153,6 @@ $artist = ["popeye","xuxa","pato donald"];
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">por dia</span>
-                                </div>
-                                <input type="number" class="form-control" name="plate_day" placeholder="lugares disponibles">
-                                <input type="number" placeholder="costo" name="plate_day_cost">
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
                                     <span class="input-group-text">todos los dias</span>
                                 </div>
                                 <input type="number" class="form-control" name="plate_all" placeholder="lugares disponibles">

@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script>
-         <?php require_once(VIEWS_PATH."js/main.js"); ?>
+        <?php require_once(VIEWS_PATH."js/main.js"); ?>
     </script>
 
 
@@ -73,9 +73,9 @@ if (!isset($_SESSION['userType']))
 
 switch ($_SESSION['userType'])
 {
-    case "public":	//require_once(VIEWS_PATH."publicnav.php");
+    case "public":	require_once(VIEWS_PATH."publicnav.php");
                     //require_once(VIEWS_PATH."usernav.php");
-                    require_once(VIEWS_PATH."adminnav.php");
+                    //require_once(VIEWS_PATH."adminnav.php");
 					break;
 
 	case "user":	require_once(VIEWS_PATH."usernav.php");
@@ -87,3 +87,42 @@ switch ($_SESSION['userType'])
 
 
 ?>
+        <div class="modal" id="modal_login">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">login</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+
+                    <div class="modal-body">
+
+                        <form method="POST" action="user/login" id="form_login">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">correo</span>
+                                </div>
+                                <input class="form-control" type="email" name="mail">
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">contraseña</span>
+                                </div>
+                                <input class="form-control" type="password" name="pass">
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_login_confirm">Entrar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>

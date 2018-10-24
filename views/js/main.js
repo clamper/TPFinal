@@ -12,7 +12,7 @@ $(document).ready(function() {
             $("#more_days_cost").hide(300);
         } else {
             $("#only_day").hide(300);
-            $("#only_day_cost").hide(300);
+            //$("#only_day_cost").hide(300);
             $("#more_days").show(300);
             $("#more_days_cost").show(300);
         }
@@ -72,10 +72,40 @@ $(document).ready(function() {
 
     });
 
+    // EDITAR
     $('div[id=abm_container]').on("click", "#btn_edit", function() {
+
+        $("#input_edit").val($(this).parent().find("#data").html());
+        $("#index_edit").val($(this).attr("data"));
         $("#modal_edit").modal('show');
 
     });
+
+    $("#edit_save").on("click", function() {
+        $("#form_edit").submit();
+    });
+
+    //ELIMINAR
+    $('div[id=abm_container]').on("click", "#btn_delete", function() {
+
+        $("#index_delete").val($(this).attr("data"));
+        $("#modal_delete").modal('show');
+
+    });
+
+    $("#delete_save").on("click", function() {
+        $("#form_delete").submit();
+    });
+
+    // LOGIN
+    $("#btn_login").on("click", function() {
+        $("#modal_login").modal('show');
+    });
+
+    $("#btn_login_confirm").on("click", function() {
+        $("#form_login").submit();
+    });
+
 
 
 });

@@ -68,16 +68,16 @@ $username = "pepito";
         </div>
 
         <form method="post" action="">
-            <form class="form-inline">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="buscador" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
-                    <div class="input-group-append" id="button-addon4">
-                        <button class="btn btn-info" type="button">Buscar</button>
-                    </div>
+        <form class="form-inline" method="POST" action="event/search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="buscador" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" name="search">
+                <div class="input-group-append" id="button-addon4">
+                    <button class="btn btn-info" type="button">Buscar</button>
                 </div>
-            </form>
-
+            </div>
         </form>
+
+    </form>
 
 
     </nav>

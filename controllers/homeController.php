@@ -5,9 +5,10 @@
     {
         public function Index()
         {
-            require_once(VIEWS_PATH."abm.php");
+            require_once(VIEWS_PATH."abmcategories.php");
             //require_once(VIEWS_PATH."add-event.php");
             //require_once(VIEWS_PATH."home.php");
+            //require_once(VIEWS_PATH."viewmyticket.php");
         }
 
         public function Logout()
