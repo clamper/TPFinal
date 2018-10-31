@@ -79,6 +79,19 @@ class CategoryDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
+
+    public function UpdateCategory($categoryId, $CategoryName)
+    {
+        $query = "UPDATE ".$this->tableName." set name = :CategoryName WHERE id = :categoryId";
+        
+        $parameters["CategoryName"] = $CategoryName;
+        $parameters["categoryId"] = $categoryId;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
+
 }
 
 

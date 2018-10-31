@@ -78,6 +78,17 @@ class ArtistDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
+    public function UpdateName($artistID, $newName)
+    {
+        $query = "UPDATE ".$this->tableName." set name = :newName WHERE id = :artistID";
+        
+        $parameters["newName"] = $newName;
+        $parameters["artistID"] = $artistID;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
 }
 
 

@@ -79,6 +79,19 @@ class SeatDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
+
+    public function UpdateSeat($seatId, $seatName)
+    {
+        $query = "UPDATE ".$this->tableName." set name = :seatName WHERE id = :seatId";
+        
+        $parameters["seatName"] = $seatName;
+        $parameters["seatId"] = $seatId;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
+
 }
 
 

@@ -90,6 +90,22 @@ class ShowDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
+
+    public function UpdateShow($showId, $idCategory, $showName, $idImage, $description)
+    {
+        $query = "UPDATE ".$this->tableName.
+        " set name = :seatName, idCategory = :idCategory, showName = :showName, idImage = :idImage, description = :description".
+        " WHERE id = :showId";
+        
+        $parameters["idCategory"] = $idCategory;
+        $parameters["showName"] = $showName;
+        $parameters["idImage"] = $idImage;
+        $parameters["description"] = $description;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
 }
 
 
