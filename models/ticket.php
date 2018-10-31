@@ -7,7 +7,7 @@
 
     class Ticket
     {
-        private $ticketNumber
+        private $ticketNumber;
         private $idUser;
         private $idLocation;
         private $qrCode;

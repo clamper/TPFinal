@@ -8,6 +8,7 @@
     {
         private $idArtist;
         private $artistName;
+        private $isActive = true;
 
         public function getIdArtist()
         {
@@ -27,6 +28,11 @@
         public function setArtistName($artistName)
         {
             $this->artistName = $artistName;
+        }
+
+        public function deleteArtistByID($id)
+        {
+            $this->isActive = false;
         }
 
     }

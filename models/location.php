@@ -1,7 +1,10 @@
 <?php
 
-    // Definicion de una Localidad, una localidad es: todos los lugares disponibles en una presentacion (artista + show + fecha), para una ubicacion
-    // especifica (platea, etc), contra de un id de locaclidad, un precio, y las cantidades totales de lugares y vendidas.
+    // Definicion de una Localidad, una localidad es: todos los lugares disponibles 
+    // en una presentacion (artista + show + fecha), para una ubicacion
+
+    // especifica (platea, etc), contra de un id de locaclidad, un precio, y
+    // las cantidades totales de lugares y vendidas.
 
     namespace Models;
 

@@ -1,21 +1,23 @@
 <?php
-    namespace Controllers;
 
-    class HomeController
+namespace Controllers;
+
+class HomeController
+{
+    public function Index()
     {
-        public function Index()
-        {
-            require_once(VIEWS_PATH."abmcategories.php");
-            //require_once(VIEWS_PATH."add-event.php");
-            //require_once(VIEWS_PATH."home.php");
-            //require_once(VIEWS_PATH."viewmyticket.php");
-        }
-
-        public function Logout()
-        {
-            session_destroy();
-            
-            $this->Index();
-        }
+        require_once(VIEWS_PATH."abmcategories.php");
+        //require_once(VIEWS_PATH."add-event.php");
+        //require_once(VIEWS_PATH."home.php");
+        //require_once(VIEWS_PATH."viewmyticket.php");
     }
+
+    public function Logout()
+    {
+        session_destroy();
+        
+        $this->Index();
+    }
+}
+
 ?>

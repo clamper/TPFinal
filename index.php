@@ -11,7 +11,7 @@
 	use Config\Router 	as Router;
 	use Config\Request 	as Request;
 		
-	Autoload::start();
+	Autoload::start(); 
 
 	session_start();
 

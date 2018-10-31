@@ -7,9 +7,9 @@
 
     class Presentation
     {
-        private $idPres
+        private $idPres;
         private $idShow;        // para que show
-        private $idArtist;      // que artista
+        //private $idArtist;      // VA EN LA TABLE ARTISTAxPRESENTACION
         private $pressDate;     // en que dia
 
         public function getIdPres()

@@ -8,6 +8,7 @@
     {
         private $idSeat;
         private $seatName;
+        private $isActive = true;
 
         public function getIdSeat()
         {
@@ -27,6 +28,11 @@
         public function setSeatName($seatName)
         {
             $this->seatName = $seatName;
+        }
+
+        public function deleteSeatByID($id)
+        {
+            $this->isActive = false;
         }
 
     }
