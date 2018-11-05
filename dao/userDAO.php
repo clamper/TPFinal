@@ -19,7 +19,7 @@ class UserDAO
     {
         $User = null;
 
-        $query = "SELECT iduser, email FROM ".$this->tableName." where id=".$id;
+        $query = "SELECT iduser, name, email FROM ".$this->tableName." where id=".$id;
 
         $this->connection = Connection::GetInstance();
 
@@ -29,6 +29,7 @@ class UserDAO
         {                
             $User = new User();
             $User->setIdUser($row["idUser"]);
+            $User->setname()($row["name"]);
             $User->setEmail($row["email"]);
         }
 
@@ -57,10 +58,11 @@ class UserDAO
     }
 
 
-    public function addUser($email, $pass)
+    public function addUser($name, $email, $pass)
     {
-        $query = "INSERT INTO ".$this->tableName." (email, password) VALUES (:email, :password);";
+        $query = "INSERT INTO ".$this->tableName." (name, email, password) VALUES (:name, :email, :password);";
             
+        $parameters["name"] = $email;
         $parameters["email"] = $email;
         $parameters["pass"] = $pass;
 

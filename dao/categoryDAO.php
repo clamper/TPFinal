@@ -57,7 +57,11 @@ class CategoryDAO
 
     public function addCategory($CategoryName)
     {
-        $query = "INSERT INTO ".$this->tableName." (Categoryname) VALUES (:Categoryname);";
+
+        if ( existCategory($CategoryName))
+            $query = "UPDATE ".$this->tableName." set Categoryname = :Categoryname where Categoryname = :Categoryname;";
+        else
+            $query = "INSERT INTO ".$this->tableName." (Categoryname) VALUES (:Categoryname);";
             
         $parameters["Categoryname"] = $CategoryName;
 
@@ -77,6 +81,22 @@ class CategoryDAO
         $this->connection = Connection::GetInstance();
 
         $this->connection->ExecuteNonQuery($query, $parameters);
+    }
+
+    private function existCategory($nameCategori)
+    {
+        $exist = false;
+
+        $query = "SELECT * FROM ".$this->tableName." where categoryname =".$CategoryName;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if (count($resultSet) > 0)
+            $exist = true;
+
+        return $exist;
     }
 
 

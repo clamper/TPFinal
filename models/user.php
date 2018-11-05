@@ -7,8 +7,19 @@
     class User
     {
         private $idUser;
+        private $name;
         private $email;
         private $password;
+
+        public function getName()
+        {
+            return $this->name;
+        }
+
+        public function setname($name)
+        {
+            $this->name = $name;
+        }
 
         public function getIdUser()
         {

@@ -57,6 +57,9 @@ class SeatDAO
 
     public function addSeat($SeatName)
     {
+        if ( existArtist($SeatName))
+            $query = "UPDATE ".$this->tableName." set SeatName = :SeatName where SeatName = :SeatName;";
+        else
         $query = "INSERT INTO ".$this->tableName." (Seatname) VALUES (:Seatname);";
             
         $parameters["Seatname"] = $SeatName;
@@ -67,6 +70,21 @@ class SeatDAO
 
     }
 
+    private function existSeat($seatName)
+    {
+        $exist = false;
+
+        $query = "SELECT * FROM ".$this->tableName." where seatName =".$seatName;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if (count($resultSet) > 0)
+            $exist = true;
+
+        return $exist;
+    }
 
     public function Delete($SeatID)
     {

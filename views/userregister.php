@@ -12,16 +12,23 @@
 
                     <div class="input-group">
                         <div class="input-group-prepend">
+                            <span class="input-group-text">nombre</span>
+                        </div>
+                        <input class="form-control" type="text" name="name" minlength="3" required>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
                             <span class="input-group-text">correo</span>
                         </div>
-                        <input class="form-control" type="email" name="mail">
+                        <input class="form-control" type="email" name="mail" required>
                     </div>
 
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">contraseña</span>
                         </div>
-                        <input class="form-control" type="password" name="pass">
+                        <input class="form-control" type="password" name="pass" required>
                     </div>
                     <br><br>
                     <button type="submit" class="btn btn-info">registrarse</button>

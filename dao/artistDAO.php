@@ -56,7 +56,10 @@ class ArtistDAO
 
     public function addArtist($ArtistName)
     {
-        $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
+        if ( existArtist($ArtistName))
+            $query = "UPDATE ".$this->tableName." set artistname = :artistname where artistname = :artistname;";
+        else
+            $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
             
         $parameters["artistname"] = $ArtistName;
 
@@ -66,6 +69,21 @@ class ArtistDAO
 
     }
 
+    private function existArtist($ArtistName)
+    {
+        $exist = false;
+
+        $query = "SELECT * FROM ".$this->tableName." where artistname =".$ArtistName;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if (count($resultSet) > 0)
+            $exist = true;
+
+        return $exist;
+    }
 
     public function Delete($artistID)
     {
