@@ -4,9 +4,6 @@
 // $array_elements  elementos a listar
 // $message para mostrar un mensaje de error
 
-$array_indexs = [0,1,2,3];
-$array_elements = ["show","musical","teatro","cine"];
-
 
 $message = "";
 
@@ -26,7 +23,7 @@ $message = "";
             echo "<div class='alert alert-danger'>".$message."</div>";
         ?>
 
-            <form method="post" action="categories/new">
+            <form method="post" action="/utn/TPFINALLAB4/category/new">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">insertar categoria</span>
@@ -44,20 +41,16 @@ $message = "";
 
             <?php
 
-        for ($x = 0; $x < count($array_elements); $x++)
-        {
+        foreach ($array_category as $key) {
         ?>
 
                 <div class="card" id="g">
                     <div class="card-body" id="j">
-                        <span id="data"><?=$array_elements[$x];?></span>
-
-
-
-                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="eliminar" id="btn_delete" data="<?=$array_indexs[$x];?>">
+                        <span id="data"><?=$key->getCategoryName();?></span>
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="eliminar" id="btn_delete" data="<?=$key->getIdCategory();?>">
                         <i class="fa fa-trash"></i>
                     </button>
-                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="editar" id="btn_edit" data="<?=$array_indexs[$x];?>" style="padding-right: 15px;">
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="editar" id="btn_edit" data="<?=$key->getIdCategory();?>" style="padding-right: 15px;">
                         <i class="fa fa-edit"></i>
                     </button>
 
@@ -82,7 +75,7 @@ $message = "";
 
 
                                 <div class="modal-body">
-                                    <form method="POST" action="categories/edit" id="form_edit">
+                                    <form method="POST" action="/utn/TPFINALLAB4/category/edit" id="form_edit">
                                         <input type="hidden" name="index" id="index_edit">
                                         <input type="text" name="edit_data" id="input_edit" value="" class="form-control">
                                     </form>
@@ -111,7 +104,7 @@ $message = "";
 
 
                                 <div class="modal-body">
-                                    <form method="POST" action="categories/delete" id="form_delete">
+                                    <form method="POST" action="/utn/TPFINALLAB4/category/delete" id="form_delete">
                                         <input type="hidden" name="index" id="index_delete">
                                     </form>
                                     <h5>seguro que desea eliminar?</h5>
