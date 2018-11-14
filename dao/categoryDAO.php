@@ -57,13 +57,19 @@ class CategoryDAO
 
     public function addCategory($CategoryName)
     {
+        $existId = $this->existCategory($CategoryName);
 
-        if ( $this->existCategory($CategoryName))
-            $query = "UPDATE ".$this->tableName." set is active = true where Categoryname like ':Categoryname';";
+        if ($existId <> -1)
+        {
+            $query = "UPDATE ".$this->tableName." set isactive = true where idcategory = :ExistId;";
+            $parameters["ExistId"] = $existId;
+        }
         else
+        {
             $query = "INSERT INTO ".$this->tableName." (Categoryname) VALUES (:Categoryname);";
-            
-        $parameters["Categoryname"] = $CategoryName;
+            $parameters["Categoryname"] = $CategoryName;
+        }   
+        
 
         $this->connection = Connection::GetInstance();
 
@@ -85,16 +91,16 @@ class CategoryDAO
 
     private function existCategory($nameCategory)
     {
-        $exist = false;
+        $exist = -1;
 
-        $query = "SELECT * FROM ".$this->tableName." where categoryname =".$nameCategory;
+        $query = "SELECT idcategory FROM ".$this->tableName." where categoryname = '".$nameCategory."'";
 
         $this->connection = Connection::GetInstance();
 
         $resultSet = $this->connection->Execute($query);
 
         if (count($resultSet) > 0)
-            $exist = true;
+            $exist = $resultSet[0]["idcategory"];
 
         return $exist;
     }
