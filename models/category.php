@@ -4,7 +4,7 @@
 
     namespace Models;
 
-    class Categoryegory
+    class Category
     {
         private $idCategory;
         private $categoryName;

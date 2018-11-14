@@ -3,7 +3,7 @@
 namespace DAO;
 
 
-use Models\Category as Category;
+use models\category as Category;
 
 
 class CategoryDAO
@@ -23,11 +23,11 @@ class CategoryDAO
         
         foreach ($resultSet as $row)
         {                
-            $Category = new Category();
-            $Category->setIdCategory($row["idCategory"]);
-            $Category->setCategoryName($row["name"]);
+            $category = new Category();
+            $category->setIdCategory($row["idcategory"]);
+            $category->setCategoryName($row["categoryname"]);
 
-            array_push($CategoryList, $Category);
+            array_push($CategoryList, $category);
         }
 
         return $CategoryList;
@@ -48,7 +48,7 @@ class CategoryDAO
         {                
             $Category = new Category();
             $Category->setIdCategory($row["idCategory"]);
-            $Category->setCategoryName($row["name"]);
+            $Category->setCategoryName($row["categoryname"]);
         }
 
         return $Category;
@@ -58,8 +58,8 @@ class CategoryDAO
     public function addCategory($CategoryName)
     {
 
-        if ( existCategory($CategoryName))
-            $query = "UPDATE ".$this->tableName." set Categoryname = :Categoryname where Categoryname = :Categoryname;";
+        if ( $this->existCategory($CategoryName))
+            $query = "UPDATE ".$this->tableName." set is active = true where Categoryname like ':Categoryname';";
         else
             $query = "INSERT INTO ".$this->tableName." (Categoryname) VALUES (:Categoryname);";
             
@@ -74,7 +74,7 @@ class CategoryDAO
 
     public function Delete($CategoryID)
     {
-        $query = "UPDATE ".$this->tableName." set isActive = false WHERE id = :CategoryCode";
+        $query = "UPDATE ".$this->tableName." set isActive = false WHERE idCategory = :CategoryCode";
         
         $parameters["CategoryCode"] = $CategoryID;
 
@@ -83,11 +83,11 @@ class CategoryDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
-    private function existCategory($nameCategori)
+    private function existCategory($nameCategory)
     {
         $exist = false;
 
-        $query = "SELECT * FROM ".$this->tableName." where categoryname =".$CategoryName;
+        $query = "SELECT * FROM ".$this->tableName." where categoryname =".$nameCategory;
 
         $this->connection = Connection::GetInstance();
 
@@ -102,7 +102,7 @@ class CategoryDAO
 
     public function UpdateCategory($categoryId, $CategoryName)
     {
-        $query = "UPDATE ".$this->tableName." set name = :CategoryName WHERE id = :categoryId";
+        $query = "UPDATE ".$this->tableName." set categoryname = :CategoryName WHERE idCategory = :categoryId";
         
         $parameters["CategoryName"] = $CategoryName;
         $parameters["categoryId"] = $categoryId;
