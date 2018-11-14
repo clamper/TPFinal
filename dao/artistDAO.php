@@ -37,13 +37,23 @@ class ArtistDAO
     public function GetArtistbyID($id)
     {
         $artist = null;
+        $error = null;
 
         $query = "SELECT * FROM ".$this->tableName." where id=".$id;
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
         $resultSet = $this->connection->Execute($query);
+
+        }catch(Exception $ex)
+        {
+            Echo $ex;
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        } 
         
+
         foreach ($resultSet as $row)
         {                
             $artist = new Artist();
@@ -51,7 +61,10 @@ class ArtistDAO
             $artist->setArtistName($row["artistname"]);
         }
 
-        return $artist;
+        if ($error = null)
+            return $artist;
+        else    
+            return $error;
     }
 
     private function existArtist($ArtistName)
@@ -67,11 +80,13 @@ class ArtistDAO
         if (count($resultSet) > 0)
             $exist = $resultSet[0]["idartist"];
 
-            return $exist;
+        return $exist;
     }
 
     public function addArtist($ArtistName)
     {
+        $error = "";
+
         $index = $this->existArtist($ArtistName);
 
         if ( $index > -1)
@@ -86,33 +101,63 @@ class ArtistDAO
         $parameters["artistname"] = $ArtistName;
         
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
 
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        }  
+
+        return $error;
     }
 
     public function Delete($artistID)
     {
+        $error = "";
+
         $query = "UPDATE ".$this->tableName." set isActive = false WHERE idartist = :artistCode";
 
         $parameters["artistCode"] = $artistID;
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        }  
+
+        return $error;
     }
 
     public function UpdateName($artistID, $newName)
     {
-        $query = "UPDATE ".$this->tableName." set name = :newName WHERE idartist = :artistID";
+        $error = "";
+
+        $query = "UPDATE ".$this->tableName." set artistname = :newName WHERE idartist = :artistID";
         
         $parameters["newName"] = $newName;
         $parameters["artistID"] = $artistID;
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        }  
+
+        return $error;
     }
 }
 
