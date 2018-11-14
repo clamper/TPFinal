@@ -1,6 +1,5 @@
 <?php
 // ABM de artistas
-// $array_artist  elementos a listar
 // $message para mostrar un mensaje de error
 
 
