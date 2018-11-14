@@ -1,15 +1,12 @@
 <?php
-// ABM de multiples elementos
-// $title que tipo de elementos son
-// $array_elements  elementos a listar
+// ABM de artistas
+// $array_artist  elementos a listar
 // $message para mostrar un mensaje de error
 
-$array_indexs = [0,1,2,3];
-$array_elements = ["show","musical","teatro","cine"];
 
 $message = "";
 
-
+//$array_artist
 ?>
 
     <div class="container" id="abm_container">
@@ -25,7 +22,7 @@ $message = "";
             echo "<div class='alert alert-danger'>".$message."</div>";
         ?>
 
-            <form method="post" action="artists/new">
+            <form method="post" action="/utn/tpfinallab4/artist/new">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">insertar artista</span>
@@ -41,32 +38,39 @@ $message = "";
             <br>
             <br>
 
+
+
+
+
             <?php
 
-        for ($x = 0; $x < count($array_elements); $x++)
-        {
-        ?>
 
-                <div class="card" id="g">
-                    <div class="card-body" id="j">
-                        <span id="data"><?=$array_elements[$x];?></span>
+            
+
+            foreach ($array_artist as $artist) 
+            {
+            ?>
+
+                    <div class="card" id="g">
+                        <div class="card-body" id="j">
+                            <span id="data"><?=$artist->getArtistName();?></span>
 
 
 
-                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="eliminar" id="btn_delete" data="<?=$array_indexs[$x];?>">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="editar" id="btn_edit" data="<?=$array_indexs[$x];?>" style="padding-right: 15px;">
-                        <i class="fa fa-edit"></i>
-                    </button>
+                            <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="eliminar" id="btn_delete" data="<?=$artist->getIdArtist();?>">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                            <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="editar" id="btn_edit" data="<?=$artist->getIdArtist();?>" style="padding-right: 15px;">
+                            <i class="fa fa-edit"></i>
+                        </button>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-                <?php
-        }
-        ?>
+                    <?php
+            }
+            ?>
 
 
                     <div class="modal" id="modal_edit">
@@ -81,7 +85,7 @@ $message = "";
 
 
                                 <div class="modal-body">
-                                    <form method="POST" action="artists/edit" id="form_edit">
+                                    <form method="POST" action="/utn/tpfinallab4/artist/edit" id="form_edit">
                                         <input type="hidden" name="index" id="index_edit">
                                         <input type="text" name="edit_data" id="input_edit" value="" class="form-control">
                                     </form>
@@ -110,7 +114,7 @@ $message = "";
 
 
                                 <div class="modal-body">
-                                    <form method="POST" action="artists/delete" id="form_delete">
+                                    <form method="POST" action="/utn/tpfinallab4/artist/delete" id="form_delete">
                                         <input type="hidden" name="index" id="index_delete">
                                     </form>
                                     <h5>seguro que desea eliminar?</h5>

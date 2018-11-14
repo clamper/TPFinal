@@ -56,12 +56,14 @@
             try
             {
                 $this->Prepare($query);
-                
+
                 foreach($parameters as $parameterName => $value)
                 {
                     $this->pdoStatement->bindParam(":".$parameterName, $parameters[$parameterName]);
                 }
         
+                var_dump($this->pdoStatement);
+
                 $this->pdoStatement->execute();
 
                 return $this->pdoStatement->rowCount();

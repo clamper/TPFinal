@@ -25,7 +25,7 @@ class ArtistDAO
         {                
             $artist = new Artist();
             $artist->setIdArtist($row["idartist"]);
-            $artist->setArtistName($row["name"]);
+            $artist->setArtistName($row["artistname"]);
 
             array_push($artistList, $artist);
         }
@@ -48,20 +48,43 @@ class ArtistDAO
         {                
             $artist = new Artist();
             $artist->setIdArtist($row["idartist"]);
-            $artist->setArtistName($row["name"]);
+            $artist->setArtistName($row["artistname"]);
         }
 
         return $artist;
     }
 
+    private function existArtist($ArtistName)
+    {
+        $exist = -1; // -1 no existe
+
+        $query = "SELECT idartist FROM ".$this->tableName." where artistname ='".$ArtistName."'";
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if (count($resultSet) > 0)
+            $exist = $resultSet[0]["idartist"];
+
+            return $exist;
+    }
+
     public function addArtist($ArtistName)
     {
-        if ( existArtist($ArtistName))
-            $query = "UPDATE ".$this->tableName." set artistname = :artistname where artistname = :artistname;";
+        $index = $this->existArtist($ArtistName);
+
+        if ( $index > -1)
+            //$query = "UPDATE ".$this->tableName." set artistname = :artistname where idartist = :index;";
+            {
+            $query = "UPDATE ".$this->tableName." set isActive = true where idartist = ".$index;
+            $parameters["index"] = $index;
+            }
         else
             $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
             
         $parameters["artistname"] = $ArtistName;
+        
 
         $this->connection = Connection::GetInstance();
 
@@ -69,26 +92,10 @@ class ArtistDAO
 
     }
 
-    private function existArtist($ArtistName)
-    {
-        $exist = false;
-
-        $query = "SELECT * FROM ".$this->tableName." where artistname =".$ArtistName;
-
-        $this->connection = Connection::GetInstance();
-
-        $resultSet = $this->connection->Execute($query);
-
-        if (count($resultSet) > 0)
-            $exist = true;
-
-        return $exist;
-    }
-
     public function Delete($artistID)
     {
-        $query = "UPDATE ".$this->tableName." set isActive = false WHERE id = :artistCode";
-        
+        $query = "UPDATE ".$this->tableName." set isActive = false WHERE idartist = :artistCode";
+
         $parameters["artistCode"] = $artistID;
 
         $this->connection = Connection::GetInstance();
@@ -98,7 +105,7 @@ class ArtistDAO
 
     public function UpdateName($artistID, $newName)
     {
-        $query = "UPDATE ".$this->tableName." set name = :newName WHERE id = :artistID";
+        $query = "UPDATE ".$this->tableName." set name = :newName WHERE idartist = :artistID";
         
         $parameters["newName"] = $newName;
         $parameters["artistID"] = $artistID;
