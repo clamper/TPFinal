@@ -15,6 +15,7 @@
             try
             {
                 $this->pdo = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME, DB_USER, DB_PASS);
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch(Exception $ex)
             {
@@ -61,8 +62,6 @@
                 {
                     $this->pdoStatement->bindParam(":".$parameterName, $parameters[$parameterName]);
                 }
-        
-                var_dump($this->pdoStatement);
 
                 $this->pdoStatement->execute();
 
@@ -71,7 +70,12 @@
             catch(Exception $ex)
             {
                 throw $ex;
-            }        	    	
+            }        	    
+            catch(PDOException $ex)
+            {
+                throw $ex;
+            }        	
+            	
         }
         
         private function Prepare($query)

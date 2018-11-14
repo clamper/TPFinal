@@ -7,6 +7,9 @@ use dao\ArtistDAO as artistdao;
 
 class ArtistController
 {
+    
+
+
     public function Index()
     {
         $dao = new ArtistDAO();
@@ -21,7 +24,7 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $dao->addArtist($newArtist);
+        $error_msg = $dao->addArtist($newArtist);
 
         $this->Index();
 
@@ -31,7 +34,7 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $dao->Delete($idArtist);
+        $error_msg = $dao->Delete($idArtist);
 
         $this->Index();
 
@@ -41,12 +44,22 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $dao->UpdateName($idArtist, $newName);
+        $error_msg = $dao->UpdateName($idArtist, $newName);
 
         $this->Index();
 
     }
 
+    public function GetArtistbyID($idArtist)
+    {
+        $artist = null;
+
+        $dao = new ArtistDAO();
+
+        $artist = $dao->GetArtistbyID($idArtist);
+
+        return $artist;
+    }
 
 
 }

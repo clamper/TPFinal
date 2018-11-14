@@ -4,7 +4,7 @@
 // $message para mostrar un mensaje de error
 
 
-$message = "";
+$error_msg = "";
 
 //$array_artist
 ?>
@@ -18,8 +18,8 @@ $message = "";
 
         <?php
 
-        if ($message != "")
-            echo "<div class='alert alert-danger'>".$message."</div>";
+        if ($error_msg != "")
+            echo "<div class='alert alert-danger'>".$error_msg."</div>";
         ?>
 
             <form method="post" action="/utn/tpfinallab4/artist/new">
@@ -39,13 +39,8 @@ $message = "";
             <br>
 
 
-
-
-
             <?php
 
-
-            
 
             foreach ($array_artist as $artist) 
             {
