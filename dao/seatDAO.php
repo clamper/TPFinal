@@ -21,13 +21,14 @@ class SeatDAO
 
         $resultSet = $this->connection->Execute($query);
         
+        
         foreach ($resultSet as $row)
         {                
             $Seat = new Seat();
-            $Seat->setIdSeat($row["idSeat"]);
-            $Seat->setSeatName($row["name"]);
+            $Seat->setIdSeat($row["idseat"]);
+            $Seat->setSeatName($row["seatname"]);
 
-            array_push($arraylist, $Seat);
+            array_push($SeatList, $Seat);
         }
 
         return $SeatList;
@@ -37,12 +38,20 @@ class SeatDAO
     public function GetSeatbyID($id)
     {
         $Seat = null;
+        $error = null;
 
         $query = "SELECT * FROM ".$this->tableName." where id=".$id;
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $resultSet = $this->connection->Execute($query);
+            $resultSet = $this->connection->Execute($query);
+
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        } 
         
         foreach ($resultSet as $row)
         {                
@@ -51,63 +60,104 @@ class SeatDAO
             $Seat->setSeatName($row["name"]);
         }
 
-        return $Seat;
+        if ($error = null)
+            return $Seat;
+        else    
+            return $error;
     }
 
 
     public function addSeat($SeatName)
     {
-        if ( existArtist($SeatName))
-            $query = "UPDATE ".$this->tableName." set SeatName = :SeatName where SeatName = :SeatName;";
+        $error = "";
+
+        $index = $this->existSeat($SeatName);
+
+        if ( $index > -1)
+        {
+            $query = "UPDATE ".$this->tableName." set isActive = true where idseat = ".$index;
+            $parameters["index"] = $index;
+        }
         else
-        $query = "INSERT INTO ".$this->tableName." (Seatname) VALUES (:Seatname);";
-            
-        $parameters["Seatname"] = $SeatName;
+        {
+            $query = "INSERT INTO ".$this->tableName." (Seatname) VALUES (:Seatname);";
+            $parameters["Seatname"] = $SeatName;
+        }   
+        
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        }  
 
+        return $error;
     }
 
     private function existSeat($seatName)
     {
-        $exist = false;
+        $exist = -1; // -1 no existe
 
-        $query = "SELECT * FROM ".$this->tableName." where seatName =".$seatName;
+        $query = "SELECT idseat FROM ".$this->tableName." where seatname ='".$seatName."'";
 
         $this->connection = Connection::GetInstance();
 
         $resultSet = $this->connection->Execute($query);
 
         if (count($resultSet) > 0)
-            $exist = true;
+            $exist = $resultSet[0]["idseat"];
 
         return $exist;
     }
 
     public function Delete($SeatID)
     {
-        $query = "UPDATE ".$this->tableName." set isActive = false WHERE id = :SeatCode";
+        $error = "";
+
+        $query = "UPDATE ".$this->tableName." set isActive = false WHERE idseat = :SeatCode";
         
         $parameters["SeatCode"] = $SeatID;
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        }  
+
+        return $error;
     }
 
 
-    public function UpdateSeat($seatId, $seatName)
+    public function UpdateName($seatId, $seatName)
     {
-        $query = "UPDATE ".$this->tableName." set name = :seatName WHERE id = :seatId";
+        $error = "";
+
+        $query = "UPDATE ".$this->tableName." set seatname = :seatName WHERE idseat = :seatId";
         
         $parameters["seatName"] = $seatName;
         $parameters["seatId"] = $seatId;
 
-        $this->connection = Connection::GetInstance();
+        try
+        {
+            $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(Exception $ex)
+        {
+            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+        }  
+
+        return $error;
     }
 
 }

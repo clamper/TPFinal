@@ -36,9 +36,10 @@ $username = "administrador";
                     <i class="fa fa-calendar"></i>Eventos
                 </button>
                     <div class="dropdown-menu" style="z-index: 1;">
-                        <a class="dropdown-item " href="#">ABM categorias</a>
-                        <a class="dropdown-item " href="#">ABM plazas</a>
-                        <a class="dropdown-item " href="#">ABM eventos/artistas</a>
+                    <a class="dropdown-item " href="/utn/TPFINALLAB4/event/new">Nuevo evento</a>
+                        <a class="dropdown-item " href="/utn/TPFINALLAB4/category">ABM categorias</a>
+                        <a class="dropdown-item " href="/utn/TPFINALLAB4/seat">ABM plazas</a>
+                        <a class="dropdown-item " href="/utn/TPFINALLAB4/artist">ABM artistas</a>
                     </div>
                 </div>
 

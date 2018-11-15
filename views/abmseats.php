@@ -4,12 +4,8 @@
 // $array_elements  elementos a listar
 // $message para mostrar un mensaje de error
 
-$array_indexs = [0,1,2,3];
-$array_elements = ["show","musical","teatro","cine"];
 
-
-
-$message = "";
+$error_msg = "";
 
 
 ?>
@@ -23,11 +19,11 @@ $message = "";
 
         <?php
 
-        if ($message != "")
+        if ($error_msg != "")
             echo "<div class='alert alert-danger'>".$message."</div>";
         ?>
 
-            <form method="post" action="seats/new">
+            <form method="post" action="/utn/TPFINALLAB4/seat/new">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">insertar tipo de entrada</span>
@@ -45,20 +41,21 @@ $message = "";
 
             <?php
 
-        for ($x = 0; $x < count($array_elements); $x++)
+
+        foreach ($array_Seat as $seat) 
         {
         ?>
 
                 <div class="card" id="g">
                     <div class="card-body" id="j">
-                        <span id="data"><?=$array_elements[$x];?></span>
+                        <span id="data"><?=$seat->getSeatName();?></span>
 
 
 
-                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="eliminar" id="btn_delete" data="<?=$array_indexs[$x];?>">
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="eliminar" id="btn_delete" data="<?=$seat->getIdSeat();?>">
                         <i class="fa fa-trash"></i>
                     </button>
-                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="editar" id="btn_edit" data="<?=$array_indexs[$x];?>" style="padding-right: 15px;">
+                        <button type="button" class="close" data-toggle="tooltip" data-placement="top" title="editar" id="btn_edit" data="<?=$seat->getIdSeat();?>" style="padding-right: 15px;">
                         <i class="fa fa-edit"></i>
                     </button>
 
@@ -83,7 +80,7 @@ $message = "";
 
 
                                 <div class="modal-body">
-                                    <form method="POST" action="seats/edit" id="form_edit">
+                                    <form method="POST" action="/utn/TPFINALLAB4/seat/edit" id="form_edit">
                                         <input type="hidden" name="index" id="index_edit">
                                         <input type="text" name="edit_data" id="input_edit" value="" class="form-control">
                                     </form>
@@ -112,7 +109,7 @@ $message = "";
 
 
                                 <div class="modal-body">
-                                    <form method="POST" action="seats/delete" id="form_delete">
+                                    <form method="POST" action="/utn/TPFINALLAB4/seat/delete" id="form_delete">
                                         <input type="hidden" name="index" id="index_delete">
                                     </form>
                                     <h5>seguro que desea eliminar?</h5>

@@ -73,9 +73,9 @@ if (!isset($_SESSION['userType']))
 
 switch ($_SESSION['userType'])
 {
-    case "public":	require_once(VIEWS_PATH."publicnav.php");
+    case "public":	//require_once(VIEWS_PATH."publicnav.php");
                     //require_once(VIEWS_PATH."usernav.php");
-                    //require_once(VIEWS_PATH."adminnav.php");
+                    require_once(VIEWS_PATH."adminnav.php");
 					break;
 
 	case "user":	require_once(VIEWS_PATH."usernav.php");

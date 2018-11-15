@@ -49,7 +49,6 @@ class ArtistDAO
 
         }catch(Exception $ex)
         {
-            Echo $ex;
             $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
         } 
         
@@ -91,14 +90,16 @@ class ArtistDAO
 
         if ( $index > -1)
             //$query = "UPDATE ".$this->tableName." set artistname = :artistname where idartist = :index;";
-            {
+        {
             $query = "UPDATE ".$this->tableName." set isActive = true where idartist = ".$index;
             $parameters["index"] = $index;
-            }
+        }
         else
+        {
             $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
-            
-        $parameters["artistname"] = $ArtistName;
+            $parameters["artistname"] = $ArtistName;
+        }   
+        
         
 
         try
