@@ -100,8 +100,6 @@ class ArtistDAO
             $parameters["artistname"] = $ArtistName;
         }   
         
-        
-
         try
         {
             $this->connection = Connection::GetInstance();
