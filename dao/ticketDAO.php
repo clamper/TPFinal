@@ -104,7 +104,7 @@ class ShowDAO
         $TicketsList = array();
 
         $query = "SELECT * FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
-        " inner join presentations P on P.idpresentation = L.idpresentation"
+        " inner join presentations P on P.idpresentation = L.idpresentation".
         " where P.date = ".$date;
 
         $this->connection = Connection::GetInstance();
