@@ -136,6 +136,10 @@ class ArtistDAO
         return $error;
     }
 
+    public function GetAllArtistByPresentation()
+    {
+    }
+
     public function UpdateName($artistID, $newName)
     {
         $error = "";
