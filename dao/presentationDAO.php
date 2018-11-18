@@ -132,7 +132,20 @@
             return $error;
         }
 
+        public function AddArtistToPresentation($idPresentation, $idArtist)
+        {
+            $error = "";
 
+            $query = "INSERT INTO ".$this->tableArtist." (idArtist, idPresentation) VALUES (:idArtist, :idPresentation);";
+            $parameters["idArtist"] = $idArtist;
+            $parameters["idPresentation"] = $idPresentation;
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+            return $error;
+        }
 
 
     }

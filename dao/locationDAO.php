@@ -82,6 +82,15 @@ class LocationDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
+    public function GetAvailability($idLocation)
+    {
+        $Location = $this->GetLocationById($idLocation);
+
+        $availability = $Location->getLocationQty() - $Location->getLocationSold();
+
+        return $availability;
+    }
+
 
     public function Delete($LocationID)
     {
