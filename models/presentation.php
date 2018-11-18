@@ -7,19 +7,19 @@
 
     class Presentation
     {
-        private $idPres;
+        private $idPresentation;
         private $idShow;        // para que show
         //private $idArtist;      // VA EN LA TABLE ARTISTAxPRESENTACION
         private $pressDate;     // en que dia
 
         public function getIdPres()
         {
-            return $this->idPres;
+            return $this->idPresentation;
         }
 
-        public function setIdPres($idPres)
+        public function setIdPres($idPresentation)
         {
-            $this->idPres = $idPres;
+            $this->idPresentation = $idPresentation;
         }
 
         public function getIdShow()
