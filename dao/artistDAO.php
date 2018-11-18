@@ -9,6 +9,7 @@ use Models\Artist as Artist;
 class ArtistDAO
 {
     private $tableName = "artists";
+    private $tableArtistXPres = "artistxpresentation";
 
 
     public function GetAllArtist()
@@ -98,9 +99,7 @@ class ArtistDAO
         {
             $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
             $parameters["artistname"] = $ArtistName;
-        }   
-        
-        
+        }
 
         try
         {
@@ -138,8 +137,24 @@ class ArtistDAO
         return $error;
     }
 
-    public function GetAllArtistByPresentation()
+    public function GetAllArtistByPresentation($idPresentation)
     {
+        $artistList = array();
+
+        $query = "SELECT idArtist FROM ".$this->tableArtistXPres." where idpresentation =".$idPresentation;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        foreach ($resultSet as $row)
+        {                
+            $idArtist = ($row["idArtist"]);
+
+            array_push($artistList, $this->GetArtistbyID($idArtist));
+        }
+
+        return $artistList;
     }
 
     public function UpdateName($artistID, $newName)
