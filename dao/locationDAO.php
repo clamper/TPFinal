@@ -38,7 +38,7 @@ class LocationDAO
     }
 
 
-    public function GetLocationbyID($id)
+    public function GetLocationById($id)
     {
         $Location = null;
 
