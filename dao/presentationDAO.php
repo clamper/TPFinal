@@ -22,7 +22,7 @@
                 $Presentation = new Presentation();
                 $Presentation->setIdPres($row["idPresentation"]);
                 $Presentation->setIdShow()($row["idShow"]);
-                $Presentation->setPresDate()($row["pressDate"]);
+                $Presentation->setPresDate()($row["Date"]);
             }
 
             return $Presentation;
@@ -43,7 +43,7 @@
                 $Presentation = new Presentation();
                 $Presentation->setIdPres($row["idPresentation"]);
                 $Presentation->setIdShow()($row["idShow"]);
-                $Presentation->setPresDate()($row["pressDate"]);         
+                $Presentation->setPresDate()($row["Date"]);         
                 
                 array_push($presentationsList, $Presentation);
             }
@@ -51,11 +51,11 @@
             return $presentationsList;
         }
 
-        public function GetAllPresentationsByDate($pressDate)
+        public function GetAllPresentationsByDate($Date)
         {
             $presentationsList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." where pressDate =".$pressDate;
+            $query = "SELECT * FROM ".$this->tableName." where Date =".$Date;
 
             $this->connection = Connection::GetInstance();
 
@@ -66,7 +66,7 @@
                 $Presentation = new Presentation();
                 $Presentation->setIdPres($row["idPresentation"]);
                 $Presentation->setIdShow()($row["idShow"]);
-                $Presentation->setPresDate()($row["pressDate"]);         
+                $Presentation->setPresDate()($row["Date"]);         
                 
                 array_push($presentationsList, $Presentation);
             }
@@ -109,7 +109,7 @@
                 $Presentation = new Presentation();
                 $Presentation->setIdPres($row["idPresentation"]);
                 $Presentation->setIdShow()($row["idShow"]);
-                $Presentation->setPresDate()($row["pressDate"]);         
+                $Presentation->setPresDate()($row["Date"]);         
                 
                 array_push($presentationsList, $Presentation);
             }
@@ -117,13 +117,13 @@
             return $presentationsList;
         }
 
-        public function AddPresentation($idShow, $pressDate)
+        public function AddPresentation($idShow, $Date)
         {
             $error = "";
 
-            $query = "INSERT INTO ".$this->tableName." (idShow, pressDate) VALUES (:idShow, :pressDate);";
+            $query = "INSERT INTO ".$this->tableName." (idShow, Date) VALUES (:idShow, :Date);";
             $parameters["idShow"] = $idShow;
-            $parameters["pressDate"] = $pressDate;
+            $parameters["Date"] = $Date;
 
             $this->connection = Connection::GetInstance();
 
