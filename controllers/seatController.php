@@ -8,8 +8,6 @@ use dao\seatdao as SeatDao;
 class SeatController
 {
     
-
-
     public function Index()
     {
         $dao = new SeatDAO();

@@ -2,11 +2,9 @@
 
 namespace DAO;
 
-
 use Model\Ticket as Ticket;
 
-
-class ShowDAO
+class TicketDAO
 {
     private $tableName = "tickets";
 
@@ -123,6 +121,6 @@ class ShowDAO
 
         return $TicketsList;
     }
-
+}
 
 ?>
