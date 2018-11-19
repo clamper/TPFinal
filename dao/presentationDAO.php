@@ -1,5 +1,7 @@
 <?php
 
+    namespace DAO;
+
     use Models\Presentation as Presentation;
 
     class PresentationDAO
@@ -24,7 +26,7 @@
                 $Presentation->setIdShow()($row["idShow"]);
                 $Presentation->setPresDate()($row["Date"]);
             }
-
+ 
             return $Presentation;
         }
 
@@ -119,8 +121,6 @@
 
         public function AddPresentation($idShow, $Date)
         {
-            $error = "";
-
             $query = "INSERT INTO ".$this->tableName." (idShow, Date) VALUES (:idShow, :Date);";
             $parameters["idShow"] = $idShow;
             $parameters["Date"] = $Date;
@@ -129,13 +129,15 @@
 
             $this->connection->ExecuteNonQuery($query, $parameters);
 
-            return $error;
+            $query = "SELECT LAST_INSERT_ID() 'last'";
+
+            $resultSet = $this->connection->Execute($query);
+
+            return $resultSet[0]['last'];
         }
 
         public function AddArtistToPresentation($idPresentation, $idArtist)
         {
-            $error = "";
-
             $query = "INSERT INTO ".$this->tableArtist." (idArtist, idPresentation) VALUES (:idArtist, :idPresentation);";
             $parameters["idArtist"] = $idArtist;
             $parameters["idPresentation"] = $idPresentation;

@@ -3,10 +3,11 @@
 namespace Controllers;
 
 use DAO\categoryDAO as categoryDAO;
-use DAO\artistDAO as artistDAO;
+use DAO\ArtistDAO as ArtistDAO;
 use DAO\seatDAO as seatDAO;
 
 use DAO\ShowDAO as ShowDAO;
+use DAO\PresentationDAO as PresentationDAO;
 
 
 class EventController
@@ -35,20 +36,39 @@ class EventController
         $showName = $_POST['name'];
         $description = $_POST['description'];
 
-        $show = new ShowDAO();
-        $lastIdShow = $show->addShow($showName, 0, $description);
+        // SHOW
+
+        $shows = new ShowDAO();
+        $lastIdShow = $shows->addShow($showName, 0, $description);
+
+        // CATEGORIES
 
         $categories = $_POST['categories'];
 
         foreach ($categories as $categoryId) {
-            $show->addCategoryToShow($lastIdShow, $categoryId);
+            $shows->addCategoryToShow($lastIdShow, $categoryId);
         }
 
+        //PRESENTATION
 
+        $presentations = new PresentationDAO();
+        $artists = new ArtistDAO();
+        
+        if ($_POST['days_radio'] == 'only')
+        {
+            $day = $_POST['days'];
+
+            $lastIdPresentation = $presentations->AddPresentation($lastIdShow, $day);
+
+            // artist
+
+            $artistList == explode(",", $_POST['artist'][0]);
+
+        }
         
         
         
-        
+
 
 
 

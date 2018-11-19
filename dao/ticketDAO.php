@@ -121,6 +121,6 @@ class TicketDAO
 
         return $TicketsList;
     }
-}
 
+}
 ?>

@@ -6,15 +6,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 ?>
 
 <div class="container" data-spy="scroll" data-target=".navbar" data-offset="50" style="z-index: 1;">
