@@ -9,6 +9,8 @@
             public
             user
             admin
+            $_SESSION['userName']
+            $_SESSION['userId']
 
 
 */
