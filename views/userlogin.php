@@ -5,17 +5,10 @@
     <br>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Registro por mail</h4>
+            <h4 class="card-title">Log In</h4>
             <div class="card-text text-center">
 
-                <form method="post" action="/utn/TPFINALLAB4/user/register">
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">nombre</span>
-                        </div>
-                        <input class="form-control" type="text" name="name" minlength="3" required>
-                    </div>
+                <form method="post" action="/utn/TPFINALLAB4/user/login">
 
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -31,17 +24,9 @@
                         <input class="form-control" type="password" name="pass" required>
                     </div>
                     <br><br>
-                    <button type="submit" class="btn btn-info">registrarse</button>
+                    <button type="submit" class="btn btn-info">Entrar</button>
                 </form>
 
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Registro por FACEBOOK</h4>
-            <div class="card-text text-center">
-                <a href="facebook"><button type="button" class="btn btn-info">boton defacebook</button></a>
             </div>
         </div>
     </div>

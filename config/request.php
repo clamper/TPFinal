@@ -22,7 +22,11 @@
                 $this->controller = ucwords(array_shift($urlArray));
 
             if(empty($urlArray))
+<<<<<<< HEAD
                 $this->method = 'new';
+=======
+                $this->method = 'Index';
+>>>>>>> 94861d231d6096ebb0c9230d4b927b5fd10e32f3
             else
                 $this->method = array_shift($urlArray);
 

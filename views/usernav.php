@@ -24,7 +24,7 @@ $username = "pepito";
                     <div class="dropdown-menu" style="z-index: 1;">
 
                         <a class="dropdown-item " href="user/myTickets">mis tickets</a>
-                        <a class="dropdown-item" href="user/logout">salir</a>
+                        <a class="dropdown-item" href="/utn/TPFINALLAB4/user/logout">salir</a>
                     </div>
                 </div>
             </div>

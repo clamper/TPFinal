@@ -2,7 +2,7 @@
 
 define("ROOT", dirname(__DIR__) . "/");
 define("FRONT_ROOT", "/utn/tpfinallab4/");
-define("VIEWS_PATH", "Views/");
+define("VIEWS_PATH", "views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 
