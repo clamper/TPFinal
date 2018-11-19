@@ -123,7 +123,7 @@ class ShowDAO
     public function addShow($showName, $idImage, $description)
     {
         $query = "INSERT INTO ".$this->tableName.
-        " (showName, idImage, description) ".
+        " (showName, id_image, description) ".
         "VALUES (:showName, :idImage, :description);";
             
         $parameters["showName"] = $showName;
@@ -133,6 +133,15 @@ class ShowDAO
         $this->connection = Connection::GetInstance();
 
         $this->connection->ExecuteNonQuery($query, $parameters);
+
+
+        $query = "SELECT LAST_INSERT_ID() 'last'";
+
+        $resultSet = $this->connection->Execute($query);
+
+        return $resultSet[0]['last'];
+
+
 
     }
 
@@ -168,7 +177,7 @@ class ShowDAO
     {
         $query = "INSERT INTO categoryxshow".
         " (idshow, idCategory) ".
-        "VALUES (:idshow, :idCategory, :description);";
+        "VALUES (:idshow, :idCategory);";
             
         $parameters["idshow"] = $idshow;
         $parameters["idCategory"] = $idCategory;

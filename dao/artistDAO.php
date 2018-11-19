@@ -12,7 +12,7 @@ class ArtistDAO
     private $tableArtistXPres = "artistxpresentation";
 
 
-    public function GetAllArtist()
+    public function GetAllArtists()
     {
         $artistList = array();
 
