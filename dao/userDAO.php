@@ -40,7 +40,7 @@ class UserDAO
     {
         $User = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where email=".$email;
+        $query = "SELECT * FROM ".$this->tableName." where email='".$email."'";
 
         $this->connection = Connection::GetInstance();
 
@@ -49,7 +49,7 @@ class UserDAO
         foreach ($resultSet as $row)
         {                
             $User = new User();
-            $User->setIdUser($row["idUser"]);
+            $User->setIdUser($row["iduser"]);
             $User->setEmail($row["email"]);
             $User->setPassword($row["password"]);
         }
@@ -64,7 +64,7 @@ class UserDAO
             
         $parameters["name"] = $email;
         $parameters["email"] = $email;
-        $parameters["pass"] = $pass;
+        $parameters["password"] = $pass;
 
         $this->connection = Connection::GetInstance();
 

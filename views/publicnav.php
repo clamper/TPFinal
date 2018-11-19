@@ -6,8 +6,8 @@
         </div>
 
         <div class="btn-group navbar-right">
-            <a href="user/registerPage"> <button type="button" class="btn btn-info"><i class="fa fa-user-plus"></i> Registrarse</button></a>
-            <button type="button" class="btn btn-info" id="btn_login"><i class="fa fa-user"></i> Entrar</button>
+            <a href="/utn/TPFINALLAB4/user/register"> <button type="button" class="btn btn-info"><i class="fa fa-user-plus"></i> Registrarse</button></a>
+            <a href="/utn/TPFINALLAB4/user/login"> <button type="button" class="btn btn-info" id="btn_login"><i class="fa fa-user"></i> Entrar</button></a>
         </div>
     </div>
 

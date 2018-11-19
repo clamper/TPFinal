@@ -22,7 +22,7 @@
                 $this->controller = ucwords(array_shift($urlArray));
 
             if(empty($urlArray))
-                $this->method = 'index';
+                $this->method = 'Index';
             else
                 $this->method = array_shift($urlArray);
 
