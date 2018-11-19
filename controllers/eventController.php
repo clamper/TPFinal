@@ -8,6 +8,7 @@ use DAO\seatDAO as seatDAO;
 
 use DAO\ShowDAO as ShowDAO;
 use DAO\PresentationDAO as PresentationDAO;
+use DAO\LocationDAO as LocationDAO;
 
 
 class EventController
@@ -30,7 +31,7 @@ class EventController
 
     public function save()
     {
-        var_dump($_POST);
+        //var_dump($_POST);
 
 
         $showName = $_POST['name'];
@@ -53,19 +54,43 @@ class EventController
 
         $presentations = new PresentationDAO();
         $artists = new ArtistDAO();
-        
-        if ($_POST['days_radio'] == 'only')
-        {
-            $day = $_POST['days'];
+        $location = new LocationDAO();
 
-            $lastIdPresentation = $presentations->AddPresentation($lastIdShow, $day);
+        foreach ($_POST['days'] as $key => $day) {
+            if ($day != "")
+                if ($_POST['artist'][$key] != "")
+                    {
+                        // creo presentacion x cada dia
+                        $lastIdPresentation = $presentations->AddPresentation($lastIdShow, $day);
 
-            // artist
+                        // lista de artistas x dia
+                        $artistList = explode(",", $_POST['artist'][$key]);
+            
+                        foreach ($artistList as $artist) {
+                            $presentations->AddArtistToPresentation($lastIdPresentation, $artist);
+                        }   
 
-            $artistList == explode(",", $_POST['artist'][0]);
+                        // agrego locations x cada dia
+                        foreach ($_POST as $key => $value) {
+                            if ( substr($key,0,9) == "seat_cost")
+                            {
+                                if ($value != "")
+                                    {
+                                        $seatId = str_replace("seat_cost","",$key);
+                                        if ($_POST['seat_total'.$seatId] != "")
+                                            $location->addLocation($lastIdPresentation, $seatId, $_POST['seat_cost'.$seatId], $_POST['seat_total'.$seatId], 0);
+                                    }
+                                
+                            }    
+                
+                        }
 
+                    }
         }
         
+        // LOCATIONS
+        
+
         
         
 

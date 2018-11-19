@@ -17,12 +17,12 @@
             $urlArray = array_filter($urlArray);
 
             if(empty($urlArray))
-                $this->controller = 'home';            
+                $this->controller = 'event';            
             else
                 $this->controller = ucwords(array_shift($urlArray));
 
             if(empty($urlArray))
-                $this->method = 'index';
+                $this->method = 'new';
             else
                 $this->method = array_shift($urlArray);
 

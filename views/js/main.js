@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    var more_days = "<div class='input-group-prepend'><input type='date' class='form-control' name='days'><input type='text' name='artist'><button type='button' class='btn bg-info' id='select_artist' data-toggle='modal' data-target='#modal_artist'>seleccionar artistas</button></div>";
+    var more_days = "<div class='input-group-prepend'><input type='date' class='form-control' name='days[]'><input type='text' name='artist[]'><button type='button' class='btn bg-info' id='select_artist' data-toggle='modal' data-target='#modal_artist'>seleccionar artistas</button></div>";
     var select_day;
 
     $('input[name=days_radio]').change(function () {

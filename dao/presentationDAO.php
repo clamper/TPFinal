@@ -145,8 +145,6 @@
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($query, $parameters);
-
-            return $error;
         }
 
 
