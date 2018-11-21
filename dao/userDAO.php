@@ -31,6 +31,8 @@ class UserDAO
             $User->setIdUser($row["idUser"]);
             $User->setname()($row["name"]);
             $User->setEmail($row["email"]);
+            $User->setUserType($row["isadmin"]);
+            
         }
 
         return $User;
@@ -52,6 +54,7 @@ class UserDAO
             $User->setIdUser($row["iduser"]);
             $User->setEmail($row["email"]);
             $User->setPassword($row["password"]);
+            $User->setUserType($row["isadmin"]);
         }
 
         return $User;
