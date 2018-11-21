@@ -35,13 +35,15 @@
             }
         }
 
-        public function viewLoginForm()
+        public function viewLoginForm($errormsg = "") 
         {
             require_once(VIEWS_PATH."userlogin.php");
         }
 
         public function Login()
         {
+            $islogin= false;
+
             $userdao = new UserDAO();
 
             $userEmail = $_POST['mail'];
@@ -58,26 +60,40 @@
                     $_SESSION["userName"] = $user->getName();
                     $_SESSION["userId"] = $user->getIdUser();
 
-                    $home = new HomeController();
-                    $home->Index();         // bye bye    
+                    $islogin = true;
+
                 }
                 else
                 {
-                    echo "Password incorrecto!!!!";
-                    $this->viewLoginForm();
+                    $errormsg = "usuario o clave incorrecto!";
                 }
             }
             else
             {
-                echo "user es null";
-                $this->viewLoginForm();
+                $errormsg = "usuario o clave incorrecto";
             }
+
+
+            require_once(VIEWS_PATH."header.php");
+
+            if ($islogin)
+            {
+                $home = new HomeController();
+                $home->Index();
+            }
+            else
+                $this->viewLoginForm($errormsg);
+
         }
 
         public function Logout()
         {
             session_destroy();
-            
+
+            session_start();
+
+            require_once(VIEWS_PATH."header.php");
+
             $home = new HomeController();
             $home->Index();         // bye bye    
         }

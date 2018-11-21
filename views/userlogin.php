@@ -23,6 +23,13 @@
                         </div>
                         <input class="form-control" type="password" name="pass" required>
                     </div>
+                    <?php
+                    
+                    if (isset($errormsg))
+                        if ( $errormsg != "")
+                            echo "<br><div class='alert alert-danger '>".$errormsg."</div>";
+
+                    ?>
                     <br><br>
                     <button type="submit" class="btn btn-info">Entrar</button>
                 </form>

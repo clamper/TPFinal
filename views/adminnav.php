@@ -1,6 +1,6 @@
 <?php
 
-$username = "administrador";
+$username = $_SESSION['userName'];
 
 
 ?>
@@ -18,7 +18,7 @@ $username = "administrador";
                             <?=$username;?>
                     </button>
                     <div class="dropdown-menu" style="z-index: 1;">
-                        <a class="dropdown-item" href="user/logout">salir</a>
+                        <a class="dropdown-item" href="/utn/tpfinallab4/user/logout">salir</a>
                     </div>
                 </div>
             </div>

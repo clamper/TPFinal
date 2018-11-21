@@ -51,6 +51,7 @@ class UserDAO
         foreach ($resultSet as $row)
         {                
             $User = new User();
+            $User->setname($row["name"]);
             $User->setIdUser($row["iduser"]);
             $User->setEmail($row["email"]);
             $User->setPassword($row["password"]);
@@ -65,7 +66,7 @@ class UserDAO
     {
         $query = "INSERT INTO ".$this->tableName." (name, email, password) VALUES (:name, :email, :password);";
             
-        $parameters["name"] = $email;
+        $parameters["name"] = $name;
         $parameters["email"] = $email;
         $parameters["password"] = $pass;
 

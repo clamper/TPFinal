@@ -24,10 +24,9 @@ class ShowDAO
         foreach ($resultSet as $row)
         {                
             $Show = new Show();
-            $Show->setIdShow($row["idShow"]);
-            $Show->setIdCategory($row["idCategory"]);
-            $Show->setShowName($row["showName"]);
-            $Show->setIdImage($row["idImage"]);
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
             $Show->setDescription($row["description"]);
 
             array_push($ShowList, $Show);
@@ -54,10 +53,9 @@ class ShowDAO
         foreach ($resultSet as $row)
         {                
             $Show = new Show();
-            $Show->setIdShow($row["idShow"]);
-            $Show->setIdCategory($row["idCategory"]);
-            $Show->setShowName($row["showName"]);
-            $Show->setIdImage($row["idImage"]);
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
             $Show->setDescription($row["description"]);
 
             array_push($ShowList, $Show);

@@ -13,6 +13,22 @@ use DAO\LocationDAO as LocationDAO;
 
 class EventController
 {
+    public function showAllEvents()
+    {
+        $showDAO = new ShowDAO();
+        $showsList = $showDAO->GetAllShows();
+
+        require_once(VIEWS_PATH."home.php");
+    }
+
+    public function showAllEventsByCategory($category = null)
+    {
+        $showDAO = new ShowDAO();
+        $showsList = $showDAO->GetShowsByCategory($category);
+
+        require_once(VIEWS_PATH."home.php");
+    }
+
 
 
     public function new()
@@ -89,17 +105,6 @@ class EventController
         }
         
         // LOCATIONS
-        
-
-        
-        
-
-
-
-
-
-
-
     }
 
 

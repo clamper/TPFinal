@@ -14,7 +14,7 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $array_artist = $dao->GetAllArtist();
+        $array_artist = $dao->GetAllArtists();
 
         require_once(VIEWS_PATH."abmartist.php");
 
