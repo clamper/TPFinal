@@ -2,12 +2,12 @@
 
     <div class="container-fluid">
         <div class="navbar-header text-white">
-            <a class="navbar-brand">MI-EVENTO.COM</a>
+            <a class="navbar-brand" href="/utn/tpfinallab4">MI-EVENTO.COM</a>
         </div>
 
         <div class="btn-group navbar-right">
-            <a href="/utn/TPFINALLAB4/user/register"> <button type="button" class="btn btn-info"><i class="fa fa-user-plus"></i> Registrarse</button></a>
-            <a href="/utn/TPFINALLAB4/user/login"> <button type="button" class="btn btn-info" id="btn_login"><i class="fa fa-user"></i> Entrar</button></a>
+            <a href="/utn/TPFINALLAB4/user/viewRegistrationForm"> <button type="button" class="btn btn-info"><i class="fa fa-user-plus"></i> Registrarse</button></a>
+            <button type="button" class="btn btn-info" id="btn_login"><i class="fa fa-user"></i> Entrar</button>
         </div>
     </div>
 

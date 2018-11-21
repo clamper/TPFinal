@@ -16,8 +16,8 @@
 	session_start();
 
 	require_once(VIEWS_PATH."header.php");
-echo "hola";
-	//Router::Route(new Request());
+
+	Router::Route(new Request());
 
 	require_once(VIEWS_PATH."footer.php");
 ?>
