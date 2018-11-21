@@ -64,15 +64,19 @@ class EventController
         
         $arrayLocations = array();
         
-        $precioMenor = 100000;
+        $precioMenor = 0;
 
         foreach ($locationsList as $location) {
-            if ($location->getLocationPrice() < $precioMenor)
+            if ($precioMenor == 0){
                 $precioMenor = $location->getLocationPrice();
+            }
+            else{
+                if ($location->getLocationPrice() < $precioMenor)
+                    $precioMenor = $location->getLocationPrice();
+            }            
         }
 
-        //var_dump($precioMenor);
-        //var_dump($artistArray);
+        require_once(VIEWS_PATH."show-detail.php");        
     }
 
 

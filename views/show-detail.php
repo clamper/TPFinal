@@ -58,7 +58,7 @@
         <div class="card-columns" id="card-colums-show">
 
             <div class="card">
-                <img class="card-img-top" src="views/img/prueba_evento.svg" alt="Card image">
+                <img class="card-img-top" src="/utn/tpfinallab4/views/img/prueba_evento.svg" alt="Card image">
             </div>
 
             <div class="card">
