@@ -10,6 +10,7 @@
         private $name;
         private $email;
         private $password;
+        private $userType;
 
         public function getName()
         {
@@ -49,6 +50,16 @@
         public function setPassword($password)
         {
             $this->password = $password;
+        }
+
+        public function getUserType()
+        {
+            return $this->userType;
+        }
+
+        public function setUserType($userType)
+        {
+            $this->userType = $userType;
         }
 
     }

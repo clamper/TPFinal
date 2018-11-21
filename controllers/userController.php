@@ -10,7 +10,6 @@
 
         public function viewRegistrationForm()
         {
-            session_destroy();
             require_once(VIEWS_PATH."userregister.php");
         }
 
@@ -38,7 +37,6 @@
 
         public function viewLoginForm()
         {
-            session_destroy();
             require_once(VIEWS_PATH."userlogin.php");
         }
 
@@ -65,13 +63,13 @@
                 }
                 else
                 {
-                    echo "oh no!";
+                    echo "Password incorrecto!!!!";
                     $this->viewLoginForm();
                 }
             }
             else
             {
-                echo "oh no!";
+                echo "user es null";
                 $this->viewLoginForm();
             }
         }
