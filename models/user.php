@@ -54,7 +54,13 @@
 
         public function getUserType()
         {
-            return $this->userType;
+            $type = "user";
+
+            if ($this->userType == 1){
+                $type = "admin";
+            }
+
+            return $type;
         }
 
         public function setUserType($userType)

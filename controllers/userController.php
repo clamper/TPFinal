@@ -54,7 +54,7 @@
             {
                 if ($userPassword == $user->getPassword())
                 {
-                    $_SESSION["userType"] = "user";
+                    $_SESSION["userType"] = $user->getUserType();
                     $_SESSION["userName"] = $user->getName();
                     $_SESSION["userId"] = $user->getIdUser();
 
