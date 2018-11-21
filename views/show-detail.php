@@ -47,7 +47,7 @@
 
 </STYLE>
 
-<div class="container" data-spy="scroll" data-target=".navbar" data-offset="50" style="z-index: 1;">
+<div class="container" data-spy="scroll" data-target=".navbar" data-offset="50" style="z-index: 1; margin-bottom:50px;">
 
     <div id="section" class="container" style="padding-top:40px;padding-bottom:30px">
 
@@ -62,9 +62,13 @@
             </div>
 
             <div class="card">
-                <div class="card-body bg-light"><?=$show->getDescription();?></div>                
-                    <div class="card-body bg-primary text-white text-center">Precios desde: $<?=$precioMenor;?></div>
+                <div class="card-body bg-light">
+                    <?=$show->getDescription();?>
                 </div>
+                <div class="card-body bg-primary text-white text-center" >
+                    Precios desde: $<?=$precioMenor;?>
+                </div>
+                
             </div>
         </div>
 
@@ -72,14 +76,16 @@
         foreach ($artistArray as $artistString => $value)
         {?>
             <div class="card bg-light" style="margin-top:20px;">
-                <h6 class="card-title" style="padding-left:20px;">Día: <?=$artistString?></h6>
+            <div class="card-header">
+                <?=$artistString?>
+            </div>
+
                 <div class="card-body"><?=$value?></div>
             </div> 
 
         <?php
         }      
         ?>
-
 
 
         

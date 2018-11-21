@@ -38,7 +38,7 @@ $categoryList = $categoryDAO->GetAllCategoriesInUse();
                     <div class="alert alert-primary">
                         proximas fechas
                     </div>
-                    mostrar aqui un calendario?<br> proximas fecha? <br> nose
+                    1/1/2018
                 </div>
 
             </div>

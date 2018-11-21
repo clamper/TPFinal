@@ -56,7 +56,7 @@ class EventController
 
             $date = date("d-m-Y",strtotime($presentation->getPresDate()));
 
-            $artistArray[ $date ] = implode(",", $artistArrayAux);
+            $artistArray[ $date ] = implode(", ", $artistArrayAux);
         }
 
         $locations = new LocationDAO();

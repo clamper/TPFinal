@@ -123,7 +123,7 @@ class ShowDAO
         "VALUES (:showName, :idImage, :description);";
             
         $parameters["showName"] = $showName;
-        $parameters["idimage"] = $idImage;
+        $parameters["idImage"] = $idImage;
         $parameters["description"] = $description;
 
         $this->connection = Connection::GetInstance();
