@@ -1,6 +1,6 @@
 <?php
 
-$username = "pepito";
+$username = $_SESSION['userName'];
 
 
 ?>
