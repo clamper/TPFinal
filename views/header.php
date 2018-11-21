@@ -98,7 +98,7 @@ switch ($_SESSION['userType'])
 
                     <div class="modal-body">
 
-                        <form method="POST" action="user/login" id="form_login">
+                        <form method="POST" action="/utn/TPFINALLAB4/user/login" id="form_login">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">correo</span>
