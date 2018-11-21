@@ -1,18 +1,10 @@
 <?php
 
-
-
-
-
-
 $array_ticket =[];
 
 $titulo_evento;
 $fecha;
 $lugares;
-
-
-
 
 
 ?>

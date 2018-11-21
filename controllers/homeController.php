@@ -9,10 +9,11 @@ class HomeController
         
        //require_once(VIEWS_PATH."abmcategories.php");
         //require_once(VIEWS_PATH."add-event.php");
-        require_once(VIEWS_PATH."home.php");
+     //  require_once(VIEWS_PATH."home.php");
         //require_once(VIEWS_PATH."viewmyticket.php");
      //   require_once(VIEWS_PATH."userregister.php");
      //   require_once(VIEWS_PATH."userlogin.php");
+        require_once(VIEWS_PATH."show-detail.php");
     }
 
     public function Logout()

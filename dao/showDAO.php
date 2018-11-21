@@ -24,10 +24,9 @@ class ShowDAO
         foreach ($resultSet as $row)
         {                
             $Show = new Show();
-            $Show->setIdShow($row["idShow"]);
-            $Show->setIdCategory($row["idCategory"]);
-            $Show->setShowName($row["showName"]);
-            $Show->setIdImage($row["idImage"]);
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
             $Show->setDescription($row["description"]);
 
             array_push($ShowList, $Show);
@@ -54,10 +53,9 @@ class ShowDAO
         foreach ($resultSet as $row)
         {                
             $Show = new Show();
-            $Show->setIdShow($row["idShow"]);
-            $Show->setIdCategory($row["idCategory"]);
-            $Show->setShowName($row["showName"]);
-            $Show->setIdImage($row["idImage"]);
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
             $Show->setDescription($row["description"]);
 
             array_push($ShowList, $Show);
@@ -83,10 +81,9 @@ class ShowDAO
         foreach ($resultSet as $row)
         {                
             $Show = new Show();
-            $Show->setIdShow($row["idShow"]);
-            $Show->setIdCategory($row["idCategory"]);
-            $Show->setShowName($row["showName"]);
-            $Show->setIdImage($row["idImage"]);
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
             $Show->setDescription($row["description"]);
 
             array_push($ShowList, $Show);
@@ -96,7 +93,7 @@ class ShowDAO
     }
 
 
-    public function GetShowBsyID($idShow)
+    public function GetShowByID($idShow)
     {
         $Show = null;
 
@@ -109,11 +106,10 @@ class ShowDAO
         foreach ($resultSet as $row)
         {                
             $Show = new Show();
-            $Show->setIdShow($row["idShow"]);
-            $Show->setIdCategory($row["idCategory"]);
-            $Show->setShowName($row["showName"]);
-            $Show->setIdImage($row["idImage"]);
-            $Show->setDescription($row["description"]);
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_Image"]);
+            $Show->setDescription($row["description"]);;
         }
 
         return $Show;
@@ -127,7 +123,7 @@ class ShowDAO
         "VALUES (:showName, :idImage, :description);";
             
         $parameters["showName"] = $showName;
-        $parameters["idImage"] = $idImage;
+        $parameters["idimage"] = $idImage;
         $parameters["description"] = $description;
 
         $this->connection = Connection::GetInstance();
@@ -161,10 +157,10 @@ class ShowDAO
     public function UpdateShow($showId, $showName, $idImage, $description)
     {
         $query = "UPDATE ".$this->tableName.
-        " set name = :seatName, showName = :showName, idImage = :idImage, description = :description".
+        " set name = :seatName, showName = :showName, id_image = :idImage, description = :description".
         " WHERE id = :showId";
         
-        $parameters["showName"] = $showName;
+        $parameters["showname"] = $showName;
         $parameters["idImage"] = $idImage;
         $parameters["description"] = $description;
 
