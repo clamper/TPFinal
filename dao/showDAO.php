@@ -108,7 +108,7 @@ class ShowDAO
             $Show = new Show();
             $Show->setIdShow($row["idshow"]);
             $Show->setShowName($row["showname"]);
-            $Show->setIdImage($row["id_Image"]);
+            $Show->setIdImage($row["id_image"]);
             $Show->setDescription($row["description"]);;
         }
 

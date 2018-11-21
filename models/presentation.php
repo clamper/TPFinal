@@ -32,16 +32,6 @@
             $this->idShow = $idShow;
         }
 
-        public function getIdArtist()
-        {
-            return $this->idArtist;
-        }
-
-        public function setIdArtist($idArtist)
-        {
-            $this->idArtist = $idArtist;
-        }
-
         public function getPresDate()
         {
             return $this->pressDate;

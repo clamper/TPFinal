@@ -141,7 +141,7 @@ class ArtistDAO
     {
         $artistList = array();
 
-        $query = "SELECT idArtist FROM ".$this->tableArtistXPres." where idpresentation =".$idPresentation;
+        $query = "SELECT * FROM ".$this->tableArtistXPres." AXP inner join artists A on AXP.idartist = A.idartist where AXP.idpresentation =".$idPresentation;
 
         $this->connection = Connection::GetInstance();
 
@@ -149,9 +149,11 @@ class ArtistDAO
         
         foreach ($resultSet as $row)
         {                
-            $idArtist = ($row["idArtist"]);
+            $artist = new Artist();
+            $artist->setIdArtist($row["idartist"]);
+            $artist->setArtistName($row["artistname"]);
 
-            array_push($artistList, $this->GetArtistbyID($idArtist));
+            array_push($artistList, $artist);
         }
 
         return $artistList;
