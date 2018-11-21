@@ -15,7 +15,7 @@ class LocationDAO
     {
         $LocationList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where idPres =".$idPresentation;
+        $query = "SELECT * FROM ".$this->tableName." where idpresentation =".$idPresentation;
 
         $this->connection = Connection::GetInstance();
 
@@ -24,12 +24,12 @@ class LocationDAO
         foreach ($resultSet as $row)
         {                
             $Location = new Location();
-            $Location->setIdLocation($row["idLocation"]);
-            $Location->setIdPres()($row["idPres"]);
-            $Location->setIdSeat()($row["idSeat"]);
-            $Location->setLocationPrice($row["locationPrice"]);
-            $Location->setLocationQty($row["locationQty"]);
-            $Location->setLocationSold()()($row["locationSold"]);
+            $Location->setIdLocation($row["idlocation"]);
+            $Location->setIdPres($row["idpresentation"]);
+            $Location->setIdSeat($row["idseat"]);
+            $Location->setLocationPrice($row["price"]);
+            $Location->setLocationQty($row["quantity"]);
+            $Location->setLocationSold($row["sold"]);
             
             array_push($LocationList, $Location);
         }

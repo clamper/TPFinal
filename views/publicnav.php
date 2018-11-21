@@ -1,3 +1,15 @@
+<?php
+
+//array de categorias, para no mostrar categorias q no poseen ningun show asignado
+
+use dao\CategoryDao as CategoryDao;
+
+$categoryDAO = new CategoryDAO();
+$categoryList = $categoryDAO->GetAllCategoriesInUse();
+
+
+?>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top bg-dark">
 
     <div class="container-fluid">
@@ -37,11 +49,15 @@
             </button>
                 <div class="dropdown-menu" style="z-index: 1;">
                     <div class="alert alert-primary">
-                        catagorias
+                        categorias
                     </div>
-                    <a class="dropdown-item " href="#">Conciertos</a>
-                    <a class="dropdown-item" href="#">Obras de teatro</a>
-                    <a class="dropdown-item" href="#">Exposiciones</a>
+                    <?php
+
+                    foreach ($categoryList as $category) {
+                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByCategory/?categoy=".$category->getIdCategory()."'>".$category->getCategoryName()."</a>";
+                    }
+                    
+                    ?>
                 </div>
             </div>
         </div>

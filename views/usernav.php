@@ -2,17 +2,22 @@
 
 $username = $_SESSION['userName'];
 
+//array de categorias, para no mostrar categorias q no poseen ningun show asignado
+
+use dao\CategoryDao as CategoryDao;
+
+$categoryDAO = new CategoryDAO();
+$categoryList = $categoryDAO->GetAllCategoriesInUse();
+
 
 ?>
-
-
 
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top bg-dark">
 
         <div class="container-fluid">
             <div class="navbar-header text-white">
-                <a class="navbar-brand">MI-EVENTO.COM</a>
+            <a class="navbar-brand" href="/utn/tpfinallab4">MI-EVENTO.COM</a>
             </div>
 
             <div class="btn-group navbar-right">
@@ -23,7 +28,7 @@ $username = $_SESSION['userName'];
                     </button>
                     <div class="dropdown-menu" style="z-index: 1;">
 
-                        <a class="dropdown-item " href="user/myTickets">mis tickets</a>
+                        <a class="dropdown-item " href="/utn/TPFINALLAB4/user/myTickets">mis tickets</a>
                         <a class="dropdown-item" href="/utn/TPFINALLAB4/user/logout">salir</a>
                     </div>
                 </div>
@@ -46,7 +51,7 @@ $username = $_SESSION['userName'];
                         <div class="alert alert-primary">
                             proximas fechas
                         </div>
-                        mostrar aqui un calendario?<br> proximas fecha? <br> nose
+                        mostrar aqui un calendario?<br> proximas fecha? <br>
                     </div>
 
                 </div>
@@ -57,11 +62,15 @@ $username = $_SESSION['userName'];
             </button>
                     <div class="dropdown-menu" style="z-index: 1;">
                         <div class="alert alert-primary">
-                            catagorias
+                            categorias
                         </div>
-                        <a class="dropdown-item " href="">Conciertos</a>
-                        <a class="dropdown-item" href="#">Obras de teatro</a>
-                        <a class="dropdown-item" href="#">Exposiciones</a>
+                        <?php
+
+                    foreach ($categoryList as $category) {
+                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByCategory/?categoy=".$category->getIdCategory()."'>".$category->getCategoryName()."</a>";
+                    }
+                    
+                    ?>
                     </div>
                 </div>
             </div>

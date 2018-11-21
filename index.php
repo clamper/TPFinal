@@ -15,9 +15,13 @@
 
 	session_start();
 
-	require_once(VIEWS_PATH."header.php");
+	$request = new Request();
+	$method = $request->getMethod();
 
-	Router::Route(new Request());
+	if ($method != "logout" && $method != "login")
+		require_once(VIEWS_PATH."header.php");
+
+	Router::Route($request);
 
 	require_once(VIEWS_PATH."footer.php");
 ?>

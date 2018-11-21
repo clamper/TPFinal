@@ -109,9 +109,9 @@
             foreach ($resultSet as $row)
             {                
                 $Presentation = new Presentation();
-                $Presentation->setIdPres($row["idPresentation"]);
-                $Presentation->setIdShow()($row["idShow"]);
-                $Presentation->setPresDate()($row["Date"]);         
+                $Presentation->setIdPres($row["idpresentation"]);
+                $Presentation->setIdShow($row["idshow"]);
+                $Presentation->setPresDate($row["date"]);         
                 
                 array_push($presentationsList, $Presentation);
             }

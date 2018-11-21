@@ -33,6 +33,29 @@ class CategoryDAO
         return $CategoryList;
     }
 
+    public function GetAllCategoriesInUse()
+    {
+        $CategoryList = array();
+
+        $query = "SELECT c.idcategory, c.categoryname FROM categories C inner join categoryxshow CXS on c.idcategory = CXS.idcategory ". 
+        "where C.isactive = true and CXS.idshow is not null group by c.categoryname ";
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        foreach ($resultSet as $row)
+        {                
+            $category = new Category();
+            $category->setIdCategory($row["idcategory"]);
+            $category->setCategoryName($row["categoryname"]);
+
+            array_push($CategoryList, $category);
+        }
+
+        return $CategoryList;
+    }
+
 
     public function GetCategorybyID($id)
     {

@@ -13,6 +13,69 @@ use DAO\LocationDAO as LocationDAO;
 
 class EventController
 {
+    public function showAllEvents()
+    {
+        $showDAO = new ShowDAO();
+        $showsList = $showDAO->GetAllShows();
+
+        require_once(VIEWS_PATH."home.php");
+    }
+
+    public function showAllEventsByCategory($category = null)
+    {
+        $showDAO = new ShowDAO();
+        $showsList = $showDAO->GetShowsByCategory($category);
+
+        require_once(VIEWS_PATH."home.php");
+    }
+
+    public function showDetail($showid)
+    {
+        $showDAO = new ShowDAO();
+        $show = $showDAO->GetShowByID($showid);
+
+        $presentationDAO = new PresentationDAO();
+        $presentationList = $presentationDAO->GetAllPresentationsByShow($showid);
+
+        //$presentationId = $presentation->getIdPres();
+
+        $artistDAO = new ArtistDAO();
+        $artistArray = array();
+        $presentationID = 0; // para sacar el numero de presentacion apra obtener una lista de seats
+
+        foreach ($presentationList as $presentation) {
+            $presentationID  = $presentation->getIdPres();
+
+            $artistList = $artistDAO->GetAllArtistByPresentation($presentationID);
+
+            $artistArrayAux = array();
+
+            foreach ($artistList as $artist) {
+                array_push($artistArrayAux, $artist->getArtistName());
+            }
+
+            $date = date("d-m-Y",strtotime($presentation->getPresDate()));
+
+            $artistArray[ $date ] = implode(",", $artistArrayAux);
+        }
+
+        $locations = new LocationDAO();
+        $locationsList = $locations->GetAllLocationsByPresentation($presentationID);
+        
+        $arrayLocations = array();
+        
+        $precioMenor = 100000;
+
+        foreach ($locationsList as $location) {
+            if ($location->getLocationPrice() < $precioMenor)
+                $precioMenor = $location->getLocationPrice();
+        }
+
+        //var_dump($precioMenor);
+        //var_dump($artistArray);
+    }
+
+
 
 
     public function new()
@@ -89,17 +152,6 @@ class EventController
         }
         
         // LOCATIONS
-        
-
-        
-        
-
-
-
-
-
-
-
     }
 
 
