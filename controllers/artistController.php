@@ -10,7 +10,7 @@ class ArtistController
     
 
 
-    public function Index()
+    public function Index($msg = "")
     {
         $dao = new ArtistDAO();
 
@@ -24,9 +24,9 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $error_msg = $dao->addArtist($newArtist);
+        $msg = $dao->addArtist($newArtist);
 
-        $this->Index();
+        $this->Index($msg);
 
     }
 
@@ -34,9 +34,9 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $error_msg = $dao->Delete($idArtist);
+        $msg = $dao->Delete($idArtist);
 
-        $this->Index();
+        $this->Index($msg);
 
     }
 
@@ -44,9 +44,9 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $error_msg = $dao->UpdateName($idArtist, $newName);
+        $msg = $dao->UpdateName($idArtist, $newName);
 
-        $this->Index();
+        $this->Index($msg);
 
     }
 

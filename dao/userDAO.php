@@ -29,7 +29,7 @@ class UserDAO
         {                
             $User = new User();
             $User->setIdUser($row["idUser"]);
-            $User->setname()($row["name"]);
+            $User->setName()($row["name"]);
             $User->setEmail($row["email"]);
             $User->setUserType($row["isadmin"]);
             
@@ -51,7 +51,7 @@ class UserDAO
         foreach ($resultSet as $row)
         {                
             $User = new User();
-            $User->setname($row["name"]);
+            $User->setName($row["name"]);
             $User->setIdUser($row["iduser"]);
             $User->setEmail($row["email"]);
             $User->setPassword($row["password"]);
@@ -62,13 +62,14 @@ class UserDAO
     }
 
 
-    public function addUser($name, $email, $pass)
+    //public function addUser($name, $email, $pass)
+    public function addUser($user)
     {
         $query = "INSERT INTO ".$this->tableName." (name, email, password) VALUES (:name, :email, :password);";
             
-        $parameters["name"] = $name;
-        $parameters["email"] = $email;
-        $parameters["password"] = $pass;
+        $parameters["name"] = $user->getName();
+        $parameters["email"] = $user->getEmail();
+        $parameters["password"] = $user->getPassword();
 
         $this->connection = Connection::GetInstance();
 

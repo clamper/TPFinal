@@ -15,7 +15,7 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT * FROM ".$this->tableName;
+        $query = "SELECT * FROM ".$this->tableName." S inner join presentations P on S.idshow = P.idshow where P.date > now()";
 
         $this->connection = Connection::GetInstance();
 

@@ -15,7 +15,6 @@
         private $idSeat;        // en que ubicacion
         private $locationPrice;
         private $locationQty;   // cantidad de lugares totales para esa localidad
-        private $locationSold;  // cantidad de lugares vendidos de esa locaclidad
 
         public function getIdLocation()
         {
@@ -65,16 +64,6 @@
         public function setLocationQty($locationQty)
         {
             $this->locationQty = $locationQty;
-        }
-
-        public function getLocationSold()
-        {
-            return $this->locationSold;
-        }
-
-        public function setLocationSold($locationSold)
-        {
-            $this->locationSold = $locationSold;
         }
 
     }

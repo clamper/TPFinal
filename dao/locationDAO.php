@@ -29,7 +29,6 @@ class LocationDAO
             $Location->setIdSeat($row["idseat"]);
             $Location->setLocationPrice($row["price"]);
             $Location->setLocationQty($row["quantity"]);
-            $Location->setLocationSold($row["sold"]);
             
             array_push($LocationList, $Location);
         }
@@ -56,7 +55,6 @@ class LocationDAO
             $Location->setIdSeat()($row["idSeat"]);
             $Location->setLocationPrice($row["locationPrice"]);
             $Location->setLocationQty($row["locationQty"]);
-            $Location->setLocationSold()()($row["locationSold"]);
             
         }
 
@@ -64,17 +62,16 @@ class LocationDAO
     }
 
 
-    public function addLocation( $idPresentation, $idseat, $price, $quantity, $sold)
+    public function addLocation( $idPresentation, $idseat, $price, $quantity)
     {
         $query = "INSERT INTO ".$this->tableName.
-        " (idpresentation, idseat,  price, quantity, sold) ".
-        "VALUES (:idPresentation, :idseat, :price, :quantity, :sold);";
+        " (idpresentation, idseat,  price, quantity) ".
+        "VALUES (:idPresentation, :idseat, :price, :quantity);";
             
         $parameters["idPresentation"] = $idPresentation;
         $parameters["idseat"] = $idseat;
         $parameters["price"] = $price;
         $parameters["quantity"] = $quantity;
-        $parameters["sold"] = $sold;
 
         $this->connection = Connection::GetInstance();
 

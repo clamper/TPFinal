@@ -1,13 +1,3 @@
-<?php
-// ABM de artistas
-// $message para mostrar un mensaje de error
-
-
-$error_msg = "";
-
-//$array_artist
-?>
-
     <div class="container" id="abm_container">
         <br>
 
@@ -17,8 +7,8 @@ $error_msg = "";
 
         <?php
 
-        if ($error_msg != "")
-            echo "<div class='alert alert-danger'>".$error_msg."</div>";
+        if ($msg != "")
+            echo "<div class='alert alert-danger'>".$msg."</div>";
         ?>
 
             <form method="post" action="/utn/tpfinallab4/artist/new">

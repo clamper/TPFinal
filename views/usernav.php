@@ -17,7 +17,7 @@ $categoryList = $categoryDAO->GetAllCategoriesInUse();
 
         <div class="container-fluid">
             <div class="navbar-header text-white">
-            <a class="navbar-brand" href="/utn/tpfinallab4">MI-EVENTO.COM</a>
+                <a class="navbar-brand" href="/utn/tpfinallab4">MI-EVENTO.COM</a>
             </div>
 
             <div class="btn-group navbar-right">
@@ -40,53 +40,45 @@ $categoryList = $categoryDAO->GetAllCategoriesInUse();
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top bg-dark" style="z-index: 1;">
 
         <div class="container-fluid text-center">
-            <div class="btn-group">
+            <div class="navbar-header">
 
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-calendar"></i>
-            </button>
+                        <i class="fa fa-calendar"></i> fechas
+                    </button>
                     <div class="dropdown-menu" style="z-index: 1;">
-                        <div class="alert alert-primary">
-                            proximas fechas
-                        </div>
                         1/1/2018
                     </div>
-
                 </div>
-                <div class="btn-group">
 
+                <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-grip-horizontal"></i>
-            </button>
+                        <i class="fa fa-grip-horizontal"></i> categorias
+                    </button>
                     <div class="dropdown-menu" style="z-index: 1;">
-                        <div class="alert alert-primary">
-                            categorias
-                        </div>
                         <?php
 
-                    foreach ($categoryList as $category) {
-                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByCategory/?categoy=".$category->getIdCategory()."'>".$category->getCategoryName()."</a>";
-                    }
-                    
-                    ?>
+                        foreach ($categoryList as $category) {
+                            echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByCategory/?categoy=".$category->getIdCategory()."'>".$category->getCategoryName()."</a>";
+                        }
+                            
+                        ?>
                     </div>
                 </div>
+                
             </div>
         </div>
 
-        <form method="post" action="">
+
         <form class="form-inline" method="POST" action="event/search">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="buscador" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" name="search">
+                <input type="text" class="form-control" placeholder="buscador" name="search" required>
                 <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-info" type="button">Buscar</button>
+                    <button class="btn btn-info" type="submit">Buscar</button>
                 </div>
             </div>
         </form>
-
-    </form>
 
 
     </nav>

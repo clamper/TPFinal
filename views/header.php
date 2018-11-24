@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/v4-shims.css">
-    <link rel="stylesheet" href="<?php echo VIEWS_PATH."css/main.css"; ?>">
+    <link rel="stylesheet" href="<?php echo CSS_PATH."main.css"; ?>">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

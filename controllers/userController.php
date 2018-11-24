@@ -25,7 +25,12 @@
 
             if ($user == null)
             {
-                $userdao->addUser($userName, $userEmail, $userPassword);
+                $newUser = new User();
+                $newUser->setName();
+                $newUser->setEmail();
+                $newUser->setPassword();
+
+                $userdao->addUser($newUser);
                 $this->viewLoginForm();
             }
             else      //  ya existe un usuario con ese mail 
