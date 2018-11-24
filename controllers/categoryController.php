@@ -9,7 +9,7 @@
     Class CategoryController
     {
 
-        public function Index()
+        public function Index($msg = "")
         {
             $dao = new categoryDAO();
 
@@ -31,27 +31,27 @@
         {
             $dao = new categoryDAO();
 
-            $dao->addCategory($newCategoryName);
+            $msg = $dao->addCategory($newCategoryName);
 
-            $this->Index();
+            $this->Index($msg);
         }
 
         public function delete($CategoryID)
         {
             $dao = new categoryDAO();
 
-            $dao->delete($CategoryID);
+            $msg = $dao->delete($CategoryID);
 
-            $this->Index();
+            $this->Index($msg);
         }
 
         public function edit($CategoryID, $newCategoryName)
         {
             $dao = new categoryDAO();
 
-            $dao->UpdateCategory($CategoryID, $newCategoryName);
+            $msg = $dao->UpdateCategory($CategoryID, $newCategoryName);
 
-            $this->Index();
+            $this->Index($msg);
         }
 
     }

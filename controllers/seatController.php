@@ -8,7 +8,7 @@ use dao\seatdao as SeatDao;
 class SeatController
 {
     
-    public function Index()
+    public function Index($msg = "")
     {
         $dao = new SeatDAO();
 
@@ -22,9 +22,9 @@ class SeatController
     {
         $dao = new SeatDAO();
 
-        $error_msg = $dao->addSeat($newSeat);
+        $msg = $dao->addSeat($newSeat);
 
-        $this->Index();
+        $this->Index($msg);
 
     }
 
@@ -32,9 +32,9 @@ class SeatController
     {
         $dao = new SeatDAO();
 
-        $error_msg = $dao->Delete($idSeat);
+        $msg = $dao->Delete($idSeat);
 
-        $this->Index();
+        $this->Index($msg);
 
     }
 
@@ -42,9 +42,9 @@ class SeatController
     {
         $dao = new SeatDAO();
 
-        $error_msg = $dao->UpdateName($idSeat, $newName);
+        $msg = $dao->UpdateName($idSeat, $newName);
 
-        $this->Index();
+        $this->Index($msg);
 
     }
 

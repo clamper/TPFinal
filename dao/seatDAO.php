@@ -69,33 +69,66 @@ class SeatDAO
 
     public function addSeat($SeatName)
     {
-        $error = "";
+        $msg = "";
 
         $index = $this->existSeat($SeatName);
 
+
         if ( $index > -1)
         {
-            $query = "UPDATE ".$this->tableName." set isActive = true where idseat = ".$index;
-            $parameters["index"] = $index;
+            if ($this->isActive($index))
+                $msg = "el tipo de plaza ya existe";
+            else
+            {
+                $query = "UPDATE ".$this->tableName." set isActive = true where idseat = ".$index;
+                $parameters["index"] = $index;
+                $msg = "tipo de plaza agregada exitosamente";
+
+                try
+                {
+                    $this->connection = Connection::GetInstance();
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }catch(Exception $ex)
+                {
+                    $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                }  
+        
+            }
         }
         else
         {
             $query = "INSERT INTO ".$this->tableName." (Seatname) VALUES (:Seatname);";
             $parameters["Seatname"] = $SeatName;
+            $msg = "tipo de plaza agregada exitosamente";
+
+            try
+            {
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            }  
+    
         }   
-        
-        try
-        {
-            $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $parameters);
+        return $msg;
+    }
 
-        }catch(Exception $ex)
-        {
-            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
-        }  
+    private function isActive($idseat)
+    {
+        $active = false;
 
-        return $error;
+        $query = "SELECT isactive FROM ".$this->tableName." where idseat ='".$idseat."'";
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if ($resultSet[0]["isactive"] == 1)
+            $active = true;
+
+        return $active;
     }
 
     private function existSeat($seatName)
@@ -116,48 +149,70 @@ class SeatDAO
 
     public function Delete($SeatID)
     {
-        $error = "";
+        $msg = "";
 
-        $query = "UPDATE ".$this->tableName." set isActive = false WHERE idseat = :SeatCode";
-        
-        $parameters["SeatCode"] = $SeatID;
+        $showDAO =  new ShowDao();
+        $cant = count($showDAO-> GetShowsBySeat($SeatID));
 
-        try
+        if ($cant == 0)
         {
-            $this->connection = Connection::GetInstance();
+            $query = "UPDATE ".$this->tableName." set isActive = false WHERE idseat = :SeatCode";
 
-            $this->connection->ExecuteNonQuery($query, $parameters);
+            $parameters["SeatCode"] = $SeatID;
 
-        }catch(Exception $ex)
-        {
-            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
-        }  
+            try
+            {
+                $this->connection = Connection::GetInstance();
 
-        return $error;
+                $this->connection->ExecuteNonQuery($query, $parameters);
+
+                $msg = "tipo de plaza eliminada con exito";
+
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            }  
+        }
+        else
+            $msg = "el tipo de plaza no puede ser eliminado por que hay un evento asociado a el";
+
+        return $msg;
     }
 
 
     public function UpdateName($seatId, $seatName)
     {
-        $error = "";
+        $msg = "";
 
-        $query = "UPDATE ".$this->tableName." set seatname = :seatName WHERE idseat = :seatId";
-        
-        $parameters["seatName"] = $seatName;
-        $parameters["seatId"] = $seatId;
+        $index = $this->existSeat($seatName);
 
-        try
+        if ( $index == -1)
         {
-            $this->connection = Connection::GetInstance();
+            $query = "UPDATE ".$this->tableName." set seatname = :seatName WHERE idseat = :seatId";
+            
+            $parameters["seatName"] = $seatName;
+            $parameters["seatId"] = $seatId;
 
-            $this->connection->ExecuteNonQuery($query, $parameters);
+            try
+            {
+                $this->connection = Connection::GetInstance();
 
-        }catch(Exception $ex)
-        {
-            $error = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
-        }  
+                $this->connection->ExecuteNonQuery($query, $parameters);
 
-        return $error;
+                $msg = "tipo de plaza actualizada con exito";
+
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            }  
+        }
+        else
+            if ($this->isActive($index))
+                $msg = "ya existe un tipo de plaza con ese nombre";
+            else
+                $msg = "ya existia un tipo de plaza con ese nombre; debe usar la funcion agregar nuevo tipo de plaza";
+
+        return $msg;
     }
 
 }

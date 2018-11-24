@@ -92,6 +92,34 @@ class ShowDAO
         return $ShowList;
     }
 
+    public function GetShowsBySeat($idSeat)
+    {
+        $ShowList = array();
+
+        $query = "SELECT * FROM shows S ".
+        "inner join presentations P on S.idshow = P.idshow ".
+        "inner join locations L on L.idpresentation = P.idpresentation ".
+        "inner join seats SE on SE.idseat = L.idseat ".
+        " where P.date > now() and SE.idseat = ".$idSeat;
+ 
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        foreach ($resultSet as $row)
+        {                
+            $Show = new Show();
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
+            $Show->setDescription($row["description"]);
+
+            array_push($ShowList, $Show);
+        }
+
+        return $ShowList;
+    }
+
 
     public function GetShowByID($idShow)
     {

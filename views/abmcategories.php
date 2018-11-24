@@ -1,15 +1,3 @@
-<?php
-// ABM de multiples elementos
-// $title que tipo de elementos son
-// $array_elements  elementos a listar
-// $message para mostrar un mensaje de error
-
-
-$message = "";
-
-
-?>
-
     <div class="container" id="abm_container">
         <br>
 
@@ -19,8 +7,9 @@ $message = "";
 
         <?php
 
-        if ($message != "")
-            echo "<div class='alert alert-danger'>".$message."</div>";
+        if ($msg != "")
+            echo "<div class='alert alert-danger alert-dismissible fade show'>".
+            "<button type='button' class='close' data-dismiss='alert'>&times;</button>".$msg."</div>";
         ?>
 
             <form method="post" action="/utn/TPFINALLAB4/category/new">

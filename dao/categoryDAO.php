@@ -77,39 +77,105 @@ class CategoryDAO
         return $Category;
     }
 
+    private function isActive($idcategory)
+    {
+        $active = false;
+
+        $query = "SELECT isactive FROM ".$this->tableName." where idcategory ='".$idcategory."'";
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if ($resultSet[0]["isactive"] == 1)
+            $active = true;
+
+        return $active;
+    }
+
 
     public function addCategory($CategoryName)
     {
-        $existId = $this->existCategory($CategoryName);
+        $msg = "";
 
-        if ($existId <> -1)
+        $index = $this->existCategory($CategoryName);
+
+        if ( $index > -1)
         {
-            $query = "UPDATE ".$this->tableName." set isactive = true where idcategory = :ExistId;";
-            $parameters["ExistId"] = $existId;
+            if ($this->isActive($index))
+                $msg = "la categoria ya existe";
+            else
+            {
+                $query = "UPDATE ".$this->tableName." set isactive = true where idcategory = :index;";
+                $parameters["index"] = $index;
+
+                $msg = "categoria agregada con exitos";
+
+                try
+                {
+                    $this->connection = Connection::GetInstance();
+
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+
+                }catch(Exception $ex)
+                {
+                    $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                } 
+            }
         }
         else
         {
             $query = "INSERT INTO ".$this->tableName." (Categoryname) VALUES (:Categoryname);";
             $parameters["Categoryname"] = $CategoryName;
-        }   
-        
+            $msg = "categoria agregada con exitos";
 
-        $this->connection = Connection::GetInstance();
+            try
+            {
+                $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+                $this->connection->ExecuteNonQuery($query, $parameters);
 
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            } 
+
+        }
+
+        return $msg;
     }
 
 
     public function Delete($CategoryID)
     {
-        $query = "UPDATE ".$this->tableName." set isActive = false WHERE idCategory = :CategoryCode";
+        $msg = "";
+
+        $showDAO =  new ShowDao();
+        $cant = count($showDAO-> GetShowsByCategory($CategoryID));
+
+        if ($cant == 0)
+        {
+            $query = "UPDATE ".$this->tableName." set isActive = false WHERE idCategory = :CategoryCode";
         
-        $parameters["CategoryCode"] = $CategoryID;
+            $parameters["CategoryCode"] = $CategoryID;
 
-        $this->connection = Connection::GetInstance();
+            try
+            {
+                $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+                $this->connection->ExecuteNonQuery($query, $parameters);
+
+                $msg = "categoria eliminada con exito";
+
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            }  
+        }
+        else
+            $msg = "la categoria no puede ser eliminada por que hay un evento asociado a ella";
+
+        return $msg;
     }
 
     private function existCategory($nameCategory)
@@ -131,14 +197,37 @@ class CategoryDAO
 
     public function UpdateCategory($categoryId, $CategoryName)
     {
-        $query = "UPDATE ".$this->tableName." set categoryname = :CategoryName WHERE idCategory = :categoryId";
+        $msg = "";
+
+        $index = $this->existCategory($CategoryName);
+
+        if ( $index == -1)
+        {
+            $query = "UPDATE ".$this->tableName." set categoryname = :CategoryName WHERE idCategory = :categoryId";
         
-        $parameters["CategoryName"] = $CategoryName;
-        $parameters["categoryId"] = $categoryId;
+            $parameters["CategoryName"] = $CategoryName;
+            $parameters["categoryId"] = $categoryId;
 
-        $this->connection = Connection::GetInstance();
+            try
+            {
+                $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+                $this->connection->ExecuteNonQuery($query, $parameters);
+
+                $msg = "categoria actualizada con exito";
+
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            }  
+        }
+        else
+            if ($this->isActive($index))
+                $msg = "ya existe una categoria con ese nombre";
+            else
+                $msg = "ya existia una categoria con ese nombre; debe usar la funcion agregar nueva caegoria";
+
+        return $msg;
     }
 
 }

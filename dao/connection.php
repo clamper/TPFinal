@@ -71,11 +71,6 @@
             {
                 throw $ex;
             }        	    
-            catch(PDOException $ex)
-            {
-                throw $ex;
-            }        	
-            	
         }
         
         private function Prepare($query)
