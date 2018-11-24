@@ -103,7 +103,7 @@ class TicketDAO
 
         $query = "SELECT * FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
         " inner join presentations P on P.idpresentation = L.idpresentation".
-        " where P.date = ".$date;
+        " where DAY(P.date) = DAY(".$date.")";
 
         $this->connection = Connection::GetInstance();
 

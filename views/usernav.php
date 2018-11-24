@@ -10,6 +10,27 @@ $categoryDAO = new CategoryDAO();
 $categoryList = $categoryDAO->GetAllCategoriesInUse();
 
 
+// a modo muestra y prueba
+$_SESSION['cart'] = Array();
+
+
+//  CART GUARDA UN ARRAY CON INDICEN DE LOS IDS DE LAS LOCACIONES Y COMO VALOR LA CANTIDAD DE ENTRADAS COMPRADAS
+//$_SESSION['cart']['idlocation'] = CANTIDAD;
+
+
+
+$_SESSION['cart']['1'] = 1;
+$_SESSION['cart']['16'] = 5;
+$_SESSION['cart']['24'] = 2;
+
+
+// SUMA LOS VALORES PARA PONER EL NUMERO SOBRE EL CARRITO
+$cant = 0;
+
+foreach ($_SESSION['cart'] as $idlocation => $value) {
+    $cant = $cant + $value;
+}
+
 ?>
 
 
@@ -20,14 +41,20 @@ $categoryList = $categoryDAO->GetAllCategoriesInUse();
                 <a class="navbar-brand" href="/utn/tpfinallab4">MI-EVENTO.COM</a>
             </div>
 
-            <div class="btn-group navbar-right">
+            <div class="navbar-right">
+
+                <button type="button" class="btn btn-info">
+                    <i class="fas fa-shopping-cart fa-lg"> </i> <span class="badge badge-light" style="transform: translate(30%, -0%);"><?=$cant?></span>
+                </button>
+
                 <div class="btn-group dropleft">
+
+
 
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                             <?=$username;?>
                     </button>
                     <div class="dropdown-menu" style="z-index: 1;">
-
                         <a class="dropdown-item " href="/utn/TPFINALLAB4/user/myTickets">mis tickets</a>
                         <a class="dropdown-item" href="/utn/TPFINALLAB4/user/logout">salir</a>
                     </div>

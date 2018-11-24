@@ -40,6 +40,19 @@
             }
         }
 
+        public function viewRecoveryForm($mail = "") 
+        {
+            $msg = "";
+
+            if ($mail != "")
+                $msg = "le enviamos un mail que posee un link para recuperar su clave".$mail;
+
+                
+
+            require_once(VIEWS_PATH."userrecovery.php");
+        }
+        
+
         public function viewLoginForm($errormsg = "") 
         {
             require_once(VIEWS_PATH."userlogin.php");

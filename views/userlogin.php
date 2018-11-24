@@ -23,11 +23,15 @@
                         </div>
                         <input class="form-control" type="password" name="pass" required>
                     </div>
+                    
                     <?php
                     
                     if (isset($errormsg))
                         if ( $errormsg != "")
-                            echo "<br><div class='alert alert-danger '>".$errormsg."</div>";
+                        {
+                            echo "<br><div class='alert alert-danger'>".$errormsg."</div>";
+                            echo "<a href='/utn/TPFINALLAB4/user/viewRecoveryForm'><button type='button' class='btn btn-info'>recuperar contraseña</button></a>";
+                        }   
 
                     ?>
                     <br><br>

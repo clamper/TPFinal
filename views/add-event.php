@@ -133,7 +133,7 @@ $artist = ["popeye","xuxa","pato donald"];
             <!-- PLATEAS -->
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">plateas y precios</h5>
+                    <h5 class="card-title">plazas y precios</h5>
 
                     <div id="only_day_cost">
                         <!-- cada tipo de platea-->
