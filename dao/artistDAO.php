@@ -108,27 +108,44 @@ class ArtistDAO
 
         if ( $index > -1)
         {
-            $query = "UPDATE ".$this->tableName." set isActive = true where idartist = ".$index;
-            $parameters["index"] = $index;
-            $msg = "artista agregado con exitos";
+            if ($this->isActive($index))
+                $msg = "el artista ya existe";
+            else
+            {
+                $query = "UPDATE ".$this->tableName." set isActive = true where idartist = ".$index;
+                $parameters["index"] = $index;
+                $msg = "artista agregado con exitos";
+
+                try
+                {
+                    $this->connection = Connection::GetInstance();
+
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+
+                }catch(Exception $ex)
+                {
+                    $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                } 
+            }
         }
         else
         {
             $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
             $parameters["artistname"] = $ArtistName;
             $msg = "artista agregado con exitos";
+
+            try
+            {
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+
+            }catch(Exception $ex)
+            {
+                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+            } 
+
         }
-
-        try
-        {
-            $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query, $parameters);
-
-        }catch(Exception $ex)
-        {
-            $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
-        }  
 
         return $msg;
     }

@@ -8,7 +8,8 @@
         <?php
 
         if ($msg != "")
-            echo "<div class='alert alert-danger'>".$msg."</div>";
+            echo "<div class='alert alert-danger alert-dismissible fade show'>".
+            "<button type='button' class='close' data-dismiss='alert'>&times;</button>".$msg."</div>";
         ?>
 
             <form method="post" action="/utn/tpfinallab4/artist/new">
@@ -22,7 +23,6 @@
                     </div>
                 </div>
             </form>
-
 
             <br>
             <br>
