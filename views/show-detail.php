@@ -87,7 +87,7 @@
                         <?php
                             // si esta logeado como usuario
                             if ($_SESSION['userType'] == "user")
-                                echo " <button type='button' data='".$presentationArray[$key_date]."'>agregar al carrito </button>"
+                                echo " <button type='button' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>"
 
                         ?>
 
@@ -104,3 +104,51 @@
         
     </div>
 </div>
+
+
+<?php
+
+// $locationsList;
+foreach ($locationsList as $location) {
+    echo $location->getIdSeat()." - ".$location->getLocationPrice()."<br>";
+}
+
+
+?>
+
+<div class="modal" id="modal_add_location_to_cart">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">seleccione sus entradas</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="POST" action="/utn/TPFINALLAB4/seat/delete" id="form_delete">
+                        <input type="hidden" name="index" id="index_delete">
+                    </form>
+                    <h5>seguro que desea eliminar?</h5>
+
+                     <?php
+
+                        // $locationsList;
+                        foreach ($locationsList as $location) {
+                            echo $location->getIdSeat()." - $".$location->getLocationPrice()."<br>";
+                        }
+
+
+
+                        ?> 
+                </div>
+
+                <div class="modal-footer" id='modal_cart_footer'>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" id="close">cancelar</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal" id="final_buy">comprar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>

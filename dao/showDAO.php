@@ -72,7 +72,7 @@ class ShowDAO
         "inner join presentations P on S.idshow = P.idshow ".
         "inner join artistxpresentation AXP on AXP.idpresentation = P.idpresentation ".
         "inner join artists A on A.idartist = AXP.idartist ".
-        " where A.idartist = ".$idArtist;
+        " where P.date > now() and A.idartist = ".$idArtist;
  
         $this->connection = Connection::GetInstance();
 

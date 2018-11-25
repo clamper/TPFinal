@@ -117,4 +117,9 @@ $(document).ready(function () {
         }
     });
 
+
+    $("#open_add_cart").on("click", function () {
+        $("#modal_add_location_to_cart").modal('show');
+    });
+
 });

@@ -61,8 +61,6 @@ class UserDAO
         return $User;
     }
 
-
-    //public function addUser($name, $email, $pass)
     public function addUser($user)
     {
         $query = "INSERT INTO ".$this->tableName." (name, email, password) VALUES (:name, :email, :password);";

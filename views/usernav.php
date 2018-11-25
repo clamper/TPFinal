@@ -11,7 +11,7 @@ $categoryList = $categoryDAO->GetAllCategoriesInUse();
 
 
 // a modo muestra y prueba
-$_SESSION['cart'] = Array();
+//$_SESSION['cart'] = Array();
 
 
 //  CART GUARDA UN ARRAY CON INDICEN DE LOS IDS DE LAS LOCACIONES Y COMO VALOR LA CANTIDAD DE ENTRADAS COMPRADAS
@@ -110,3 +110,34 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
 
 
     </nav>
+
+
+
+
+    <div class="modal" id="modal_cart">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">mi carrito</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                <div class="modal-body">
+                    <form method="POST" action="/utn/TPFINALLAB4/seat/delete" id="form_delete">
+                        <input type="hidden" name="index" id="index_delete">
+                    </form>
+                    <h5>seguro que desea eliminar?</h5>
+
+                </div>
+
+                <div class="modal-footer" id='modal_cart_footer'>
+                    <button type="button" class="btn btn-info" data-dismiss="modal" id="close">continuar comprando</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" id="final_buy">finalizar compra</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
