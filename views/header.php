@@ -88,43 +88,47 @@ switch ($_SESSION['userType'])
 }
 
 
-?>
-        <div class="modal" id="modal_login">
-            <div class="modal-dialog">
-                <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">login</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+/*
+
+    <div class="modal" id="modal_login">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">login</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
 
-                    <div class="modal-body">
+                <div class="modal-body">
 
-                        <form method="POST" action="/utn/TPFINALLAB4/user/login" id="form_login">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">correo</span>
-                                </div>
-                                <input class="form-control" type="email" name="mail">
+                    <form method="POST" action="/utn/TPFINALLAB4/user/login" id="form_login">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">correo</span>
                             </div>
+                            <input class="form-control" type="email" name="mail">
+                        </div>
 
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">contraseña</span>
-                                </div>
-                                <input class="form-control" type="password" name="pass">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">contraseña</span>
                             </div>
-                        </form>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_login_confirm">Entrar</button>
-                    </div>
+                            <input class="form-control" type="password" name="pass">
+                        </div>
+                    </form>
 
                 </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal" id="btn_login_confirm">Entrar</button>
+                </div>
+
             </div>
         </div>
+    </div>
+*/
+        ?>

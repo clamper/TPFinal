@@ -4,6 +4,7 @@
 
     use Models\user as User;
     use dao\userDAO as UserDAO;
+    use Controllers\mailController as MailController;
 
     class UserController
     {
@@ -40,20 +41,90 @@
             }
         }
 
-        public function viewRecoveryForm($mail = "") 
+        public function viewRecoveryForm($mail = "", $error = "") 
         {
-            $msg = "";
-
-            if ($mail != "")
-                $msg = "le enviamos un mail que posee un link para recuperar su clave".$mail;
-
-                
-
             require_once(VIEWS_PATH."userrecovery.php");
+        }
+
+        public function RecoveryPass($mail)
+        {
+            $error = "";
+
+            $userdao = new UserDAO();
+
+            $user = $userdao->GetUserByEmail($mail);
+
+            if ($user != null)
+            {
+                $mailSystem = new MailController();
+
+                $hash = $this->encodeUser($user);
+
+
+                $mailMsg = "<div>".
+                    "<h4>mi envento</h4>".
+                    "<br><br><br>".
+                    "Para reseat su clave haga click en el siguiente link<br>".
+                    "<a href='http://127.0.0.1/utn/TPFINALLAB4/user/resetPass?mail=".$mail."&cod=".$hash."'>resetear contraseña</a>".
+                    "</div>";
+
+                $error = $mailSystem->send($mail, "mi-evento recuperacion de clave", $mailMsg);
+            }
+            else    
+                $error = "no tenemos ningun usuario registrado con ese mail";
+
+            
+            if ($error == "")
+            {
+                $this->viewRecoveryForm($mail, "el reseteo de clave fue un enviado a su mail");
+            }
+            else    
+                $this->viewRecoveryForm($mail, $error);
+        }
+
+        public function resetPass($mail, $cod, $pass = "")
+        {
+            $security = false;
+
+            $userdao = new UserDAO();
+
+            $user = $userdao->GetUserByEmail($mail);
+
+            if ($user != null)
+            {
+                $hash = $this->encodeUser($user);
+                if ($hash == $cod)
+                    $security = true;
+            }    
+            
+            
+
+            if ($security)
+                if ($pass == "")
+                    require_once(VIEWS_PATH."userresetpass.php");
+                else
+                {
+                    $userdao->resetPass($mail, $pass);
+                    $this->viewLoginForm("","contraseña reiniciada");
+                }
+            else
+            {
+                $events = new EventController();
+                $events->showAllEvents();
+            }
+        }
+
+        public function encodeUser($usuario)
+        {
+            $hash = md5($usuario->getName() . $usuario->getEmail() . $usuario->getPassword() . $usuario->getUserType());
+
+            $hash = substr($hash, 0, 15);
+
+            return $hash;
         }
         
 
-        public function viewLoginForm($errormsg = "") 
+        public function viewLoginForm($errormsg = "", $msg = "") 
         {
             require_once(VIEWS_PATH."userlogin.php");
         }
@@ -92,12 +163,15 @@
             }
 
 
+
             require_once(VIEWS_PATH."header.php");
 
             if ($islogin)
             {
                 $home = new HomeController();
                 $home->Index();
+
+                $_SESSION['cart'] = Array();
             }
             else
                 $this->viewLoginForm($errormsg);

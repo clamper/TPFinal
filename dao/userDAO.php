@@ -77,6 +77,20 @@ class UserDAO
 
     }
 
+    public function resetPass($mail, $newpass)
+    {
+        $user = $this->GetUserByEmail($mail);
+        $idUser = $user->getIdUser();
+
+        $query = "UPDATE ".$this->tableName." set password = :newpass WHERE iduser = :idUser";
+        
+        $parameters["newpass"] = $newpass;
+        $parameters["idUser"] = $idUser;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
 
     public function Delete($UserID)
     {

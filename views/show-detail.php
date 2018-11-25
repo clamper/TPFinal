@@ -27,7 +27,7 @@
     $Show: es un objeto show;    
     $artistArray: es una lista de strings, como clave usa el dia, como dato la lista de artistas separados por coma.
     $minPrice: es el precio desde para el SHOW.
-
+    $presentationArray: es una lista de los IDS de las presentaciones, como clave usa el dia, como dato el ID de las presentaciones
     */
 
 ?>
@@ -65,22 +65,34 @@
                 <div class="card-body bg-light">
                     <?=$show->getDescription();?>
                 </div>
-                <div class="card-body bg-primary text-white text-center" >
+                <div class="card-body bg-primary text-white text-center " >
                     Precios desde: $<?=$precioMenor;?>
                 </div>
-                
             </div>
         </div>
 
         <?php
-        foreach ($artistArray as $artistString => $value)
+        foreach ($artistArray as $key_date => $value)
         {?>
             <div class="card bg-light" style="margin-top:20px;">
             <div class="card-header">
-                <?=$artistString?>
+                <span><?=$key_date?> </span>
+                
             </div>
 
-                <div class="card-body"><?=$value?></div>
+                <div class="card-body">
+                    <div class=" d-flex justify-content-between">
+                        <span><?=$value?> </span>
+                        
+                        <?php
+                            // si esta logeado como usuario
+                            if ($_SESSION['userType'] == "user")
+                                echo " <button type='button' data='".$presentationArray[$key_date]."'>agregar al carrito </button>"
+
+                        ?>
+
+                    </div>
+                </div>
             </div> 
 
         <?php

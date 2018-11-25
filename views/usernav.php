@@ -18,10 +18,11 @@ $_SESSION['cart'] = Array();
 //$_SESSION['cart']['idlocation'] = CANTIDAD;
 
 
-
+/*
 $_SESSION['cart']['1'] = 1;
 $_SESSION['cart']['16'] = 5;
 $_SESSION['cart']['24'] = 2;
+*/
 
 
 // SUMA LOS VALORES PARA PONER EL NUMERO SOBRE EL CARRITO

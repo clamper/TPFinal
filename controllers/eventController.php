@@ -40,7 +40,11 @@ class EventController
         //$presentationId = $presentation->getIdPres();
 
         $artistDAO = new ArtistDAO();
+        $locations = new LocationDAO();
+
         $artistArray = array();
+        $presentationArray = array();
+        $locationsArray = array();
         $presentationID = 0; // para sacar el numero de presentacion apra obtener una lista de seats
 
         foreach ($presentationList as $presentation) {
@@ -56,13 +60,13 @@ class EventController
 
             $date = date("d-m-Y",strtotime($presentation->getPresDate()));
 
+            $presentationArray[ $date ] = $presentationID;
             $artistArray[ $date ] = implode(", ", $artistArrayAux);
         }
 
-        $locations = new LocationDAO();
+        
         $locationsList = $locations->GetAllLocationsByPresentation($presentationID);
         
-        $arrayLocations = array();
         
         $precioMenor = 0;
 

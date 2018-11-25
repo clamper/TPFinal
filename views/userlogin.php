@@ -25,6 +25,10 @@
                     </div>
                     
                     <?php
+
+                    if (isset($msg))
+                        if ( $msg != "")
+                            echo "<br><div class='alert alert-success'>".$msg."</div>";
                     
                     if (isset($errormsg))
                         if ( $errormsg != "")
