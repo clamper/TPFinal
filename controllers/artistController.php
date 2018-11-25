@@ -24,7 +24,10 @@ class ArtistController
     {
         $dao = new ArtistDAO();
 
-        $msg = $dao->addArtist($newArtist);
+        $artist = new Artist();
+        $artist->setArtistName($newArtist);
+
+        $msg = $dao->addArtist($artist);
 
         $this->Index($msg);
 

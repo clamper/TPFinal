@@ -17,7 +17,7 @@ class ArtistDAO
     {
         $artistList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where isactive = true";
+        $query = "SELECT idartist, artistname FROM ".$this->tableName." where isactive = true";
 
         $this->connection = Connection::GetInstance();
 
@@ -41,7 +41,7 @@ class ArtistDAO
         $artist = null;
         $error = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where id=".$id;
+        $query = "SELECT idartist, artistname FROM ".$this->tableName." where id=".$id;
 
         try
         {
@@ -100,11 +100,11 @@ class ArtistDAO
         return $active;
     }
 
-    public function addArtist($ArtistName)
+    public function addArtist($artist)
     {
         $msg = "";
 
-        $index = $this->existArtist($ArtistName);
+        $index = $this->existArtist($artist->getArtistName());
 
         if ( $index > -1)
         {
@@ -131,7 +131,7 @@ class ArtistDAO
         else
         {
             $query = "INSERT INTO ".$this->tableName." (artistname) VALUES (:artistname);";
-            $parameters["artistname"] = $ArtistName;
+            $parameters["artistname"] = $artist->getArtistName();
             $msg = "artista agregado con exitos";
 
             try
@@ -186,7 +186,7 @@ class ArtistDAO
     {
         $artistList = array();
 
-        $query = "SELECT * FROM ".$this->tableArtistXPres." AXP inner join artists A on AXP.idartist = A.idartist where AXP.idpresentation =".$idPresentation;
+        $query = "SELECT AXP.idartist, artistname FROM ".$this->tableArtistXPres." AXP inner join artists A on AXP.idartist = A.idartist where AXP.idpresentation =".$idPresentation;
 
         $this->connection = Connection::GetInstance();
 
