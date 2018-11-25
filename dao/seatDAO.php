@@ -40,7 +40,7 @@ class SeatDAO
         $Seat = null;
         $error = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where id=".$id;
+        $query = "SELECT * FROM ".$this->tableName." where idseat =".$id;
 
         try
         {
@@ -56,11 +56,11 @@ class SeatDAO
         foreach ($resultSet as $row)
         {                
             $Seat = new Seat();
-            $Seat->setIdSeat($row["idSeat"]);
-            $Seat->setSeatName($row["name"]);
+            $Seat->setIdSeat($row["idseat"]);
+            $Seat->setSeatName($row["seatname"]);
         }
 
-        if ($error = null)
+        if ($error == null)
             return $Seat;
         else    
             return $error;

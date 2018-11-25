@@ -110,7 +110,9 @@
 
 // $locationsList;
 foreach ($locationsList as $location) {
-    echo $location->getIdSeat()." - ".$location->getLocationPrice()."<br>";
+    $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
+    var_dump($seat);
+    echo $seat->getSeatName() ." - $".$location->getLocationPrice()."<br>";
 }
 
 
@@ -134,9 +136,11 @@ foreach ($locationsList as $location) {
 
                      <?php
 
+
+
                         // $locationsList;
                         foreach ($locationsList as $location) {
-                            echo $location->getIdSeat()." - $".$location->getLocationPrice()."<br>";
+                            echo $seatDAO->GetSeatbyID($location->getIdSeat())->getSeatName ." - $".$location->getLocationPrice()."<br>";
                         }
 
 

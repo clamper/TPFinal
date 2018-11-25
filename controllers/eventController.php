@@ -41,6 +41,7 @@ class EventController
 
         $artistDAO = new ArtistDAO();
         $locations = new LocationDAO();
+        $seatDAO = new seatDAO();
 
         $artistArray = array();
         $presentationArray = array();
