@@ -40,7 +40,7 @@ class EventController
         //$presentationId = $presentation->getIdPres();
 
         $artistDAO = new ArtistDAO();
-        $locations = new LocationDAO();
+        $locationsDAO = new LocationDAO();
         $seatDAO = new seatDAO();
 
         $artistArray = array();
@@ -66,7 +66,7 @@ class EventController
         }
 
         
-        $locationsList = $locations->GetAllLocationsByPresentation($presentationID);
+        $locationsList = $locationsDAO->GetAllLocationsByPresentation($presentationID);
         
         
         $precioMenor = 0;

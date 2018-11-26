@@ -81,7 +81,7 @@
             </div>
 
                 <div class="card-body">
-                    <div class=" d-flex justify-content-between">
+                    <div class="d-flex justify-content-between">
                         <span><?=$value?> </span>
                         
                         <?php
@@ -110,10 +110,26 @@
 
 // $locationsList;
 foreach ($locationsList as $location) {
+
+    // $max = $locationsDAO->getabalibility($location->getIdLocation());
+    $max = 5;
+
     $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
-    var_dump($seat);
-    echo $seat->getSeatName() ." - $".$location->getLocationPrice()."<br>";
+    //echo $seat->getSeatName() ." - $".$location->getLocationPrice();
+
+    echo "<div class='card card-body bg-info text-white'>".
+            "<div class='d-flex justify-content-between'>".
+
+                "<span>".$seat->getSeatName() ." - $".$location->getLocationPrice()."</span>".
+                "<span><input type='number' placeholder='cantidad' id='location_cant' min=0 max=".$max."></span>".
+                "<span>total</span>".
+
+
+            "</div>".
+        "</div>";
+    
 }
+
 
 
 ?>
@@ -129,19 +145,34 @@ foreach ($locationsList as $location) {
                 </div>
 
                 <div class="modal-body">
-                    <form method="POST" action="/utn/TPFINALLAB4/seat/delete" id="form_delete">
-                        <input type="hidden" name="index" id="index_delete">
-                    </form>
-                    <h5>seguro que desea eliminar?</h5>
 
                      <?php
 
 
-
-                        // $locationsList;
                         foreach ($locationsList as $location) {
-                            echo $seatDAO->GetSeatbyID($location->getIdSeat())->getSeatName ." - $".$location->getLocationPrice()."<br>";
+
+                            // $max = $locationsDAO->getabalibility($location->getIdLocation());
+                            $max = 5;
+
+                            $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
+                            //echo $seat->getSeatName() ." - $".$location->getLocationPrice();
+
+                            echo "<div class='card card-body bg-info text-white'>".
+                                    "<div class='d-flex justify-content-between'>".
+
+                                        "<span>".$seat->getSeatName() ." - $<span id=price".$location->getIdSeat().">".$location->getLocationPrice()."</span></span>".
+                                        "<span><input data=".$location->getIdSeat()." type='number' placeholder='cantidad' id='location_cant' min=0 max=".$max."></span>".
+                                        "<span id=total".$location->getIdSeat().">0</span>".
+                                    "</div>".
+                                "</div>";
                         }
+
+                        echo "<br><br><br>";
+
+                        echo "<div class=' text-right' id='total'>".
+                                "total $0".
+
+                                "</div>";
 
 
 

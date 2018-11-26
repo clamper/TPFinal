@@ -118,8 +118,31 @@ $(document).ready(function () {
     });
 
 
+
     $("#open_add_cart").on("click", function () {
         $("#modal_add_location_to_cart").modal('show');
+    });
+
+    $("#modal_add_location_to_cart").on("change", "#location_cant", function () {
+
+        var data = $(this).attr("data");
+        var price = $("#price" + data).html();
+
+
+        $("#total" + data).html($(this).val() * price);
+
+        var total = 0;
+
+        $("#modal_add_location_to_cart").each(function () {
+            if ($(this).is("span"))
+                alert($(this).html());
+            total = total + $(this).html();
+        });
+
+
+
+        $("#total").html(total);
+
     });
 
 });
