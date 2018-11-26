@@ -15,7 +15,7 @@ class CategoryDAO
     {
         $CategoryList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where isactive = true";
+        $query = "SELECT idcategory, categoryname FROM ".$this->tableName." where isactive = true";
 
         $this->connection = Connection::GetInstance();
 
@@ -61,7 +61,7 @@ class CategoryDAO
     {
         $Category = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where id=".$id;
+        $query = "SELECT idCategory, categoryname FROM ".$this->tableName." where id=".$id;
 
         $this->connection = Connection::GetInstance();
 
@@ -94,22 +94,22 @@ class CategoryDAO
     }
 
 
-    public function addCategory($CategoryName)
+    public function addCategory($Category)
     {
         $msg = "";
 
-        $index = $this->existCategory($CategoryName);
+        $index = $this->existCategory($Category->getCategoryName());
 
         if ( $index > -1)
         {
             if ($this->isActive($index))
-                $msg = "la categoria ya existe";
+                $msg = "La categoria ya existe";
             else
             {
                 $query = "UPDATE ".$this->tableName." set isactive = true where idcategory = :index;";
                 $parameters["index"] = $index;
 
-                $msg = "categoria agregada con exitos";
+                $msg = "Categoria agregada con exitos";
 
                 try
                 {
@@ -119,14 +119,14 @@ class CategoryDAO
 
                 }catch(Exception $ex)
                 {
-                    $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                    $msg = "Ha ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
                 } 
             }
         }
         else
         {
             $query = "INSERT INTO ".$this->tableName." (Categoryname) VALUES (:Categoryname);";
-            $parameters["Categoryname"] = $CategoryName;
+            $parameters["Categoryname"] = $Category->getCategoryName();
             $msg = "categoria agregada con exitos";
 
             try
@@ -137,7 +137,7 @@ class CategoryDAO
 
             }catch(Exception $ex)
             {
-                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                $msg = "Ha ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
             } 
 
         }
@@ -165,15 +165,15 @@ class CategoryDAO
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
 
-                $msg = "categoria eliminada con exito";
+                $msg = "Categoria eliminada con exito";
 
             }catch(Exception $ex)
             {
-                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                $msg = "Ha ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
             }  
         }
         else
-            $msg = "la categoria no puede ser eliminada por que hay un evento asociado a ella";
+            $msg = "La categoria no puede ser eliminada por que hay un evento asociado a ella";
 
         return $msg;
     }
@@ -214,18 +214,18 @@ class CategoryDAO
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
 
-                $msg = "categoria actualizada con exito";
+                $msg = "Categoria actualizada con exito";
 
             }catch(Exception $ex)
             {
-                $msg = "ah ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
+                $msg = "Ha ocurrido un error con el servidor, aguarde un instante y pruebe nuevamente";
             }  
         }
         else
             if ($this->isActive($index))
-                $msg = "ya existe una categoria con ese nombre";
+                $msg = "Ya existe una categoria con ese nombre";
             else
-                $msg = "ya existia una categoria con ese nombre; debe usar la funcion agregar nueva caegoria";
+                $msg = "Ya existia una categoria con ese nombre; debe usar la funcion agregar nueva categoria";
 
         return $msg;
     }

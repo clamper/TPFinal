@@ -31,7 +31,10 @@
         {
             $dao = new categoryDAO();
 
-            $msg = $dao->addCategory($newCategoryName);
+            $category = new Category();
+            $category->setCategoryName($newCategoryName);
+
+            $msg = $dao->addCategory($category);
 
             $this->Index($msg);
         }
