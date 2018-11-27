@@ -47,9 +47,9 @@
 
 </STYLE>
 
-<div class="container" data-spy="scroll" data-target=".navbar" data-offset="50" style="z-index: 1; margin-bottom:50px;">
+<div class="container" data-spy="scroll" data-target=".navbar" data-offset="50" style="z-index: 1; margin-bottom:50px;" id="show_detail_content">
 
-    <div id="section" class="container" style="padding-top:40px;padding-bottom:30px">
+    <div id="section" class="container" style="padding-top:40px;padding-bottom:30px" >
 
         <div class="card card-body bg-info text-white text-center"><?=$show->getShowName();?></div>
         <br>
@@ -85,6 +85,7 @@
                         <span><?=$value?> </span>
                         
                         <?php
+
                             // si esta logeado como usuario
                             if ($_SESSION['userType'] == "user")
                                 echo " <button type='button' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>"
@@ -162,7 +163,7 @@ foreach ($locationsList as $location) {
 
                                         "<span>".$seat->getSeatName() ." - $<span id=price".$location->getIdSeat().">".$location->getLocationPrice()."</span></span>".
                                         "<span><input data=".$location->getIdSeat()." type='number' placeholder='cantidad' id='location_cant' min=0 max=".$max."></span>".
-                                        "<span id=total".$location->getIdSeat().">0</span>".
+                                        "<span id='total".$location->getIdSeat()."'>$0</span>".
                                     "</div>".
                                 "</div>";
                         }

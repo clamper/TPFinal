@@ -27,9 +27,9 @@
             if ($user == null)
             {
                 $newUser = new User();
-                $newUser->setName();
-                $newUser->setEmail();
-                $newUser->setPassword();
+                $newUser->setName($userName);
+                $newUser->setEmail($userEmail);
+                $newUser->setPassword($userPassword);
 
                 $userdao->addUser($newUser);
                 $this->viewLoginForm();
@@ -148,6 +148,7 @@
                     $_SESSION["userType"] = $user->getUserType();
                     $_SESSION["userName"] = $user->getName();
                     $_SESSION["userId"] = $user->getIdUser();
+                    $_SESSION['cart'] = Array();
 
                     $islogin = true;
 
@@ -168,10 +169,8 @@
 
             if ($islogin)
             {
-                $home = new HomeController();
+                 $home = new HomeController();
                 $home->Index();
-
-                $_SESSION['cart'] = Array();
             }
             else
                 $this->viewLoginForm($errormsg);
