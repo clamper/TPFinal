@@ -84,9 +84,6 @@ class EventController
         require_once(VIEWS_PATH."show-detail.php");        
     }
 
-
-
-
     public function new()
     {
         $CategoriesDAO = new categoryDAO();

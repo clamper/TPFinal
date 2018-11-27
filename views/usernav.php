@@ -44,9 +44,11 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
 
             <div class="navbar-right">
 
-                <button type="button" class="btn btn-info">
-                    <i class="fas fa-shopping-cart fa-lg"> </i> <span class="badge badge-light" style="transform: translate(30%, -0%);"><?=$cant?></span>
-                </button>
+                <a href="/utn/TPFINALLAB4/user/myCart">
+                    <button type="button" class="btn btn-info">
+                        <i class="fas fa-shopping-cart fa-lg"> </i> <span class="badge badge-light" style="transform: translate(30%, -0%);"><?=$cant?></span>
+                    </button>
+                </a>
 
                 <div class="btn-group dropleft">
 

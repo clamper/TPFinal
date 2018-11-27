@@ -18,7 +18,7 @@
 	$request = new Request();
 	$method = $request->getMethod();
 
-	if ($method != "logout" && $method != "login")
+	if ($method != "logout" && $method != "login" && $method != "addToCart")
 		require_once(VIEWS_PATH."header.php");
 
 	Router::Route($request);

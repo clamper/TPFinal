@@ -88,7 +88,8 @@
 
                             // si esta logeado como usuario
                             if ($_SESSION['userType'] == "user")
-                                echo " <button type='button' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>"
+                                echo " <button type='button' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>";
+                                echo $presentationArray[$key_date];
 
                         ?>
 
@@ -106,85 +107,56 @@
     </div>
 </div>
 
-
-<?php
-
-// $locationsList;
-foreach ($locationsList as $location) {
-
-    // $max = $locationsDAO->getabalibility($location->getIdLocation());
-    $max = 5;
-
-    $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
-    //echo $seat->getSeatName() ." - $".$location->getLocationPrice();
-
-    echo "<div class='card card-body bg-info text-white'>".
-            "<div class='d-flex justify-content-between'>".
-
-                "<span>".$seat->getSeatName() ." - $".$location->getLocationPrice()."</span>".
-                "<span><input type='number' placeholder='cantidad' id='location_cant' min=0 max=".$max."></span>".
-                "<span>total</span>".
-
-
-            "</div>".
-        "</div>";
-    
-}
-
-
-
-?>
-
 <div class="modal" id="modal_add_location_to_cart">
         <div class="modal-dialog">
-            <div class="modal-content">
+        
+            <form method="POST" action="/utn/TPFINALLAB4/user/addToCart" id="formAddCart" >
+                <input type="hidden" name="idshow"  value="<?=$showid?>">
+                <input type="hidden" name="idpresentation" value="">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">seleccione sus entradas</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">seleccione sus entradas</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <?php
+
+                            foreach ($locationsList as $location) {
+
+                                // $max = $locationsDAO->getabalibility($location->getIdLocation());
+                                $max = 5;
+
+                                $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
+                                //echo $seat->getSeatName() ." - $".$location->getLocationPrice();
+
+                                echo "<div class='card card-body bg-info text-white'>".
+                                        "<div class='d-flex justify-content-between'>".
+
+                                            "<span>".$seat->getSeatName() ." - $<span id='price".$location->getIdSeat()."'>".$location->getLocationPrice()."</span></span>".
+                                            "<span><input data='".$location->getIdSeat()."' type='number' placeholder='cantidad' name='seat".$location->getIdSeat()."' id='location_cant' min=0 max=".$max."></span>".
+                                            "<span id='total".$location->getIdSeat()."'>$0</span>".
+                                        "</div>".
+                                    "</div>";
+                            }
+
+                            echo "<br><br><br>";
+
+                            echo "<div class=' text-right' id='total'>total $0</div>";
+
+                            ?> 
+                            
+                    </div>
+
+                    <div class="modal-footer" id='modal_cart_footer'>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" id="close">cancelar</button>
+                        <button type="submit" class="btn btn-info" id="final_buy">comprar</button>
+                    </div>
+
                 </div>
-
-                <div class="modal-body">
-
-                     <?php
-
-
-                        foreach ($locationsList as $location) {
-
-                            // $max = $locationsDAO->getabalibility($location->getIdLocation());
-                            $max = 5;
-
-                            $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
-                            //echo $seat->getSeatName() ." - $".$location->getLocationPrice();
-
-                            echo "<div class='card card-body bg-info text-white'>".
-                                    "<div class='d-flex justify-content-between'>".
-
-                                        "<span>".$seat->getSeatName() ." - $<span id=price".$location->getIdSeat().">".$location->getLocationPrice()."</span></span>".
-                                        "<span><input data=".$location->getIdSeat()." type='number' placeholder='cantidad' id='location_cant' min=0 max=".$max."></span>".
-                                        "<span id='total".$location->getIdSeat()."'>$0</span>".
-                                    "</div>".
-                                "</div>";
-                        }
-
-                        echo "<br><br><br>";
-
-                        echo "<div class=' text-right' id='total'>".
-                                "total $0".
-
-                                "</div>";
-
-
-
-                        ?> 
-                </div>
-
-                <div class="modal-footer" id='modal_cart_footer'>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" id="close">cancelar</button>
-                    <button type="button" class="btn btn-info" data-dismiss="modal" id="final_buy">comprar</button>
-                </div>
-
-            </div>
+            </form>
         </div>
     </div>

@@ -3,7 +3,13 @@
     namespace Controllers;
 
     use Models\user as User;
+
     use dao\userDAO as UserDAO;
+    use dao\LocationDAO as LocationDAO;
+    use dao\SeatDAO as SeatDAO;
+    use dao\PresentationDAO as PresentationDAO;
+    use dao\ShowDAO as ShowDAO;
+
     use Controllers\mailController as MailController;
 
     class UserController
@@ -169,11 +175,76 @@
 
             if ($islogin)
             {
-                 $home = new HomeController();
+                $home = new HomeController();
                 $home->Index();
             }
             else
                 $this->viewLoginForm($errormsg);
+
+        }
+
+    
+        public function addToCart()
+        {
+            $locationsDAO = new LocationDAO();
+
+            $idpresentation = $_POST['idpresentation'];
+
+            $locations = $locationsDAO ->GetAllLocationsByPresentation($idpresentation);
+
+            foreach ($_POST as $key => $value) {
+                if ( substr($key,0,4) == "seat")
+                {
+                    $idseat = str_replace("seat","",$key);
+
+                    if (    ($value != "") && ($value != 0) )
+                    {
+                        foreach ($locations as $location){
+                        if ( $location->getIdSeat() == $idseat )
+                            if (    isset($_SESSION['cart'][$location->getIdLocation()])   )
+                                $_SESSION['cart'][$location->getIdLocation()] = $_SESSION['cart'][$location->getIdLocation()] + $value;
+                            else
+                                $_SESSION['cart'][$location->getIdLocation()] = $value;
+                        }
+                    }
+                }       
+            }
+
+            //echo "post: "; var_dump($_POST);
+            //echo "<br><br>cart: ";var_dump($_SESSION['cart']);
+
+            require_once(VIEWS_PATH."header.php");
+
+            $event = new EventController();
+            $event->showDetail($_POST['idshow']);
+        }
+
+        public function myCart()
+        {
+            var_dump($_SESSION['cart']);
+
+            $locationsDAO = new LocationDAO();
+            $seatDAO = new SeatDAO();
+            $presentationDAO =  new PresentationDAO();
+            $showDAO = new ShowDAO();
+
+            foreach ($_SESSION['cart'] as $idLocation => $cant) {
+
+                if ($cant > 0)
+                {
+                    $location = $locationsDAO->GetLocationById($idLocation);
+                    $presentation = $presentationDAO->GetPresentationById($location->getIdPres());
+                    $seat = $seatDAO->GetSeatbyID(  $location->getIdSeat()   );
+                    $show = $showDAO->GetShowByID($presentation->getIdShow() );
+
+                    echo "<br>".$show->getShowName();
+                    echo date("d-m-y", strtotime($presentation->getPresDate()) ); 
+                    echo $seat->getSeatName();
+                    echo $location->getLocationPrice();
+                    
+                    echo "<br>";
+                }
+            }
 
         }
 

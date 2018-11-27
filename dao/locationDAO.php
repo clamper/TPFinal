@@ -41,7 +41,7 @@ class LocationDAO
     {
         $Location = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where id=".$id;
+        $query = "SELECT * FROM ".$this->tableName." where idlocation =".$id;
 
         $this->connection = Connection::GetInstance();
 
@@ -50,11 +50,11 @@ class LocationDAO
         foreach ($resultSet as $row)
         {                
             $Location = new Location();
-            $Location->setIdLocation($row["idLocation"]);
-            $Location->setIdPres()($row["idPres"]);
-            $Location->setIdSeat()($row["idSeat"]);
-            $Location->setLocationPrice($row["locationPrice"]);
-            $Location->setLocationQty($row["locationQty"]);
+            $Location->setIdLocation($row["idlocation"]);
+            $Location->setIdPres($row["idpresentation"]);
+            $Location->setIdSeat($row["idseat"]);
+            $Location->setLocationPrice($row["price"]);
+            $Location->setLocationQty($row["quantity"]);
             
         }
 
@@ -90,7 +90,7 @@ class LocationDAO
 
     public function Delete($LocationID)
     {
-        $query = "DELETE FROM ".$this->tableName."  WHERE id = :LocationId";
+        $query = "DELETE FROM ".$this->tableName."  WHERE idlocation = :LocationId";
         
         $parameters["LocationID"] = $LocationID;
 
