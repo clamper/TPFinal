@@ -13,7 +13,7 @@
         {
             $Presentation = null;
 
-            $query = "SELECT * FROM ".$this->tableName." where idPresentation=".$idPresentation;
+            $query = "SELECT idpresentation, idshow, date FROM ".$this->tableName." where idPresentation=".$idPresentation;
 
             $this->connection = Connection::GetInstance();
 
@@ -34,7 +34,7 @@
         {
             $presentationsList = array();
 
-            $query = "SELECT * FROM ".$this->tableName;
+            $query = "SELECT idpresentation, idshow, date FROM ".$this->tableName;
 
             $this->connection = Connection::GetInstance();
 
@@ -57,7 +57,7 @@
         {
             $presentationsList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." where Date =".$Date;
+            $query = "SELECT idpresentation, idshow, date FROM ".$this->tableName." where Date =".$Date;
 
             $this->connection = Connection::GetInstance();
 
@@ -100,7 +100,7 @@
         {
             $presentationsList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." where idShow =".$idShow;
+            $query = "SELECT idpresentation, idshow, date FROM ".$this->tableName." where idShow =".$idShow;
 
             $this->connection = Connection::GetInstance();
 
@@ -119,11 +119,11 @@
             return $presentationsList;
         }
 
-        public function AddPresentation($idShow, $Date)
+        public function AddPresentation($presentation)
         {
             $query = "INSERT INTO ".$this->tableName." (idShow, Date) VALUES (:idShow, :Date);";
-            $parameters["idShow"] = $idShow;
-            $parameters["Date"] = $Date;
+            $parameters["idShow"] = $presentation->getIdShow();
+            $parameters["Date"] = $presentation->getPresDate();
 
             $this->connection = Connection::GetInstance();
 

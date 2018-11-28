@@ -10,7 +10,8 @@ use DAO\ShowDAO as ShowDAO;
 use DAO\PresentationDAO as PresentationDAO;
 use DAO\LocationDAO as LocationDAO;
 
-use Model\location as Location;
+use Models\location as Location;
+use Models\presentation as Presentation;
 
 
 class EventController
@@ -123,22 +124,25 @@ class EventController
 
         //PRESENTATION
 
-        $presentations = new PresentationDAO();
+        $presentationDAO = new PresentationDAO();
         $artists = new ArtistDAO();
-        $location = new LocationDAO();
+        $locationDAO = new LocationDAO();
 
         foreach ($_POST['days'] as $key => $day) {
             if ($day != "")
                 if ($_POST['artist'][$key] != "")
                     {
                         // creo presentacion x cada dia
-                        $lastIdPresentation = $presentations->AddPresentation($lastIdShow, $day);
+                        $presentation = new Presentation();
+                        $presentation->setIdShow($lastIdShow);
+                        $presentation->setPresDate($day);
+                        $lastIdPresentation = $presentationDAO->AddPresentation($presentation);
 
                         // lista de artistas x dia
                         $artistList = explode(",", $_POST['artist'][$key]);
             
                         foreach ($artistList as $artist) {
-                            $presentations->AddArtistToPresentation($lastIdPresentation, $artist);
+                            $presentationDAO->AddArtistToPresentation($lastIdPresentation, $artist);
                         }   
 
                         // agrego locations x cada dia
@@ -156,7 +160,7 @@ class EventController
                                             $location->setLocationPrice($_POST['seat_cost'.$seatId]);
                                             $location->setLocationQty($_POST['seat_total'.$seatId]);                                            
 
-                                            $location->addLocation($location);
+                                            $locationDAO->addLocation($location);
                                         }
                                             
                                     }
