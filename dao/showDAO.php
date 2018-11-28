@@ -92,6 +92,32 @@ class ShowDAO
         return $ShowList;
     }
 
+    public function GetShowsByDate($date)
+    {
+        $ShowList = array();
+
+        $query = "SELECT * FROM shows S ".
+        "inner join presentations P on S.idshow = P.idshow ".
+        " where DAY(P.date) = DAY('".$date."') and MONTH(P.date) = MONTH('".$date."')";
+ 
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        foreach ($resultSet as $row)
+        {                
+            $Show = new Show();
+            $Show->setIdShow($row["idshow"]);
+            $Show->setShowName($row["showname"]);
+            $Show->setIdImage($row["id_image"]);
+            $Show->setDescription($row["description"]);
+
+            array_push($ShowList, $Show);
+        }
+
+        return $ShowList;
+    }
+
     public function GetShowsBySeat($idSeat)
     {
         $ShowList = array();
@@ -132,7 +158,7 @@ class ShowDAO
 
             $query = "SELECT p.date 'date' FROM shows S ".
             "inner join presentations P on S.idshow = P.idshow ".
-            " where S.idshow = ".$idshow;
+            " where P.date > now() and S.idshow = ".$idshow;
  
             $this->connection = Connection::GetInstance();
 
@@ -140,9 +166,9 @@ class ShowDAO
 
             foreach ($resultSet as $row)
             {                
-                $date = date("d/m/y", strtotime($row["date"]) );
+                //$date = date("d/m/y", strtotime($row["date"]) );
     
-                array_push($datesList, $date);
+                array_push($datesList, $row['date']);
             }
         }
 
