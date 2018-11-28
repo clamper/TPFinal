@@ -88,7 +88,7 @@
 
                             // si esta logeado como usuario
                             if ($_SESSION['userType'] == "user")
-                                echo " <button type='button' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>";
+                                echo " <button type='button' class='btn btn-primary' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>";
 
                         ?>
 

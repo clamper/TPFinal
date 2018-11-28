@@ -120,6 +120,35 @@ class ShowDAO
         return $ShowList;
     }
 
+    public function GetDatesByShows()
+    {
+        $datesList = array();
+
+        $showsList = $this->GetAllShows();
+
+        foreach ($showsList as $show) {
+            
+            $idshow = $show->getIdShow();
+
+            $query = "SELECT p.date 'date' FROM shows S ".
+            "inner join presentations P on S.idshow = P.idshow ".
+            " where S.idshow = ".$idshow;
+ 
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            foreach ($resultSet as $row)
+            {                
+                $date = date("d/m/y", strtotime($row["date"]) );
+    
+                array_push($datesList, $date);
+            }
+        }
+
+        return $datesList;
+    }
+
 
     public function GetShowByID($idShow)
     {

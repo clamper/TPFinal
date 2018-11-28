@@ -3,10 +3,16 @@
 //array de categorias, para no mostrar categorias q no poseen ningun show asignado
 
 use dao\CategoryDao as CategoryDao;
+use DAO\ShowDAO as ShowDAO;
 
 $categoryDAO = new CategoryDAO();
 $categoryList = $categoryDAO->GetAllCategoriesInUse();
 
+$showDAO = new ShowDAO();
+
+$dates = $showDAO->GetDatesByShows();
+
+var_dump($dates);
 
 ?>
 
