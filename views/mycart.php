@@ -67,7 +67,7 @@ $entradasTotal = 0;
         ?>
             <br>
             <div class="card card-body text-white text-center">
-                <button type="button" class="btn btn-primary">comprar <?=$entradasTotal?> entradas por $ <?=$costoTotal?></button>
+                <a href="/utn/TPFINALLAB4/ticket/ConfirmTransaction"> <button type="button" class="btn btn-primary">comprar <?=$entradasTotal?> entradas por $ <?=$costoTotal?></button></a>
             </div>
     
         <?php
