@@ -26,15 +26,9 @@
 
 
     <style>
-        @media (min-width: 501px) {
-            .card-columns {
-                column-count: 1;
-            }
-        }
-        
         @media (min-width: 576px) {
             .card-columns {
-                column-count: 2;
+                column-count: 1;
             }
         }
         
@@ -43,19 +37,15 @@
                 column-count: 2;
             }
         }
-        
-        @media (min-width: 992px) {
-            .card-columns {
-                column-count: 4;
-            }
-        }
-        
+
         @media (min-width: 1200px) {
             .card-columns {
-                column-count: 4;
+                column-count: 3;
             }
         }
     </style>
+
+    
 
 
 

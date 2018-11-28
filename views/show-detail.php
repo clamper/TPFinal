@@ -17,12 +17,6 @@
     $arrayArtistas["29/10/18"] = "Artista3, Artista4";
     $arrayArtistas["30/10/18"] = "Artista4, Artista2, Artista3";
     $arrayArtistas["31/10/18"] = "Artista5, Artista4";
-*/
-    if ($show == null){
-        echo "El show es null !!!";
-    }
-
-    /* 
 
     $Show: es un objeto show;    
     $artistArray: es una lista de strings, como clave usa el dia, como dato la lista de artistas separados por coma.
@@ -119,10 +113,19 @@
                         <span><?=$value?> </span>
                         
                         <?php
-
+                            //var_dump(date("d-m-y"));
+                            //var_dump(date("d-m-y", strtotime($key_date) ));
+                            //var_dump(date("d-m-y") > date("d-m-y", strtotime($key_date) ));
                             // si esta logeado como usuario
+
+                            $fecha = strtotime($key_date);
+                            $hoy = strtotime(date("d-m-Y"));
+
                             if ($_SESSION['userType'] == "user")
-                                echo " <button type='button' class='btn btn-primary' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>";
+                                if (    $fecha  > $hoy )
+                                    echo " <button type='button' class='btn btn-primary' data='".$presentationArray[$key_date]."' id='open_add_cart'>agregar al carrito </button>";
+
+
 
                         ?>
 
@@ -161,18 +164,29 @@
                             foreach ($locationsList as $location) {
 
                                 // $max = $locationsDAO->getabalibility($location->getIdLocation());
-                                $max = 5;
+                                $max = $locationsDAO->GetAvailability($location->getIdLocation());
+
+                                
 
                                 $seat = $seatDAO->GetSeatbyID($location->getIdSeat()); 
                                 //echo $seat->getSeatName() ." - $".$location->getLocationPrice();
 
                                 echo "<div class='card card-body bg-info text-white'>".
-                                        "<div class='d-flex justify-content-between'>".
+                                        "<div class='d-flex justify-content-between'>";
 
-                                            "<span>".$seat->getSeatName() ." - $<span id='price".$location->getIdSeat()."'>".$location->getLocationPrice()."</span></span>".
+                                        if ($max != 0)
+                                        {
+                                            echo "<span>".$seat->getSeatName() ." - $<span id='price".$location->getIdSeat()."'>".$location->getLocationPrice()."</span></span>".
                                             "<span><input data='".$location->getIdSeat()."' type='number' placeholder='cantidad' name='seat".$location->getIdSeat()."' id='location_cant' min=0 max=".$max."></span>".
-                                            "<span id='total".$location->getIdSeat()."'>$0</span>".
-                                        "</div>".
+                                            "<span id='total".$location->getIdSeat()."'>$0</span>";
+                                        }
+                                        else
+                                        {
+                                            echo "entradas agotadas";
+                                        }
+
+
+                                echo        "</div>".
                                     "</div>";
                             }
 

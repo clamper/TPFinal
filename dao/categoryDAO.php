@@ -6,7 +6,7 @@ namespace DAO;
 use models\category as Category;
 
 
-class CategoryDAO
+class CategoryDAO implements ICategoryDAO
 {
     private $tableName = "categories";
 
@@ -37,8 +37,11 @@ class CategoryDAO
     {
         $CategoryList = array();
 
-        $query = "SELECT c.idcategory, c.categoryname FROM categories C inner join categoryxshow CXS on c.idcategory = CXS.idcategory ". 
-        "where C.isactive = true and CXS.idshow is not null group by c.categoryname ";
+        $query = "SELECT c.idcategory, c.categoryname , p.date from ".
+            "categories C inner join categoryxshow CXS on c.idcategory = CXS.idcategory ".
+            "inner join shows S on CXS.idshow = S.idshow ".
+            "inner join presentations P on s.idshow = p.idshow  ".
+            "where C.isactive = true and CXS.idshow is not null and P.date > now() group by c.categoryname";
 
         $this->connection = Connection::GetInstance();
 

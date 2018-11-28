@@ -82,12 +82,13 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
                         <i class="fa fa-calendar"></i> fechas
                     </button>
                 <div class="dropdown-menu" style="z-index: 1;">
-                <?php
-                    foreach ($dates as $date) {
-                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByDate/?date=".date("y/m/d", strtotime($date))."'>".date("d/m/y", strtotime($date) )."</a>";
-                        
-                    }
-                ?>
+                    <a class="dropdown-item" href="/utn/tpfinallab4">todas las fechas</a>
+                    <?php
+                        foreach ($dates as $date) {
+                            echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByDate/?date=".date("y/m/d", strtotime($date))."'>".date("d/m/y", strtotime($date) )."</a>";
+                            
+                        }
+                    ?>
                 </div>
             </div>
 
@@ -96,6 +97,7 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
                         <i class="fa fa-grip-horizontal"></i> categorias
                     </button>
                     <div class="dropdown-menu" style="z-index: 1;">
+                        <a class="dropdown-item" href="/utn/tpfinallab4">todas las categorias</a>
                         <?php
 
                         foreach ($categoryList as $category) {
@@ -108,16 +110,6 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
                 
             </div>
         </div>
-
-
-        <form class="form-inline" method="POST" action="event/search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="buscador" name="search" required>
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-info" type="submit">Buscar</button>
-                </div>
-            </div>
-        </form>
 
 
     </nav>

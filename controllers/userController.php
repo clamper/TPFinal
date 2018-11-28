@@ -219,6 +219,23 @@
             $event->showDetail($_POST['idshow']);
         }
 
+        public function removeToCart()
+        {
+            //var_dump($_SESSION['cart']);
+            
+            if ( isset($_POST['idLocation']))
+            {
+                $idLocation = $_POST['idLocation'];
+
+                if ($idLocation != 0)
+                {
+                    $_SESSION['cart'][$idLocation] = 0;
+                }
+            }
+
+            $this->myCart();
+        }
+
         public function myCart()
         {
             //var_dump($_SESSION['cart']);

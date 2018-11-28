@@ -4,7 +4,7 @@ namespace DAO;
 
 use Models\Ticket as Ticket;
 
-class TicketDAO
+class TicketDAO implements ITicketDAO
 {
     private $tableName = "tickets";
 
@@ -13,11 +13,10 @@ class TicketDAO
     {
         $query = "INSERT INTO ".$this->tableName.
         " (iduser, idLocation, date, price) ".
-        "VALUES (:idUser, :idLocation, :date, :price);";
+        "VALUES (:idUser, :idLocation, now(), :price);";
             
         $parameters["idUser"] = $ticket->getIdUser();
         $parameters["idLocation"] = $ticket->getIdLocation();
-        $parameters["date"] = $ticket->getDate();
         $parameters["price"] = $ticket->getPrice();
 
         $this->connection = Connection::GetInstance();
@@ -48,6 +47,22 @@ class TicketDAO
         }
 
         return $TicketsList;
+    }
+
+    public function countTicketByLocation($idlocation)
+    {
+        $count = 0;
+
+        $query = "SELECT count(*) 'total' FROM ".$this->tableName." where idlocation =".$idlocation;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if (count($resultSet) != 0)
+            $count = $resultSet[0]["total"];
+        
+        return $count;
     }
 
     public function GetAllTicketsByLocation($idlocation)
@@ -111,7 +126,7 @@ class TicketDAO
 
         $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
         " inner join presentations P on P.idpresentation = L.idpresentation".
-        " where DAY(P.date) = DAY(".$date.")";
+        " where MONTH(P.date) = MONTH(".$date.") and DAY(P.date) = DAY(".$date.")";
 
         $this->connection = Connection::GetInstance();
 
@@ -131,6 +146,59 @@ class TicketDAO
 
         return $TicketsList;
     }
+
+    public function GetAllTicketsForDates()
+    {
+        $TicketsList = array();
+
+        $query = "SELECT count(*) 'cant', date, SUM(T.price) 'total' FROM ".$this->tableName." T group by T.date";
+        
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        return $resultSet;
+    }
+
+    public function GetAllTicketsForCategories()
+    {
+        $TicketsList = array();
+
+        $query = "SELECT count(*) 'cant', C.categoryname 'category', SUM(T.price) 'total' ".
+                    "FROM tickets T inner join locations L on T.idlocation = L.idlocation ".
+                    "inner join presentations P on L.idpresentation = P.idpresentation ".
+                    "inner join shows S on P.idshow = S.idshow ".
+                    "inner JOIN categoryxshow CXS on S.idshow = CXS.idshow ".
+                    "inner join categories C on c.idcategory = CXS.idcategory ".
+                    "group by C.idcategory";
+        
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        return $resultSet;
+    }
+
+    public function GetAllTicketsSold()
+    {
+        $TicketsList = array();
+
+        $query = "SELECT S.showname 'show', P.date 'date', SE.seatname 'seat', L.quantity 'total', count( T.idticket ) 'vendidos' FROM ".
+                "locations L inner join presentations P on L.idpresentation = P.idpresentation ".
+                "inner join shows S on P.idshow = S.idshow ".
+                "inner join seats SE on SE.idseat = L.idseat ".
+                "left join tickets T on T.idlocation = L.idlocation ".
+                "where P.date > now() ".
+                "group by L.idlocation";
+        
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+        
+        return $resultSet;
+    }
+
+
 
 }
 ?>

@@ -6,7 +6,7 @@ namespace DAO;
 use Models\Seat as Seat;
 
 
-class SeatDAO
+class SeatDAO implements ISeatDAO 
 {
     private $tableName = "seats";
 

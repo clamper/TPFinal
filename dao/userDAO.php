@@ -6,7 +6,7 @@ namespace DAO;
 use Models\User as User;
 
 
-class UserDAO
+class UserDAO implements IUserDAO
 {
     private $tableName = "users";
 

@@ -4,9 +4,10 @@ namespace DAO;
 
 
 use Models\Location as Location;
+use DAO\TicketDAO as TicketDAO;
 
 
-class LocationDAO
+class LocationDAO implements ILocationDAO
 {
     private $tableName = "locations";
 
@@ -80,9 +81,19 @@ class LocationDAO
 
     public function GetAvailability($idLocation)
     {
-        $Location = $this->GetLocationById($idLocation);
+        $plates = 0;
+        $sold = 0;
+        $availability = 0;
 
-        $availability = $Location->getLocationQty() - $Location->getLocationSold();
+
+        $location = $this->GetLocationById($idLocation);
+        $plates = $location->getLocationQty();
+
+        $ticketDAO = new TicketDAO();
+        $sold = $ticketDAO->countTicketByLocation(  $location->getIdLocation()    );
+
+
+        $availability = $plates - $sold;
 
         return $availability;
     }

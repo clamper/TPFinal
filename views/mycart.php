@@ -15,7 +15,7 @@ $entradasTotal = 0;
     <?php
         foreach ($_SESSION['cart'] as $idLocation => $cant) {
             
-            $items = $cant;
+            $items = $items + $cant;
             
             if ($cant > 0)
             {
@@ -43,8 +43,14 @@ $entradasTotal = 0;
                             <span><?php echo $cant." entradas x $".$precio." = $".$total; ?></span>
                         </div>
                     </div>
+                    <div class="card-footer text-right">
+                        <form method="POST" action="/utn/TPFINALLAB4/user/removeToCart">
+                            <input type='hidden' value='<?=$idLocation?>' name='idLocation'>
+                            <button type="submit" class="btn btn-primary">eliminar del carrito</button>
+                        </form>
+                    </div>
                 </div>
-
+                <br>
                 <?php
              }
 

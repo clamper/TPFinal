@@ -33,7 +33,7 @@
 
             require_once(VIEWS_PATH."viewmyticket.php");
         }
-    
+
         public function ConfirmTransaction(){
     
             $msg = "";
@@ -91,6 +91,28 @@
             
     
         }
+
+
+
+        public function viewMoneyReporter()
+        {
+            $ticketDAO = new TicketDAO();
+
+            $arrayReporterForDay = $ticketDAO->GetAllTicketsForDates();
+            $arrayReporterForCategories = $ticketDAO->GetAllTicketsForCategories();
+
+            require_once(VIEWS_PATH."moneyreporter.php");
+        }
+
+        public function viewSoldReporter()
+        {
+            $ticketDAO = new TicketDAO();
+
+            $arrayReporterSold = $ticketDAO->GetAllTicketsSold();
+
+            require_once(VIEWS_PATH."SoldReporter.php");
+        }
+        
     
         public function GenerarQR(){  // HELP !
             return 0;

@@ -6,7 +6,7 @@ namespace DAO;
 use Models\Show as Show;
 
 
-class ShowDAO
+class ShowDAO implements IShowDAO
 {
     private $tableName = "shows";
 
@@ -40,9 +40,10 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT S.idshow, showname, id_image, description".
-        " FROM ".$this->tableName." S inner join categoryxshow CXS on S.idshow=CXS.idshow inner join categories C on c.idcategory= CXS.idcategory".
-        " where C.idcategory = :idcategory";
+        $query = "SELECT S.idshow, showname, id_image, description FROM ".$this->tableName." S ".
+        "inner join categoryxshow CXS on S.idshow=CXS.idshow inner join categories C on c.idcategory= CXS.idcategory ".
+        "inner join presentations P on s.idshow = p.idshow ".
+        "where C.idcategory = :idcategory and P.date > now() group by S.idshow";
 
         $parameters["idcategory"] = $idcategory;
 

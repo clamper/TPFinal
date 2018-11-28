@@ -7,7 +7,7 @@ use Models\Artist as Artist;
 use DAO\ShowDao as ShowDao;
 
 
-class ArtistDAO
+class ArtistDAO implements IArtistDAO
 {
     private $tableName = "artists";
     private $tableArtistXPres = "artistxpresentation";

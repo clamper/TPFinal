@@ -4,7 +4,7 @@
 
     use Models\Presentation as Presentation;
 
-    class PresentationDAO
+    class PresentationDAO implements IPresentationDAO
     {
         private $tableName = "presentations";
         private $tableArtist= "artistxpresentation";

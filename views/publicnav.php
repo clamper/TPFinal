@@ -39,12 +39,13 @@ $dates = $showDAO->GetDatesByShows();
                     <i class="fa fa-calendar"></i> fechas
                 </button>
                 <div class="dropdown-menu" style="z-index: 1;">
-                <?php
-                    foreach ($dates as $date) {
-                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByDate/?date=".date("y/m/d", strtotime($date))."'>".date("d/m/y", strtotime($date) )."</a>";
-                        
-                    }
-                ?>
+                    <a class="dropdown-item" href="/utn/tpfinallab4">todas las fechas</a>
+                    <?php
+                        foreach ($dates as $date) {
+                            echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByDate/?date=".date("y/m/d", strtotime($date))."'>".date("d/m/y", strtotime($date) )."</a>";
+                            
+                        }
+                    ?>
                 </div>
             </div>
 
@@ -53,6 +54,7 @@ $dates = $showDAO->GetDatesByShows();
                     <i class="fa fa-grip-horizontal"></i> categorias
                 </button>
                 <div class="dropdown-menu" style="z-index: 1;">
+                    <a class="dropdown-item" href="/utn/tpfinallab4">todas las categorias</a>
                     <?php
 
                     foreach ($categoryList as $category) {
@@ -65,18 +67,5 @@ $dates = $showDAO->GetDatesByShows();
             
         </div>
     </div>
-
-    <form method="post" action="">
-        <form class="form-inline" method="POST" action="event/search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="buscador" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" name="search">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-info" type="button">Buscar</button>
-                </div>
-            </div>
-        </form>
-
-    </form>
-
 
 </nav>
