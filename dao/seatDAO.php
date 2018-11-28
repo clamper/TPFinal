@@ -15,7 +15,7 @@ class SeatDAO
     {
         $SeatList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where isactive = true";
+        $query = "SELECT idseat, seatname FROM ".$this->tableName." where isactive = true";
 
         $this->connection = Connection::GetInstance();
 
@@ -40,7 +40,7 @@ class SeatDAO
         $Seat = null;
         $error = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where idseat =".$id;
+        $query = "SELECT idseat, seatname FROM ".$this->tableName." where idseat =".$id;
 
         try
         {
@@ -67,11 +67,11 @@ class SeatDAO
     }
 
 
-    public function addSeat($SeatName)
+    public function addSeat($Seat)
     {
         $msg = "";
 
-        $index = $this->existSeat($SeatName);
+        $index = $this->existSeat($Seat->getSeatName());
 
 
         if ( $index > -1)
@@ -98,7 +98,7 @@ class SeatDAO
         else
         {
             $query = "INSERT INTO ".$this->tableName." (Seatname) VALUES (:Seatname);";
-            $parameters["Seatname"] = $SeatName;
+            $parameters["Seatname"] = $Seat->getSeatName();
             $msg = "tipo de plaza agregada exitosamente";
 
             try
