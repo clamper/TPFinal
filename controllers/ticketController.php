@@ -2,6 +2,8 @@
 
     namespace Controllers;
 
+    include "/utn/tpfinallab4/phpqrcode/qrlib.php";
+
     use Models\ticket as Ticket;
     use Models\presentation as Presentation;
     use Models\location as Location;

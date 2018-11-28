@@ -6,7 +6,9 @@
     if ($msg != "")
         echo "<div class='alert alert-info alert-dismissible fade show'>".
         "<button type='button' class='close' data-dismiss='alert'>&times;</button>".$msg."</div>";
-    ?>        
+
+        QRcode::png("My First QR Code");
+    ?>
 
     <div class="card">
         <div class="card-body">
