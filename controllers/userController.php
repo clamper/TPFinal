@@ -221,30 +221,15 @@
 
         public function myCart()
         {
-            var_dump($_SESSION['cart']);
+            //var_dump($_SESSION['cart']);
 
             $locationsDAO = new LocationDAO();
             $seatDAO = new SeatDAO();
             $presentationDAO =  new PresentationDAO();
             $showDAO = new ShowDAO();
 
-            foreach ($_SESSION['cart'] as $idLocation => $cant) {
-
-                if ($cant > 0)
-                {
-                    $location = $locationsDAO->GetLocationById($idLocation);
-                    $presentation = $presentationDAO->GetPresentationById($location->getIdPres());
-                    $seat = $seatDAO->GetSeatbyID(  $location->getIdSeat()   );
-                    $show = $showDAO->GetShowByID($presentation->getIdShow() );
-
-                    echo "<br>".$show->getShowName();
-                    echo date("d-m-y", strtotime($presentation->getPresDate()) ); 
-                    echo $seat->getSeatName();
-                    echo $location->getLocationPrice();
-                    
-                    echo "<br>";
-                }
-            }
+            require_once(VIEWS_PATH."header.php");
+            require_once(VIEWS_PATH."mycart.php");
 
         }
 
