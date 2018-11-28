@@ -12,6 +12,7 @@ use DAO\LocationDAO as LocationDAO;
 
 use Models\location as Location;
 use Models\presentation as Presentation;
+use Models\show as Show;
 
 
 class EventController
@@ -122,7 +123,12 @@ class EventController
         // SHOW
 
         $shows = new ShowDAO();
-        $lastIdShow = $shows->addShow($showName, 0, $description);
+        $nuevoShow = New Show();
+        $nuevoShow->setShowName($showName);
+        $nuevoShow->setIdImage(0);
+        $nuevoShow->setDescription($description);
+
+        $lastIdShow = $shows->addShow($nuevoShow);
 
         // CATEGORIES
 
