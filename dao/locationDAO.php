@@ -15,7 +15,7 @@ class LocationDAO
     {
         $LocationList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where idpresentation =".$idPresentation;
+        $query = "SELECT idlocation, idpresentation, idseat, price, quantity FROM ".$this->tableName." where idpresentation =".$idPresentation;
 
         $this->connection = Connection::GetInstance();
 
@@ -41,7 +41,7 @@ class LocationDAO
     {
         $Location = null;
 
-        $query = "SELECT * FROM ".$this->tableName." where idlocation =".$id;
+        $query = "SELECT idlocation, idpresentation, idseat, price, quantity FROM ".$this->tableName." where idlocation =".$id;
 
         $this->connection = Connection::GetInstance();
 
@@ -62,16 +62,16 @@ class LocationDAO
     }
 
 
-    public function addLocation( $idPresentation, $idseat, $price, $quantity)
+    public function addLocation($location)
     {
         $query = "INSERT INTO ".$this->tableName.
         " (idpresentation, idseat,  price, quantity) ".
         "VALUES (:idPresentation, :idseat, :price, :quantity);";
             
-        $parameters["idPresentation"] = $idPresentation;
-        $parameters["idseat"] = $idseat;
-        $parameters["price"] = $price;
-        $parameters["quantity"] = $quantity;
+        $parameters["idPresentation"] = $location->getIdPres();
+        $parameters["idseat"] = $location->getIdSeat();
+        $parameters["price"] = $location->getLocationPrice();
+        $parameters["quantity"] = $location->getLocationQty();
 
         $this->connection = Connection::GetInstance();
 

@@ -10,6 +10,8 @@ use DAO\ShowDAO as ShowDAO;
 use DAO\PresentationDAO as PresentationDAO;
 use DAO\LocationDAO as LocationDAO;
 
+use Model\location as Location;
+
 
 class EventController
 {
@@ -146,8 +148,17 @@ class EventController
                                 if ($value != "")
                                     {
                                         $seatId = str_replace("seat_cost","",$key);
-                                        if ($_POST['seat_total'.$seatId] != "")
-                                            $location->addLocation($lastIdPresentation, $seatId, $_POST['seat_cost'.$seatId], $_POST['seat_total'.$seatId], 0);
+                                        if ($_POST['seat_total'.$seatId] != ""){
+
+                                            $location = new Location();
+                                            $location->setIdPres($lastIdPresentation);
+                                            $location->setIdSeat($seatId);
+                                            $location->setLocationPrice($_POST['seat_cost'.$seatId]);
+                                            $location->setLocationQty($_POST['seat_total'.$seatId]);                                            
+
+                                            $location->addLocation($location);
+                                        }
+                                            
                                     }
                                 
                             }    
