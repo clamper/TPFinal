@@ -23,13 +23,14 @@ class ImageController
         $next = 1;
 
         $files = scandir("./images", SCANDIR_SORT_DESCENDING);
-
+        
         if ( count($files) > 0)
         {
             $path_info = pathinfo($files[0]);
             $name = $path_info['basename'];
 
-            
+            // cuenta la cantidad de archivos y no el ultimo por que el 10 no es secuencial del 9 y cuenta mal
+            $name = count($files);
 
             $next = intval($name) + 1;
             
@@ -72,10 +73,6 @@ class ImageController
                         {
                             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $file))
                             {
-                                //echo 'el archivo '.basename($_FILES["fileToUpload"]["name"]).' fue subido correctamente.';
-
-                                //echo '<img src="'.FRONT_ROOT.$file.'" border="0" title="'.$_FILES["fileToUpload"]["name"].'" alt="Imagen"/>';
-
                                 $showDAO = new ShowDAO();
                                 $showDAO->setImageToShow($id, $name);
 
@@ -90,7 +87,7 @@ class ImageController
                             $error = 'el archivo es demasiado grande.';
                     }
                     else
-                        $error ='<img src="'.FRONT_ROOT.$file.'" border="0" title="'.$_FILES["fileToUpload"]["name"].'" alt="Imagen"/>';
+                        $error = 'el archivo ya existe.';
                 }
                 else
                     $error = 'no es imagen.';

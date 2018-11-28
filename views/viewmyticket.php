@@ -1,15 +1,4 @@
-<?php
-
-$array_ticket =[];
-
-$titulo_evento;
-$fecha;
-$lugares;
-
-
-?>
-
-    <div class="container" id="abm_container">
+<div class="container" id="abm_container">
         <br>
 
         <?php
@@ -48,7 +37,7 @@ $lugares;
                                 <td><?= $ticket->getTicketNumber(); ?></td>
                                 <td><?= $show->getShowName(); ?></td>
                                 <td><?= $ticket->getDate(); ?></td>
-                                <td><?= $$seat->getSeatName(); ?></td>
+                                <td><?= $seat->getSeatName(); ?></td>
                                 <td style="color:green;"><?= $ticket->getPrice(); ?></td>
                             </tr>
 
