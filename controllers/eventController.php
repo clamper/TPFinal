@@ -21,7 +21,7 @@ class EventController
         $showDAO = new ShowDAO();
         $showsList = $showDAO->GetAllShows();
 
-        
+
 
         require_once(VIEWS_PATH."home.php");
     }
@@ -30,6 +30,14 @@ class EventController
     {
         $showDAO = new ShowDAO();
         $showsList = $showDAO->GetShowsByCategory($category);
+
+        require_once(VIEWS_PATH."home.php");
+    }
+
+    public function showAllEventsByDate($date = null)
+    {
+        $showDAO = new ShowDAO();
+        $showsList = $showDAO->GetShowsByDate($date);
 
         require_once(VIEWS_PATH."home.php");
     }

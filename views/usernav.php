@@ -7,8 +7,12 @@ $username = $_SESSION['userName'];
 use dao\CategoryDao as CategoryDao;
 
 $categoryDAO = new CategoryDAO();
+use DAO\ShowDAO as ShowDAO;
 $categoryList = $categoryDAO->GetAllCategoriesInUse();
 
+$showDAO = new ShowDAO();
+
+$dates = $showDAO->GetDatesByShows();
 
 // a modo muestra y prueba
 //$_SESSION['cart'] = Array();
@@ -77,10 +81,15 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-calendar"></i> fechas
                     </button>
-                    <div class="dropdown-menu" style="z-index: 1;">
-                        1/1/2018
-                    </div>
+                <div class="dropdown-menu" style="z-index: 1;">
+                <?php
+                    foreach ($dates as $date) {
+                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByDate/?date=".date("y/m/d", strtotime($date))."'>".date("d/m/y", strtotime($date) )."</a>";
+                        
+                    }
+                ?>
                 </div>
+            </div>
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">

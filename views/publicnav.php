@@ -12,8 +12,6 @@ $showDAO = new ShowDAO();
 
 $dates = $showDAO->GetDatesByShows();
 
-var_dump($dates);
-
 ?>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top bg-dark">
@@ -41,7 +39,12 @@ var_dump($dates);
                     <i class="fa fa-calendar"></i> fechas
                 </button>
                 <div class="dropdown-menu" style="z-index: 1;">
-                    1/1/2018
+                <?php
+                    foreach ($dates as $date) {
+                        echo "<a class='dropdown-item' href='/utn/tpfinallab4/event/showAllEventsByDate/?date=".date("y/m/d", strtotime($date))."'>".date("d/m/y", strtotime($date) )."</a>";
+                        
+                    }
+                ?>
                 </div>
             </div>
 
