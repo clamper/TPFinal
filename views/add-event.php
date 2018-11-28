@@ -97,7 +97,7 @@ $artist = ["popeye","xuxa","pato donald"];
                                 <h5 class="card-title">dia del evento</h5>
                             </div>
                             <div class="input-group-prepend">
-                                <input type="datetime" class="form-control" name="days[]">
+                                <input type="date" class="form-control" name="days[]">
                                 <input type="hidden" name="artist[]">
                                 <button type="button" class="btn bg-info" id="select_artist" data-toggle="modal"
                                     data-target="#modal_artist">seleccionar artistas</button>

@@ -11,7 +11,7 @@
         private $idShow;
         private $idCategory;
         private $showName;
-        private $idImage;
+        private $idImage = 0;
         private $description;
 
         public function getIdShow()

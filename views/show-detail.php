@@ -59,7 +59,12 @@
 
             <div class="card">
                 <div class="card-body">
-                    <img class="card-img-top" src="/utn/tpfinallab4/image/<?=$show->getIdImage();?>g" alt="Card image">
+                    <?php
+                        if ( $show->getIdImage() == 0)
+                            echo "<img class='card-img-top' src='/utn/tpfinallab4/views/img/prueba_evento.svg' alt='Card image'>";
+                        else
+                            echo "<img class='card-img-top' src='/utn/tpfinallab4/images/".$show->getIdImage()."' alt='Card image'>";
+                    ?>
                 </div>
 
                 <?php
