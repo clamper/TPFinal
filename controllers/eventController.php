@@ -188,7 +188,7 @@ class EventController
                     }
         }
         
-        // LOCATIONS
+        $this->showAllEvents();
     }
 
 

@@ -19,7 +19,7 @@ class UserDAO
     {
         $User = null;
 
-        $query = "SELECT iduser, 'name', email FROM ".$this->tableName." where id=".$id;
+        $query = "SELECT iduser, name, email FROM ".$this->tableName." where id=".$id;
 
         $this->connection = Connection::GetInstance();
 
@@ -42,7 +42,7 @@ class UserDAO
     {
         $User = null;
 
-        $query = "SELECT 'name', iduser, email, 'password', isadmin FROM ".$this->tableName." where email='".$email."'";
+        $query = "SELECT name, iduser, email, password, isadmin FROM ".$this->tableName." where email='".$email."'";
 
         $this->connection = Connection::GetInstance();
 

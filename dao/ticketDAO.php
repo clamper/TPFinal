@@ -13,7 +13,7 @@ class TicketDAO
     {
         $query = "INSERT INTO ".$this->tableName.
         " (iduser, idLocation) ".
-        "VALUES (:idUser, :idLocation,);";
+        "VALUES (:idUser, :idLocation);";
             
         $parameters["idUser"] = $ticket->getIdUser();
         $parameters["idLocation"] = $ticket->getIdLocation();
@@ -114,7 +114,7 @@ class TicketDAO
             $Ticket = new Ticket();
             $Ticket->setTicketNumber($row["idticket"]);
             $Ticket->setIdUser($row["iduser"]);
-            $Ticket->setIdLocation($row["idlocation"]));
+            $Ticket->setIdLocation($row["idlocation"]);
            
             array_push($TicketsList, $Ticket);
         }
