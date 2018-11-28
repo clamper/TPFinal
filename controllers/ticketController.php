@@ -6,11 +6,13 @@
     use Models\presentation as Presentation;
     use Models\location as Location;
     use Models\seat as Seat;
+    use Models\show as Show;
 
     use dao\ticketdao as TicketDAO;
     use dao\presentationDAO as PresentationDAO;
     use dao\locationDAO as LocationDAO;
     use dao\seatDAO as SeatDAO;
+    use dao\showDAO as ShowDAO;
 
 
     class TicketController
@@ -19,7 +21,12 @@
         public function ViewMyTickets($msg = ""){
 
             $TicketDao = new TicketDAO();
+            $locationDAO = new LocationDAO();
+            $SeatDAO = new SeatDAO();
+            $PresentationDAO = new PresentationDAO();
+            $ShowDAO = new ShowDAO();
 
+            $array_ticket = array();
             $array_ticket = $TicketDao->GetAllTicketsByUser($_SESSION["userId"]);
 
             require_once(VIEWS_PATH."viewmyticket.php");
