@@ -15,7 +15,7 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT S.idshow, showname, id_image, 'description' FROM ".$this->tableName." S inner join presentations P on S.idshow = P.idshow where P.date > now() group by S.idshow";
+        $query = "SELECT S.idshow, showname, id_image, description FROM ".$this->tableName." S inner join presentations P on S.idshow = P.idshow where P.date > now() group by S.idshow";
 
         $this->connection = Connection::GetInstance();
 
@@ -40,7 +40,7 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT S.idshow, showname, id_image, 'description'".
+        $query = "SELECT S.idshow, showname, id_image, description".
         " FROM ".$this->tableName." S inner join categoryxshow CXS on S.idshow=CXS.idshow inner join categories C on c.idcategory= CXS.idcategory".
         " where C.idcategory = :idcategory";
 
@@ -68,7 +68,7 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT S.idshow, showname, id_image, 'description' FROM shows S ".
+        $query = "SELECT S.idshow, showname, id_image, description FROM shows S ".
         "inner join presentations P on S.idshow = P.idshow ".
         "inner join artistxpresentation AXP on AXP.idpresentation = P.idpresentation ".
         "inner join artists A on A.idartist = AXP.idartist ".
@@ -96,7 +96,7 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT S.idshow, showname, id_image, 'description' FROM shows S ".
+        $query = "SELECT S.idshow, showname, id_image, description FROM shows S ".
         "inner join presentations P on S.idshow = P.idshow ".
         " where DAY(P.date) = DAY('".$date."') and MONTH(P.date) = MONTH('".$date."')";
  
@@ -122,7 +122,7 @@ class ShowDAO
     {
         $ShowList = array();
 
-        $query = "SELECT S.idshow, showname, id_image, 'description' FROM shows S ".
+        $query = "SELECT S.idshow, showname, id_image, description FROM shows S ".
         "inner join presentations P on S.idshow = P.idshow ".
         "inner join locations L on L.idpresentation = P.idpresentation ".
         "inner join seats SE on SE.idseat = L.idseat ".
@@ -180,7 +180,7 @@ class ShowDAO
     {
         $Show = null;
 
-        $query = "SELECT idshow, showname, id_image, 'description' FROM ".$this->tableName." where idshow =".$idShow;
+        $query = "SELECT idshow, showname, id_image, description FROM ".$this->tableName." where idshow =".$idShow;
 
         $this->connection = Connection::GetInstance();
 
