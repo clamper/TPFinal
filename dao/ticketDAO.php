@@ -9,14 +9,14 @@ class TicketDAO
     private $tableName = "tickets";
 
 
-    public function addTicket($idUser, $idLocation)
+    public function addTicket($ticket)
     {
         $query = "INSERT INTO ".$this->tableName.
         " (iduser, idLocation) ".
         "VALUES (:idUser, :idLocation,);";
             
-        $parameters["idUser"] = $idUser;
-        $parameters["idLocation"] = $idLocation;
+        $parameters["idUser"] = $ticket->getIdUser();
+        $parameters["idLocation"] = $ticket->getIdLocation();
 
         $this->connection = Connection::GetInstance();
 
@@ -27,7 +27,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where iduser =".$iduser;
+        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." where iduser =".$iduser;
 
         $this->connection = Connection::GetInstance();
 
@@ -36,9 +36,9 @@ class TicketDAO
         foreach ($resultSet as $row)
         {                
             $Ticket = new Ticket();
-            $Ticket->setTicketNumber($ticketNumber);
-            $Ticket->setIdUser($idUser);
-            $Ticket->setIdLocation($idLocation);
+            $Ticket->setTicketNumber($row["idticket"]);
+            $Ticket->setIdUser($row["iduser"]);
+            $Ticket->setIdLocation($row["idlocation"]);
            
             array_push($TicketsList, $Ticket);
         }
@@ -50,7 +50,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." where idlocation =".$idlocation;
+        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." where idlocation =".$idlocation;
 
         $this->connection = Connection::GetInstance();
 
@@ -59,9 +59,9 @@ class TicketDAO
         foreach ($resultSet as $row)
         {                
             $Ticket = new Ticket();
-            $Ticket->setTicketNumber($ticketNumber);
-            $Ticket->setIdUser($idUser);
-            $Ticket->setIdLocation($idLocation);
+            $Ticket->setTicketNumber($row["idticket"]);
+            $Ticket->setIdUser($row["iduser"]);
+            $Ticket->setIdLocation($row["idlocation"]);
            
             array_push($TicketsList, $Ticket);
         }
@@ -73,7 +73,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
+        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
         " inner join presentations P on P.idpresentation = L.idpresentation".
         " inner join shows S on S.idshow = P.idshow".
         " inner join categoryxshow CXS on CXS.idshow = S.idshow".
@@ -87,9 +87,9 @@ class TicketDAO
         foreach ($resultSet as $row)
         {                
             $Ticket = new Ticket();
-            $Ticket->setTicketNumber($ticketNumber);
-            $Ticket->setIdUser($idUser);
-            $Ticket->setIdLocation($idLocation);
+            $Ticket->setTicketNumber($row["idticket"]);
+            $Ticket->setIdUser($row["iduser"]);
+            $Ticket->setIdLocation($row["idlocation"]);
            
             array_push($TicketsList, $Ticket);
         }
@@ -101,7 +101,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT * FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
+        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
         " inner join presentations P on P.idpresentation = L.idpresentation".
         " where DAY(P.date) = DAY(".$date.")";
 
@@ -112,9 +112,9 @@ class TicketDAO
         foreach ($resultSet as $row)
         {                
             $Ticket = new Ticket();
-            $Ticket->setTicketNumber($ticketNumber);
-            $Ticket->setIdUser($idUser);
-            $Ticket->setIdLocation($idLocation);
+            $Ticket->setTicketNumber($row["idticket"]);
+            $Ticket->setIdUser($row["iduser"]);
+            $Ticket->setIdLocation($row["idlocation"]));
            
             array_push($TicketsList, $Ticket);
         }
