@@ -219,9 +219,6 @@ class ShowDAO
         $resultSet = $this->connection->Execute($query);
 
         return $resultSet[0]['last'];
-
-
-
     }
 
 
@@ -266,6 +263,19 @@ class ShowDAO
         $this->connection->ExecuteNonQuery($query, $parameters);
     }
 
+    public function setImageToShow($showId, $imageId)
+    {
+        $query = "UPDATE ".$this->tableName.
+        " set id_image = :imageId".
+        " WHERE idshow = :showId";
+
+        $parameters["imageId"] = $imageId;
+        $parameters["showId"] = $showId;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
 }
 
 

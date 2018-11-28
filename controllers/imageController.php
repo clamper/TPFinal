@@ -2,6 +2,9 @@
 
 namespace Controllers;
 
+use Controllers\EventController as EventController;
+use DAO\ShowDAO as ShowDAO;
+
 
 class ImageController
 {
@@ -69,9 +72,16 @@ class ImageController
                         {
                             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $file))
                             {
-                                echo 'el archivo '.basename($_FILES["fileToUpload"]["name"]).' fue subido correctamente.';
+                                //echo 'el archivo '.basename($_FILES["fileToUpload"]["name"]).' fue subido correctamente.';
 
-                                echo '<img src="'.FRONT_ROOT.$file.'" border="0" title="'.$_FILES["fileToUpload"]["name"].'" alt="Imagen"/>';
+                                //echo '<img src="'.FRONT_ROOT.$file.'" border="0" title="'.$_FILES["fileToUpload"]["name"].'" alt="Imagen"/>';
+
+                                $showDAO = new ShowDAO();
+                                $showDAO->setImageToShow($id, $name);
+
+                                $eventController = new EventController();
+                                $eventController->showDetail($id);
+
                             }
                             else
                                 $error = 'No se pudo subir el archivo.';

@@ -22,8 +22,6 @@ class EventController
         $showDAO = new ShowDAO();
         $showsList = $showDAO->GetAllShows();
 
-
-
         require_once(VIEWS_PATH."home.php");
     }
 
@@ -42,6 +40,8 @@ class EventController
 
         require_once(VIEWS_PATH."home.php");
     }
+
+    
 
     public function showDetail($showid)
     {

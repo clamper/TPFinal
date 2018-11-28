@@ -62,7 +62,7 @@ foreach ($_SESSION['cart'] as $idlocation => $value) {
                             <?=$username;?>
                     </button>
                     <div class="dropdown-menu" style="z-index: 1;">
-                        <a class="dropdown-item " href="/utn/TPFINALLAB4/user/myTickets">mis tickets</a>
+                        <a class="dropdown-item " href="/utn/TPFINALLAB4/user/ViewMyTickets">mis tickets</a>
                         <a class="dropdown-item" href="/utn/TPFINALLAB4/user/logout">salir</a>
                     </div>
                 </div>

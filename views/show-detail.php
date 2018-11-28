@@ -58,7 +58,36 @@
         <div class="card-columns" id="card-colums-show">
 
             <div class="card">
-                <img class="card-img-top" src="/utn/tpfinallab4/views/img/prueba_evento.svg" alt="Card image">
+                <div class="card-body">
+                    <img class="card-img-top" src="/utn/tpfinallab4/image/<?=$show->getIdImage();?>g" alt="Card image">
+                </div>
+
+                <?php
+
+                if ($_SESSION['userType'] == "admin")
+                {
+                ?>
+                    <div class="card-footer text-muted text-center">
+                        <form method="POST" action="/utn/TPFINALLAB4/image/save" enctype="multipart/form-data">
+
+                            <input type="hidden" value="<?=$show->getIdShow();?>" name="id">
+
+                            <div class="custom-file" id="customFile" lang="es">
+                                <input type="file" class="custom-file-input" name="fileToUpload" id="fileToUpload" accept="image/x-png,image/gif,image/jpeg" aria-describedby="fileHelp" required>
+                                <label class="custom-file-label" for="fileToUpload">
+                                    Seleccione su imagen
+                                </label>
+                                
+                            </div>
+                            <br><br>
+                            <button type="submit" class='btn btn-primary' name="upload">subir nueva imagen</button>
+                        </form>
+                        
+            
+                    </div>
+                <?PHP
+                }
+                ?>
             </div>
 
             <div class="card">
