@@ -55,7 +55,7 @@
                             $presentation = $PresentationDAO->GetPresentationById($location->getIdPres());
                             $seat = $SeatDAO->GetSeatbyID($location->getIdSeat());
                             
-                            $date = date("d-m-y", strtotime($presentation->getPresDate()));
+                            $date = date("Y-m-d", strtotime($presentation->getPresDate()));
                             $precio = $location->getLocationPrice();
 
                             $qr = $this->GenerarQR();
