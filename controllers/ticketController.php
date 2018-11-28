@@ -18,6 +18,10 @@
 
         public function ViewMyTickets($msg = ""){
 
+            $TicketDao = new TicketDAO();
+
+            $array_ticket = $TicketDao->GetAllTicketsByUser($_SESSION["userId"]);
+
             require_once(VIEWS_PATH."viewmyticket.php");
         }
     
@@ -66,8 +70,6 @@
                     else{
                         $msg = "Hubo un error al procesar su compra!";
                     }
-        
-                    
                 }
         
                 $this->ViewMyTickets($msg);

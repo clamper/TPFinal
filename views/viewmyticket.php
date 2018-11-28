@@ -28,26 +28,20 @@ $lugares;
                     <table class="table text-center">
                         <thead class="thead-dark">
                             <tr>
-                                <th>evento</th>
-                                <th>fecha</th>
-                                <th>platea</th>
+                                <th>Nro ticket</th>
+                                <th>Show</th>
+                                <th>Fecha</th>
+                                <th>Ubicacion</th>
+                                <th>Precio</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>Mary</td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
                             </tr>
                         </tbody>
                     </table>
