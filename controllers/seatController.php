@@ -22,7 +22,10 @@ class SeatController
     {
         $dao = new SeatDAO();
 
-        $msg = $dao->addSeat($newSeat);
+        $seat = new Seat();
+        $seat->setSeatName($newSeat);
+
+        $msg = $dao->addSeat($seat);
 
         $this->Index($msg);
 
