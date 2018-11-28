@@ -2,7 +2,7 @@
 
 namespace DAO;
 
-use Model\Ticket as Ticket;
+use Models\Ticket as Ticket;
 
 class TicketDAO
 {
@@ -29,7 +29,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." where iduser =".$iduser;
+        $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." where iduser =".$idUser;
 
         $this->connection = Connection::GetInstance();
 
