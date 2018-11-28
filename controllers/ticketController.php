@@ -2,7 +2,7 @@
 
     namespace Controllers;
 
-    include "/utn/tpfinallab4/phpqrcode/qrlib.php";
+    include ("phpqrcode/qrlib.php");
 
     use Models\ticket as Ticket;
     use Models\presentation as Presentation;
