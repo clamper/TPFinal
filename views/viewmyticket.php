@@ -23,8 +23,6 @@ $lugares;
                 <br>
                 <div class="card-text text-center">
 
-
-
                     <table class="table text-center">
                         <thead class="thead-dark">
                             <tr>
