@@ -11,6 +11,8 @@
         private $idUser;
         private $idLocation;
         private $qrCode;
+        private $date;
+        private $price;
 
         public function getTicketNumber()
         {
@@ -50,6 +52,26 @@
         public function setQrCode($qrCode)
         {
             $this->qrCode = $qrCode;
+        }
+
+        public function getDate()
+        {
+            return $this->date;
+        }
+
+        public function setDate($date)
+        {
+            $this->date = $date;
+        }
+
+        public function getPrice()
+        {
+            return $this->price;
+        }
+
+        public function setPrice($price)
+        {
+            $this->price = $price;
         }
 
     }

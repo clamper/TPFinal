@@ -2,8 +2,15 @@
 
     namespace Controllers;
 
-    use Models\ticket as ticket;
+    use Models\ticket as Ticket;
+    use Models\presentation as Presentation;
+    use Models\location as Location;
+    use Models\seat as Seat;
+
     use dao\ticketdao as TicketDAO;
+    use dao\presentationDAO as PresentationDAO;
+    use dao\locationDAO as LocationDAO;
+    use dao\seatDAO as SeatDAO;
 
 
     class TicketController
@@ -17,37 +24,60 @@
         public function ConfirmTransaction(){
     
             $msg = "";
-    
-            foreach ($_SESSION['cart'] as $idLocation => $cantidad) {
-    
-                if ($cantidad > 0){
-    
-                    for ($i=0; $i < $cantidad; $i++) { 
 
-                        $ticket = new Ticket();
+            if (isset($_SESSION['cart'])){
+
+                $TicketDao = new TicketDAO();
+                $locationDAO = new LocationDAO();
+                $SeatDAO = new SeatDAO();
+                $PresentationDAO = new PresentationDAO();
+
+                foreach ($_SESSION['cart'] as $idLocation => $cantidad) {
     
-                        $qr = $this->GenerarQR();
+                    if ($cantidad > 0){
         
-                        $ticket->setIdUser($_SESSION["userId"]);
-                        $ticket->setIdLocation($idLocation);
-                        $ticket->setQrCode($qr);
-        
-                        $TicketDao = new TicketDAO();
-                        $TicketDao->addTicket($ticket);
+                        for ($i=0; $i < $cantidad; $i++) { 
+    
+                            $ticket = new Ticket();
+
+                            $location = $locationDAO->GetLocationById($idLocation);
+                            $presentation = $PresentationDAO->GetPresentationById($location->getIdPres());
+                            $seat = $SeatDAO->GetSeatbyID($location->getIdSeat());
+                            
+                            $date = date("d-m-y", strtotime($presentation->getPresDate()));
+                            $precio = $location->getLocationPrice();
+
+                            $qr = $this->GenerarQR();
+            
+                            $ticket->setIdUser($_SESSION["userId"]);
+                            $ticket->setIdLocation($idLocation);
+                            $ticket->setQrCode($qr);
+                            $ticket->setPrice($precio);
+                            $ticket->setDate($date);
+                                                        
+
+                            $TicketDao->addTicket($ticket);
+                        }
+                        
+                        $_SESSION['cart'] = array();
+                        require_once(VIEWS_PATH."header.php");
+                        $msg = "Su compra se ha confirmado con exito!";
                     }
+                    else{
+                        $msg = "Hubo un error al procesar su compra!";
+                    }
+        
                     
-                    $_SESSION['cart'] = array();
-                    require_once(VIEWS_PATH."header.php");
-                    $msg = "Su compra se ha confirmado con exito!";
                 }
-                else{
-                    $msg = "Hubo un error al procesar su compra!";
-                }
-    
-                
+        
+                $this->ViewMyTickets($msg);
+
             }
-    
-            $this->ViewMyTickets($msg);
+            else{
+                $msg = "Ha ocurrido un error con su carrito!";
+                $this->ViewMyTickets($msg);
+            }
+            
     
         }
     

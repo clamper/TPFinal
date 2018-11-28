@@ -12,11 +12,13 @@ class TicketDAO
     public function addTicket($ticket)
     {
         $query = "INSERT INTO ".$this->tableName.
-        " (iduser, idLocation) ".
-        "VALUES (:idUser, :idLocation);";
+        " (iduser, idLocation, date, price) ".
+        "VALUES (:idUser, :idLocation, :date, :price);";
             
         $parameters["idUser"] = $ticket->getIdUser();
         $parameters["idLocation"] = $ticket->getIdLocation();
+        $parameters["date"] = $ticket->getDate();
+        $parameters["price"] = $ticket->getPrice();
 
         $this->connection = Connection::GetInstance();
 
@@ -27,7 +29,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." where iduser =".$iduser;
+        $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." where iduser =".$iduser;
 
         $this->connection = Connection::GetInstance();
 
@@ -39,6 +41,8 @@ class TicketDAO
             $Ticket->setTicketNumber($row["idticket"]);
             $Ticket->setIdUser($row["iduser"]);
             $Ticket->setIdLocation($row["idlocation"]);
+            $Ticket->setDate($row["date"]);
+            $Ticket->setPrice($row["price"]);
            
             array_push($TicketsList, $Ticket);
         }
@@ -50,7 +54,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." where idlocation =".$idlocation;
+        $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." where idlocation =".$idlocation;
 
         $this->connection = Connection::GetInstance();
 
@@ -62,6 +66,8 @@ class TicketDAO
             $Ticket->setTicketNumber($row["idticket"]);
             $Ticket->setIdUser($row["iduser"]);
             $Ticket->setIdLocation($row["idlocation"]);
+            $Ticket->setDate($row["date"]);
+            $Ticket->setPrice($row["price"]);
            
             array_push($TicketsList, $Ticket);
         }
@@ -73,7 +79,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
+        $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
         " inner join presentations P on P.idpresentation = L.idpresentation".
         " inner join shows S on S.idshow = P.idshow".
         " inner join categoryxshow CXS on CXS.idshow = S.idshow".
@@ -90,6 +96,8 @@ class TicketDAO
             $Ticket->setTicketNumber($row["idticket"]);
             $Ticket->setIdUser($row["iduser"]);
             $Ticket->setIdLocation($row["idlocation"]);
+            $Ticket->setDate($row["date"]);
+            $Ticket->setPrice($row["price"]);
            
             array_push($TicketsList, $Ticket);
         }
@@ -101,7 +109,7 @@ class TicketDAO
     {
         $TicketsList = array();
 
-        $query = "SELECT idticket, idlocation, iduser FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
+        $query = "SELECT idticket, idlocation, iduser, date, price FROM ".$this->tableName." T inner join locations L on T.idlocation = L.idlocation".
         " inner join presentations P on P.idpresentation = L.idpresentation".
         " where DAY(P.date) = DAY(".$date.")";
 
@@ -115,6 +123,8 @@ class TicketDAO
             $Ticket->setTicketNumber($row["idticket"]);
             $Ticket->setIdUser($row["iduser"]);
             $Ticket->setIdLocation($row["idlocation"]);
+            $Ticket->setDate($row["date"]);
+            $Ticket->setPrice($row["price"]);
            
             array_push($TicketsList, $Ticket);
         }
