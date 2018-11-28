@@ -12,34 +12,83 @@ class ImageController
         require_once(VIEWS_PATH."uploadImage.php");
     }
 
-    public function save($id, $image)
+    public function nextFile($file)
     {
-        var_dump($_POST);
+        $path_info = pathinfo($file);
+        $extension = $path_info['extension'];
 
+        $next = 1;
 
+        $files = scandir("./images", SCANDIR_SORT_DESCENDING);
+
+        if ( count($files) > 0)
+        {
+            $path_info = pathinfo($files[0]);
+            $name = $path_info['basename'];
+
+            
+
+            $next = intval($name) + 1;
+            
+        }
+        
+        return $next.".".$extension;
     }
 
+    public function save($id, $fileToUpload)
+    {
+        $error = "";
 
+        $imageDirectory = 'images/';
 
+        if(!file_exists($imageDirectory))
+            mkdir($imageDirectory);
 
+        if($_FILES)
+        {
+            if((isset($_FILES['fileToUpload'])) && ($_FILES['fileToUpload']['name'] != ''))
+            {
+                $name = $this->nextFile($_FILES['fileToUpload']['name']);
 
+                $file = $imageDirectory . $name;			
 
+                //Obtenemos la extensión del archivo. No sirve para comprobar el veradero tipo del archivo
+                $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
 
+                //Genera un array a partir de una verdera imagen. Retorna false si no es una archivo de imagen			
+                $imageInfo = getimagesize($_FILES['fileToUpload']['tmp_name']);
+                //var_dump($imageInfo);
+                if($imageInfo !== false)
+                {
+                    //echo $imageInfo['mime'];
 
+                    if(!file_exists($file))
+                    {
+                        //echo $_FILES['fileToUpload']['size'];
+                        if($_FILES['fileToUpload']['size'] < 5000000) //Menor a 5 MB
+                        {
+                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $file))
+                            {
+                                echo 'el archivo '.basename($_FILES["fileToUpload"]["name"]).' fue subido correctamente.';
 
+                                echo '<img src="'.FRONT_ROOT.$file.'" border="0" title="'.$_FILES["fileToUpload"]["name"].'" alt="Imagen"/>';
+                            }
+                            else
+                                $error = 'No se pudo subir el archivo.';
+                        }
+                        else
+                            $error = 'el archivo es demasiado grande.';
+                    }
+                    else
+                        $error ='<img src="'.FRONT_ROOT.$file.'" border="0" title="'.$_FILES["fileToUpload"]["name"].'" alt="Imagen"/>';
+                }
+                else
+                    $error = 'no es imagen.';
+            }		
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        return $error;
+    }
 
 
 }
